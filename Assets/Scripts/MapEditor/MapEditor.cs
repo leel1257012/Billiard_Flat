@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEditor;
+using System.Xml.Serialization;
+using System.Xml;
 
 public class MapEditor : MonoBehaviour
 {
@@ -38,7 +41,7 @@ public class MapEditor : MonoBehaviour
     {
         bool isValid;
         Vector3 mousePoint = GetMousePoint();
-        Debug.Log("cur: " + mousePoint);
+        //Debug.Log("cur: " + mousePoint);
         //Debug.Log(prevMousePoint);
         if (currentFloor != null && floorMode != 0)     // ºí·Ï ¼±ÅÃ È®ÀÎ
         {
@@ -158,5 +161,89 @@ public class MapEditor : MonoBehaviour
         if (currentFloor != null) currentFloor.SetActive(false);
         floorMode = 0;
     }
-}
+    
+    public void saveMap()
+    {
+        string path = EditorUtility.SaveFilePanel("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½", "", "BFMap_", "bfmap");
 
+        if(path.Length != 0)
+        {
+            List<MapStructure> objectList = new List<MapStructure>();
+            for (int i = 0; i < walls.childCount; i++){
+                MapEditorFloor temp = walls.GetChild(i).GetComponent<MapEditorFloor>();
+                objectList.Add(new MapStructure(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
+            }
+            for (int i = 0; i < platforms.childCount; i++)
+            {
+                MapEditorFloor temp = platforms.GetChild(i).GetComponent<MapEditorFloor>();
+                objectList.Add(new MapStructure(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
+            }
+            for (int i = 0; i < devices.childCount; i++)
+            {
+                MapEditorFloor temp = devices.GetChild(i).GetComponent<MapEditorFloor>();
+                objectList.Add(new MapStructure(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
+            }
+            for (int i = 0; i < items.childCount; i++)
+            {
+                MapEditorFloor temp = items.GetChild(i).GetComponent<MapEditorFloor>();
+                objectList.Add(new MapStructure(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
+            }
+            Debug.Log("Number of Saved object: "+objectList.Count);
+
+            FileStream fs = File.Create(path);
+            
+            XmlSerializer xs = new XmlSerializer(typeof(List<MapStructure>));
+            xs.Serialize(fs, objectList); 
+            fs.Close();
+        }
+    }
+    public void loadMap()
+    {
+        string path = EditorUtility.OpenFilePanel("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½", "", "bfmap");
+
+
+        if(path.Length != 0)
+        {
+            FileStream fs = File.Open(path,FileMode.Open);
+            XmlSerializer xs = new XmlSerializer(typeof(List<MapStructure>));
+            List<MapStructure> readData = (List<MapStructure>) xs.Deserialize(fs);
+
+            foreach (Transform child in walls.transform)
+                Destroy(child.gameObject);
+            foreach (Transform child in platforms.transform)
+                Destroy(child.gameObject);
+            foreach (Transform child in devices.transform)
+                Destroy(child.gameObject);
+            foreach (Transform child in items.transform)
+                Destroy(child.gameObject);
+            /*
+            while(walls.childCount!=0)
+                Destroy(walls.GetChild(0).gameObject);
+            while(platforms.childCount!=0)
+                Destroy(platforms.GetChild(0).gameObject);
+            while(devices.childCount!=0)
+                Destroy(devices.GetChild(0).gameObject);
+            while(items.childCount!=0)
+                Destroy(items.GetChild(0).gameObject);
+                */
+
+            foreach(MapStructure element in readData){
+                Vector2 pos = new Vector2(element.x, element.y);
+                FloorType floorType = element.type;
+                GameObject floorObject = floors[(int) floorType - 1];
+
+                GameObject newFloor = null;
+                if (floorType == FloorType.Wall) newFloor = Instantiate(floorObject, pos, Quaternion.identity, walls);
+                if (floorType == FloorType.DisposableFloor || floorType == FloorType.HookFloor || floorType == FloorType.MovingFloor
+                    || floorType == FloorType.SlipFloor || floorType == FloorType.JumpFloor || floorType == FloorType.SlowFloor
+                    || floorType == FloorType.TimedFloor || floorType == FloorType.Spawn || floorType == FloorType.Goal) newFloor = Instantiate(floorObject, pos, Quaternion.identity, platforms);
+                if (floorType == FloorType.Device) newFloor = Instantiate(floorObject, pos, Quaternion.identity, devices);
+                if (floorType == FloorType.Item) newFloor = Instantiate(floorObject, pos, Quaternion.identity, items);
+
+                newFloor.GetComponent<MapEditorFloor>().mapPos = pos;
+                newFloor.GetComponent<BoxCollider2D>().enabled = true;
+                newFloor.SetActive(true);
+            }
+        }
+    }
+}
