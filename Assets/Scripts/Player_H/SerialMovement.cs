@@ -5,7 +5,6 @@ using UnityEngine;
 public class SerialMovement : MonoBehaviour
 {
     public GameObject[] Players = new GameObject[8];
-    //public Script[] Players = new Script[8];
     int MaxSize = 7;
     public int top = 0;
     int bottom = 0;
@@ -25,8 +24,7 @@ public class SerialMovement : MonoBehaviour
             pre.Previous = Players[i+1];
             pre.Next = Players[i-1];
         }
-        Players[bottom].GetComponent<PreviousPlayer>().SetLastTrue();
-        Players[top-1].GetComponent<PreviousPlayer>().SetStartTrue();
+        //Players[bottom].GetComponent<PreviousPlayer>().SetLastTrue();
         Players[top].AddComponent<PlayerLaunch>();
         topPlayer = Players[top].GetComponent<PlayerLaunch>();
     }
@@ -36,18 +34,22 @@ public class SerialMovement : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.A)) Players[top].transform.Translate(-1*speed*Time.deltaTime,0,0);
         if(Input.GetKey(KeyCode.D)) Players[top].transform.Translate(1*speed*Time.deltaTime,0,0);
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && (top != bottom))
         {
-            PreviousPlayer previousPlayer = Players[top-1].GetComponent<PreviousPlayer>();
+            PreviousPlayer previousPlayer = Players[--top].GetComponent<PreviousPlayer>();
             Destroy(previousPlayer);
         }
 
         if(topPlayer.stop == true)
         {
-            Destroy(Players[top--]);
-            Players[top].AddComponent<PlayerLaunch>();
-            topPlayer = Players[top].GetComponent<PlayerLaunch>();
-            topPlayer.SetStopFalse();
+            Destroy(Players[top+1]);
+            Players[top].GetComponent<CircleCollider2D>().isTrigger = false;
+            if(top != bottom) 
+            {
+                Players[top].AddComponent<PlayerLaunch>();
+                topPlayer = Players[top].GetComponent<PlayerLaunch>();
+                topPlayer.SetStopFalse();
+            }
         }
     }
 }

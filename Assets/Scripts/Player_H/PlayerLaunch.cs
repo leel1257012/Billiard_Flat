@@ -16,6 +16,8 @@ public class PlayerLaunch : MonoBehaviour
     Vector3 colPos;
     Vector3 colLocalScale;
     int check;
+    PlatformSpawn spawn;
+    //public GameObject platform;
     
     // Start is called before the first frame update
     void Start()
@@ -24,10 +26,12 @@ public class PlayerLaunch : MonoBehaviour
         stop = false; //플레이가 움직이는 중인지
         UpDown = true; //up == true, Down == false
         maxSpeed = 10;
-        speed = minSpeed = 3;
+        speed = minSpeed = 1;
         deceleration = 0.99f;
         rb = GetComponent<Rigidbody2D>();
         Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        //platform = GameObject.Find("TestPlatform");
+        spawn = GameObject.Find("PlatformSpawner").GetComponent<PlatformSpawn>();
     }
 
     // Update is called once per frame
@@ -37,6 +41,7 @@ public class PlayerLaunch : MonoBehaviour
         {
             if(Input.GetMouseButtonDown(0))
             {
+                speed = minSpeed;
                 MousePosition = Input.mousePosition;
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
                 Direction = MousePosition - rb.position;
@@ -46,19 +51,18 @@ public class PlayerLaunch : MonoBehaviour
             {
                 if(UpDown == true)
                 {
-                    speed *= 1.05f;
+                    speed *= 1.02f;
                     if(speed >= maxSpeed) UpDown = false;
                 }
                 else
                 {
-                    speed *= 0.95f;
+                    speed *= 0.98f;
                     if(speed <= minSpeed) UpDown = true;
                 }
 
             }
             if(Input.GetMouseButtonUp(0))
             {
-                speed = minSpeed;
                 rb.gravityScale = 0;
                 moved = true;
             }
@@ -71,13 +75,17 @@ public class PlayerLaunch : MonoBehaviour
         {
             if(speed > 0.3)
             {
-                rb.MovePosition(rb.position + Direction * speed * Time.fixedDeltaTime);
+                //rb.MovePosition(rb.position + Direction * speed * Time.fixedDeltaTime);
+                rb.velocity = Direction * speed;
                 speed *= deceleration;
             }
             else 
             {
                 moved = false;
                 stop = true;
+                //this.platform = GameObject.Find("TestPlatform");
+                //Instantiate(platform, transform.position, Quaternion.identity);
+                spawn.Platform1(transform.position);
             }
         }
     }
