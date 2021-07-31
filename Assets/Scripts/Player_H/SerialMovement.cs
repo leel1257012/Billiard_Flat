@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SerialMovement : MonoBehaviour
 {
+    public float JumpForce = 5.0f;
+    Rigidbody2D rb2D;
     public GameObject[] Players = new GameObject[8];
     int MaxSize = 7;
     public int top = 0;
@@ -25,6 +27,7 @@ public class SerialMovement : MonoBehaviour
             pre.Next = Players[i-1];
         }
         //Players[bottom].GetComponent<PreviousPlayer>().SetLastTrue();
+        rb2D = Players[top].GetComponent<Rigidbody2D>();
         Players[top].AddComponent<PlayerLaunch>();
         topPlayer = Players[top].GetComponent<PlayerLaunch>();
     }
@@ -46,10 +49,22 @@ public class SerialMovement : MonoBehaviour
             Players[top].GetComponent<CircleCollider2D>().isTrigger = false;
             if(top != bottom) 
             {
+                rb2D = Players[top].GetComponent<Rigidbody2D>();
+                rb2D.gravityScale = 1.0f;
                 Players[top].AddComponent<PlayerLaunch>();
                 topPlayer = Players[top].GetComponent<PlayerLaunch>();
                 topPlayer.SetStopFalse();
             }
         }
+        if (!isJumping())
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+                rb2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+        }
+    }
+    bool isJumping()
+    {
+        if (rb2D.velocity.y == 0) return false;
+        else return true;
     }
 }
