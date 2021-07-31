@@ -54,7 +54,7 @@ public class draw_UI : MonoBehaviour
             }
 
             //use a current ball
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.W))
             {
                 UseCurrentBall();
             }

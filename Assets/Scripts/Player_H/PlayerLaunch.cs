@@ -90,27 +90,36 @@ public class PlayerLaunch : MonoBehaviour
         }
     }
 
-    void CheckCollisionSide() // 충돌 방향
+    //void CheckCollisionSide() // 충돌 방향
+    //{
+    //    if(Mathf.Abs(colPos.x - transform.position.x) < (float)(transform.localScale.x + colLocalScale.x)/2 - 0.1) check = 1; //up & down
+    //    else check = 2; //right & left
+    //}
+
+    //void OnCollisionEnter2D(Collision2D col) // 충돌 시 방향전환
+    //{
+    //    colPos = col.transform.position;
+    //    colLocalScale = col.transform.localScale;
+    //    CheckCollisionSide();
+    //    if(check == 1)
+    //    {
+    //        Direction.y *= -1;
+
+    //    }
+    //    else
+    //    {
+    //        Direction.x *= -1;
+    //    }
+    //}
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(Mathf.Abs(colPos.x - transform.position.x) < (float)(transform.localScale.x + colLocalScale.x)/2 - 0.1) check = 1; //up & down
-        else check = 2; //right & left
+        Vector2 normalVector = collision.contacts[0].normal;
+        Vector2 reflectVector = Vector2.Reflect(Direction, normalVector);
+        Direction = reflectVector.normalized;
     }
 
-    void OnCollisionEnter2D(Collision2D col) // 충돌 시 방향전환
-    {
-        colPos = col.transform.position;
-        colLocalScale = col.transform.localScale;
-        CheckCollisionSide();
-        if(check == 1)
-        {
-            Direction.y *= -1;
-            
-        }
-        else
-        {
-            Direction.x *= -1;
-        }
-    }
+
 
     public void SetStopFalse()
     {

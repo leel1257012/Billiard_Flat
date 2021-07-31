@@ -5,11 +5,11 @@ using UnityEngine;
 public class SerialMovement : MonoBehaviour
 {
     public float JumpForce = 5.0f;
-    Rigidbody2D rb2D;
+    public Rigidbody2D rb2D;
     public GameObject[] Players = new GameObject[8];
     int MaxSize = 7;
     public int top = 0;
-    int bottom = 0;
+    public int bottom = 0;
     public float speed;
     PlayerLaunch topPlayer;
 
@@ -47,10 +47,10 @@ public class SerialMovement : MonoBehaviour
         {
             Destroy(Players[top+1]);
             Players[top].GetComponent<CircleCollider2D>().isTrigger = false;
+            rb2D = Players[top].GetComponent<Rigidbody2D>();
+            rb2D.gravityScale = 1.0f;
             if(top != bottom) 
             {
-                rb2D = Players[top].GetComponent<Rigidbody2D>();
-                rb2D.gravityScale = 1.0f;
                 Players[top].AddComponent<PlayerLaunch>();
                 topPlayer = Players[top].GetComponent<PlayerLaunch>();
                 topPlayer.SetStopFalse();
