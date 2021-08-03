@@ -40,34 +40,40 @@ public class MapEditor : MonoBehaviour
     void Update()
     {
         bool isValid;
+        bool isColliding;                               // ÇöÀç À§Ä¡¿¡ ÀÌ¹Ì ¿ÀºêÁ§Æ®°¡ ÀÖ´ÂÁö
         Vector3 mousePoint = GetMousePoint();
         //Debug.Log("cur: " + mousePoint);
         //Debug.Log(prevMousePoint);
         if (currentFloor != null && floorMode != 0)     // ºí·Ï ¼±ÅÃ È®ÀÎ
         {
             isValid = false;
+
             currentFloor.transform.position = mousePoint;
+            isColliding = currentFloor.GetComponent<BoxCollider2D>().OverlapCollider(new ContactFilter2D(), new Collider2D[1])>0?true:false;
+
             if (prevMousePoint != mousePoint)
             {
                 if (Input.GetMouseButton(0))            // ºí·Ï ¼±ÅÃÀÌ µÇ¾îÀÖÀ¸¸é ÁÂÅ¬¸¯À¸·Î ¼³Ä¡
                 {
-                    if (CheckWall(mousePoint.x, mousePoint.y)) Destroy(CheckWall(mousePoint.x, mousePoint.y).gameObject);
-                    if (CheckPlatform(mousePoint.x, mousePoint.y)) Destroy(CheckPlatform(mousePoint.x, mousePoint.y).gameObject);
-                    if (CheckDevice(mousePoint.x, mousePoint.y)) Destroy(CheckDevice(mousePoint.x, mousePoint.y).gameObject);
-                    if (CheckItem(mousePoint.x, mousePoint.y)) Destroy(CheckItem(mousePoint.x, mousePoint.y).gameObject);
+                    if (!isColliding) {
+                        if (CheckWall(mousePoint.x, mousePoint.y)) Destroy(CheckWall(mousePoint.x, mousePoint.y).gameObject);
+                        if (CheckPlatform(mousePoint.x, mousePoint.y)) Destroy(CheckPlatform(mousePoint.x, mousePoint.y).gameObject);
+                        if (CheckDevice(mousePoint.x, mousePoint.y)) Destroy(CheckDevice(mousePoint.x, mousePoint.y).gameObject);
+                        if (CheckItem(mousePoint.x, mousePoint.y)) Destroy(CheckItem(mousePoint.x, mousePoint.y).gameObject);
 
-                    GameObject newFloor = null;
-                    if (floorMode == FloorType.Wall) newFloor = Instantiate(currentFloor, mousePoint, Quaternion.identity, walls);
-                    if (floorMode == FloorType.DisposableFloor || floorMode == FloorType.HookFloor || floorMode == FloorType.MovingFloor
-                        || floorMode == FloorType.SlipFloor || floorMode == FloorType.JumpFloor || floorMode == FloorType.SlowFloor
-                        || floorMode == FloorType.TimedFloor || floorMode == FloorType.Spawn || floorMode == FloorType.Goal) newFloor = Instantiate(currentFloor, mousePoint, Quaternion.identity, platforms);
-                    if (floorMode == FloorType.Device) newFloor = Instantiate(currentFloor, mousePoint, Quaternion.identity, devices);
-                    if (floorMode == FloorType.Item) newFloor = Instantiate(currentFloor, mousePoint, Quaternion.identity, items);
+                        GameObject newFloor = null;
+                        if (floorMode == FloorType.Wall) newFloor = Instantiate(currentFloor, mousePoint, Quaternion.identity, walls);
+                        if (floorMode == FloorType.DisposableFloor || floorMode == FloorType.HookFloor || floorMode == FloorType.MovingFloor
+                            || floorMode == FloorType.SlipFloor || floorMode == FloorType.JumpFloor || floorMode == FloorType.SlowFloor
+                            || floorMode == FloorType.TimedFloor || floorMode == FloorType.Spawn || floorMode == FloorType.Goal) newFloor = Instantiate(currentFloor, mousePoint, Quaternion.identity, platforms);
+                        if (floorMode == FloorType.Device) newFloor = Instantiate(currentFloor, mousePoint, Quaternion.identity, devices);
+                        if (floorMode == FloorType.Item) newFloor = Instantiate(currentFloor, mousePoint, Quaternion.identity, items);
 
-                    newFloor.GetComponent<MapEditorFloor>().mapPos = new Vector2(mousePoint.x, mousePoint.y);
-                    newFloor.GetComponent<BoxCollider2D>().enabled = true;
+                        newFloor.GetComponent<MapEditorFloor>().mapPos = new Vector2(mousePoint.x, mousePoint.y);
+                        newFloor.GetComponent<BoxCollider2D>().enabled = true;
 
-                    prevMousePoint = mousePoint;
+                        prevMousePoint = mousePoint;
+                    }
                 } else if (Input.GetMouseButton(1))     // ºí·Ï ¼±ÅÃÇÑ »óÅÂ¿¡¼­ ¿ìÅ¬¸¯À¸·Î »èÁ¦
                 {
                     Vector3 tempPos = Input.mousePosition;
@@ -99,7 +105,7 @@ public class MapEditor : MonoBehaviour
     Vector3 GetMousePoint()
     {
         Vector3 originPos = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
-        Vector3 mousePoint = new Vector3(Mathf.Round(originPos.x), Mathf.Round(originPos.y));
+        Vector3 mousePoint = new Vector3(originPos.x, originPos.y);//Vector3(Mathf.Round(originPos.x), Mathf.Round(originPos.y));
         return mousePoint;
     }
 
@@ -111,6 +117,7 @@ public class MapEditor : MonoBehaviour
         {
             currentFloor = floors[_floorMode - 1];
             currentFloor.SetActive(true);
+            currentFloor.GetComponent<BoxCollider2D>().enabled = true;
         }
         else currentFloor = null;
         Debug.Log("Current Floor " + (FloorType)_floorMode);
@@ -164,7 +171,7 @@ public class MapEditor : MonoBehaviour
     
     public void saveMap()
     {
-        string path = EditorUtility.SaveFilePanel("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½", "", "BFMap_", "bfmap");
+        string path = EditorUtility.SaveFilePanel("Save Map", "", "Stage_", "xml");
 
         if(path.Length != 0)
         {
@@ -199,7 +206,7 @@ public class MapEditor : MonoBehaviour
     }
     public void loadMap()
     {
-        string path = EditorUtility.OpenFilePanel("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½", "", "bfmap");
+        string path = EditorUtility.OpenFilePanel("Load Map", "", "xml");
 
 
         if(path.Length != 0)
