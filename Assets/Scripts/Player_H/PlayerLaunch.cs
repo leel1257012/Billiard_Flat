@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerLaunch : MonoBehaviour
 {
+    SerialMovement SerialMovement;
+
     Camera Camera;
     Vector2 Direction;
     Vector2 MousePosition;
+    Rigidbody2D rbPlayer;
     private Rigidbody2D rb;
     public float speed, deceleration;
     public float maxSpeed, minSpeed;
@@ -22,6 +25,7 @@ public class PlayerLaunch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SerialMovement = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
         moved = false;
         stop = false; //플레이가 움직이는 중인지
         UpDown = true; //up == true, Down == false
@@ -37,7 +41,7 @@ public class PlayerLaunch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(moved == false)
+        if(moved == false && !SerialMovement.isJumping())
         {
             if(Input.GetMouseButtonDown(0))
             {
@@ -118,8 +122,6 @@ public class PlayerLaunch : MonoBehaviour
         Vector2 reflectVector = Vector2.Reflect(Direction, normalVector);
         Direction = reflectVector.normalized;
     }
-
-
 
     public void SetStopFalse()
     {
