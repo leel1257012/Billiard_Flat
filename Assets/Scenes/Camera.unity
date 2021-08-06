@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Arrow: {fileID: 5877940178344221941, guid: 7b58aa48e89cf435f9212648f2c48035, type: 3}
+  Chargebar: {fileID: 4564648568835289153, guid: bd15c826e82ad4998bb549fe4deaabc7, type: 3}
 --- !u!4 &1010302701
 Transform:
   m_ObjectHideFlags: 0

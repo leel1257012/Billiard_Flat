@@ -54,7 +54,8 @@ public class PlayerLaunch_H : MonoBehaviour
                 Direction = MousePosition - rb.position;
                 Direction = Direction.normalized;
                 minTime = currentTime; //// 수정
-                arrow.Instant(transform.position,Direction); ////
+                arrow.Instant(transform.position,Direction); 
+                arrow.chargebarSpawn(transform.position); ////
             }
             if(Input.GetMouseButton(0)) ////수정
             {
@@ -96,7 +97,8 @@ public class PlayerLaunch_H : MonoBehaviour
                 {
                     speed = maxSpeed - (maxSpeed - minSpeed) * (time / chargeTime);
                 }
-                arrow.DisInstant();////
+                arrow.DisInstant();
+                arrow.chargebarDestroy(); ////
             }
         }
     }
