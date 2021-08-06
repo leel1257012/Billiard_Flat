@@ -9,7 +9,7 @@ public class SerialMovement : MonoBehaviour
     public GameObject[] Players = new GameObject[8];
     int MaxSize = 7;
     public int top = 0;
-    public int bottom = 0;
+    public int bottom = 0; 
     public float speed;
     PlayerLaunch topPlayer;
 
@@ -37,7 +37,8 @@ public class SerialMovement : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.A)) Players[top].transform.Translate(-1*speed*Time.deltaTime,0,0);
         if(Input.GetKey(KeyCode.D)) Players[top].transform.Translate(1*speed*Time.deltaTime,0,0);
-        if(Input.GetMouseButtonDown(0) && (top != bottom))
+
+        if(Input.GetMouseButtonDown(0) && (top != bottom) && !isJumping())
         {
             PreviousPlayer previousPlayer = Players[--top].GetComponent<PreviousPlayer>();
             Destroy(previousPlayer);
@@ -56,13 +57,15 @@ public class SerialMovement : MonoBehaviour
                 topPlayer.SetStopFalse();
             }
         }
+
         if (!isJumping())
         {
             if (Input.GetKeyDown(KeyCode.Space))
                 rb2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
     }
-    bool isJumping()
+
+    public bool isJumping()
     {
         if (rb2D.velocity.y == 0) return false;
         else return true;
