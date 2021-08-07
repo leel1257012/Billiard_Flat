@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         spawnPlatform = GameObject.Find("SpawnPlatform");
+        //serialMove = GameObject.Find("SerialMoving");
         Vector3 spawn = spawnPlatform.transform.position + new Vector3(0f, 1f, 0f);
         for(int i=0; i<playerCount; i++)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLaunch : MonoBehaviour
 {
-    SerialMovement SerialMovement;
+    public SerialMovement SerialMovement;
 
     Camera Camera;
     Vector2 Direction;
@@ -15,13 +15,18 @@ public class PlayerLaunch : MonoBehaviour
     public float maxSpeed, minSpeed;
     bool UpDown, moved;
     public bool stop;
+    public bool isLaunched;
 
     Vector3 colPos;
     Vector3 colLocalScale;
     int check;
     PlatformSpawn spawn;
     //public GameObject platform;
-    
+
+    float minTime = 0, currentTime = 0, time = 0; ////수정
+    public float chargeTime = 1.5f;
+    ArrowController arrow; ////
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,12 +41,14 @@ public class PlayerLaunch : MonoBehaviour
         Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         //platform = GameObject.Find("TestPlatform");
         spawn = GameObject.Find("PlatformSpawner").GetComponent<PlatformSpawn>();
+        //arrow = GameObject.Find("ArrowSpawner").GetComponent<ArrowController>(); ////수정
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(moved == false && !SerialMovement.isJumping())
+        currentTime += Time.deltaTime; ////수정
+        if (moved == false && !SerialMovement.isJumping())
         {
             if(Input.GetMouseButtonDown(0))
             {
@@ -50,25 +57,51 @@ public class PlayerLaunch : MonoBehaviour
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
                 Direction = MousePosition - rb.position;
                 Direction = Direction.normalized;
+                //minTime = currentTime; //// 수정
+                //arrow.Instant(transform.position, Direction);
+                //arrow.chargebarSpawn(transform.position); ////
             }
             if(Input.GetMouseButton(0))
             {
-                if(UpDown == true)
+                MousePosition = Input.mousePosition; //중간에 발사위치 조정 가능하도록
+                MousePosition = Camera.ScreenToWorldPoint(MousePosition);
+                Direction = MousePosition - rb.position;
+                Direction = Direction.normalized;
+                //arrow.Setting(transform.position, Direction);
+
+                if (UpDown == true) //speed 기준에서 시간 기준으로 바꿈
                 {
-                    speed *= 1.02f;
-                    if(speed >= maxSpeed) UpDown = false;
+                    if (currentTime - minTime >= chargeTime)
+                    {
+                        UpDown = false;
+                        minTime = currentTime = 0;
+                    }
                 }
                 else
                 {
-                    speed *= 0.98f;
-                    if(speed <= minSpeed) UpDown = true;
-                }
+                    if (currentTime - minTime >= chargeTime)
+                    {
+                        UpDown = true;
+                        minTime = currentTime = 0;
+                    }
+                }////
 
             }
             if(Input.GetMouseButtonUp(0))
             {
                 rb.gravityScale = 0;
                 moved = true;
+                time = currentTime - minTime; ////수정
+                if (UpDown == true)
+                {
+                    speed = minSpeed + (maxSpeed - minSpeed) * (time / chargeTime);
+                }
+                else
+                {
+                    speed = maxSpeed - (maxSpeed - minSpeed) * (time / chargeTime);
+                }
+                //arrow.DisInstant();
+                //arrow.chargebarDestroy(); ////
             }
         }
     }
@@ -94,30 +127,16 @@ public class PlayerLaunch : MonoBehaviour
         }
     }
 
-    //void CheckCollisionSide() // 충돌 방향
-    //{
-    //    if(Mathf.Abs(colPos.x - transform.position.x) < (float)(transform.localScale.x + colLocalScale.x)/2 - 0.1) check = 1; //up & down
-    //    else check = 2; //right & left
-    //}
-
-    //void OnCollisionEnter2D(Collision2D col) // 충돌 시 방향전환
-    //{
-    //    colPos = col.transform.position;
-    //    colLocalScale = col.transform.localScale;
-    //    CheckCollisionSide();
-    //    if(check == 1)
-    //    {
-    //        Direction.y *= -1;
-
-    //    }
-    //    else
-    //    {
-    //        Direction.x *= -1;
-    //    }
-    //}
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.GetComponent<MapEditorFloor>() != null && !moved)
+        {
+            if(collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.Goal)
+            {
+                Debug.Log("Goal Reached!");
+            }
+        }
+
         Vector2 normalVector = collision.contacts[0].normal;
         Vector2 reflectVector = Vector2.Reflect(Direction, normalVector);
         Direction = reflectVector.normalized;

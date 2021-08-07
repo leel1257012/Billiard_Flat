@@ -14,6 +14,8 @@ public class SerialMovement1 : MonoBehaviour
     public float speed = 3f;
     PlayerLaunch topPlayer;
 
+    public CameraController camera; /////수정
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,8 @@ public class SerialMovement1 : MonoBehaviour
         rb2D = Players[top].GetComponent<Rigidbody2D>();
         Players[top].AddComponent<PlayerLaunch>();
         topPlayer = Players[top].GetComponent<PlayerLaunch>();
+        camera = GameObject.Find("Main Camera").GetComponent<CameraController>(); ////수정
+        camera.Player = Players[top]; ////수정
     }
 
     // Update is called once per frame
@@ -56,6 +60,7 @@ public class SerialMovement1 : MonoBehaviour
         {
             PreviousPlayer previousPlayer = Players[--top].GetComponent<PreviousPlayer>();
             Destroy(previousPlayer);
+            camera.Player = Players[top]; ////수정
         }
 
         if(topPlayer.stop == true)
@@ -77,7 +82,7 @@ public class SerialMovement1 : MonoBehaviour
                 rb2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
     }
-    bool isJumping()
+    public bool isJumping()
     {
         if (rb2D.velocity.y == 0) return false;
         else return true;
