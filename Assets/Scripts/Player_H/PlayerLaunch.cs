@@ -41,7 +41,7 @@ public class PlayerLaunch : MonoBehaviour
         Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         //platform = GameObject.Find("TestPlatform");
         spawn = GameObject.Find("PlatformSpawner").GetComponent<PlatformSpawn>();
-        //arrow = GameObject.Find("ArrowSpawner").GetComponent<ArrowController>(); ////수정
+        arrow = GameObject.Find("ArrowSpawner").GetComponent<ArrowController>(); ////수정
     }
 
     // Update is called once per frame
@@ -57,9 +57,9 @@ public class PlayerLaunch : MonoBehaviour
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
                 Direction = MousePosition - rb.position;
                 Direction = Direction.normalized;
-                //minTime = currentTime; //// 수정
-                //arrow.Instant(transform.position, Direction);
-                //arrow.chargebarSpawn(transform.position); ////
+                minTime = currentTime; //// 수정
+                arrow.Instant(transform.position, Direction);
+                arrow.chargebarSpawn(transform.position); ////
             }
             if(Input.GetMouseButton(0))
             {
@@ -67,7 +67,7 @@ public class PlayerLaunch : MonoBehaviour
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
                 Direction = MousePosition - rb.position;
                 Direction = Direction.normalized;
-                //arrow.Setting(transform.position, Direction);
+                arrow.Setting(transform.position, Direction);
 
                 if (UpDown == true) //speed 기준에서 시간 기준으로 바꿈
                 {
@@ -100,8 +100,8 @@ public class PlayerLaunch : MonoBehaviour
                 {
                     speed = maxSpeed - (maxSpeed - minSpeed) * (time / chargeTime);
                 }
-                //arrow.DisInstant();
-                //arrow.chargebarDestroy(); ////
+                arrow.DisInstant();
+                arrow.chargebarDestroy(); ////
             }
         }
     }
