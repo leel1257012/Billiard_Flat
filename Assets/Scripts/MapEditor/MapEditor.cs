@@ -4,16 +4,21 @@ using UnityEngine;
 using System.IO;
 using UnityEditor;
 using System.Xml.Serialization;
+using UnityEngine.UI;
 using System.Xml;
 
 public class MapEditor : MonoBehaviour
 {
-
+    public GameObject[] panelObjects;
+    public GameObject selectedBall;
+    Vector2 mapSize = new Vector2(16,10);
     FloorType floorMode = 0;
     GameObject currentFloor = null;
     public GameObject[] floors;
+    public Sprite[] balls;
+    public GameObject ballSelection;
     Vector3 prevMousePoint;
-    Transform walls, platforms, devices, items;
+    Transform walls, platforms, devices, items, ballsList;
     Camera cam;
 
     // Start is called before the first frame update
@@ -175,32 +180,39 @@ public class MapEditor : MonoBehaviour
 
         if(path.Length != 0)
         {
-            List<MapStructure> objectList = new List<MapStructure>();
+            List<SinglePlatform> objectList = new List<SinglePlatform>();
             for (int i = 0; i < walls.childCount; i++){
                 MapEditorFloor temp = walls.GetChild(i).GetComponent<MapEditorFloor>();
-                objectList.Add(new MapStructure(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
+                objectList.Add(new SinglePlatform(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
             }
             for (int i = 0; i < platforms.childCount; i++)
             {
                 MapEditorFloor temp = platforms.GetChild(i).GetComponent<MapEditorFloor>();
-                objectList.Add(new MapStructure(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
+                objectList.Add(new SinglePlatform(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
             }
             for (int i = 0; i < devices.childCount; i++)
             {
                 MapEditorFloor temp = devices.GetChild(i).GetComponent<MapEditorFloor>();
-                objectList.Add(new MapStructure(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
+                objectList.Add(new SinglePlatform(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
             }
             for (int i = 0; i < items.childCount; i++)
             {
                 MapEditorFloor temp = items.GetChild(i).GetComponent<MapEditorFloor>();
-                objectList.Add(new MapStructure(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
+                objectList.Add(new SinglePlatform(temp.mapPos.x,temp.mapPos.y,temp.thisFloor));
             }
             Debug.Log("Number of Saved object: "+objectList.Count);
 
+            MapStructure mMap = new MapStructure(
+                mapSize.x,
+                mapSize.y,
+                getSelectedBalls(),
+                objectList
+            );
+
             FileStream fs = File.Create(path);
             
-            XmlSerializer xs = new XmlSerializer(typeof(List<MapStructure>));
-            xs.Serialize(fs, objectList); 
+            XmlSerializer xs = new XmlSerializer(typeof(MapStructure));
+            xs.Serialize(fs, mMap); 
             fs.Close();
         }
     }
@@ -212,8 +224,17 @@ public class MapEditor : MonoBehaviour
         if(path.Length != 0)
         {
             FileStream fs = File.Open(path,FileMode.Open);
-            XmlSerializer xs = new XmlSerializer(typeof(List<MapStructure>));
-            List<MapStructure> readData = (List<MapStructure>) xs.Deserialize(fs);
+            XmlSerializer xs = new XmlSerializer(typeof(MapStructure));
+            MapStructure readData = (MapStructure) xs.Deserialize(fs);
+            List<SinglePlatform> readPlatforms = readData.platforms;
+
+            mapSize = new Vector2(readData.mapWidth,readData.mapHeight);
+            panelObjects[1].GetComponent<Text>().text = mapSize.x.ToString();
+            panelObjects[2].GetComponent<Text>().text = mapSize.y.ToString();
+            GameObject.Find("MapBorder").transform.localScale = new Vector2(mapSize.x, mapSize.y);
+            foreach (var type in readData.balls)
+                addBall((int)type);
+            
 
             foreach (Transform child in walls.transform)
                 Destroy(child.gameObject);
@@ -234,7 +255,7 @@ public class MapEditor : MonoBehaviour
                 Destroy(items.GetChild(0).gameObject);
                 */
 
-            foreach(MapStructure element in readData){
+            foreach(SinglePlatform element in readPlatforms){
                 Vector2 pos = new Vector2(element.x, element.y);
                 FloorType floorType = element.type;
                 GameObject floorObject = floors[(int) floorType - 1];
@@ -252,5 +273,58 @@ public class MapEditor : MonoBehaviour
                 newFloor.SetActive(true);
             }
         }
+    }
+    public void addBall(int _type){
+        
+        BallType type = (BallType)_type;
+        var generatedObject = Instantiate(ballSelection,selectedBall.transform);
+        generatedObject.GetComponent<Image>().sprite = balls[_type];
+        generatedObject.GetComponent<MapEditorBall>().type = type;
+        generatedObject.transform.SetParent(selectedBall.transform,false);
+
+        generatedObject.SetActive(true);
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(selectedBall.GetComponent<RectTransform>());
+    }
+    List<BallType> getSelectedBalls(){
+        Transform layout = selectedBall.transform;
+        List<BallType> res = new List<BallType>();
+        /*
+        Debug.Log("Number of balls: "+selectedBalls.Count.ToString());
+        for(int i=0;i<selectedBalls.Count;i++){
+            selectedBalls[i].GetComponent<MapEditorBall>().index=i;
+            a+=((int)selectedBalls[i].GetComponent<MapEditorBall>().type).ToString();
+        }
+        */
+        for (int i=0;i<layout.childCount;i++){
+            res.Add(layout.GetChild(i).GetComponent<MapEditorBall>().type);
+        }
+        return res;
+    }
+    public void changeMapSize(int flag)
+    {
+        switch(flag){
+            case 0:
+                mapSize.x+=1;
+                break;
+            case 1:
+                if(mapSize.x>1)
+                    mapSize.x-=1;
+                break;
+            case 2:
+                mapSize.y+=1;
+                break;
+            case 3:
+                if(mapSize.y>1)
+                    mapSize.y-=1;
+                break;
+        }
+        panelObjects[1].GetComponent<Text>().text = mapSize.x.ToString();
+        panelObjects[2].GetComponent<Text>().text = mapSize.y.ToString();
+        GameObject.Find("MapBorder").transform.localScale = new Vector2(mapSize.x, mapSize.y);
+    }
+    public void panelVisibility(bool flag)
+    {
+        panelObjects[0].SetActive(flag);
     }
 }

@@ -375,7 +375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fda337eb1d9b1e44ac9a8bea0887d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
 --- !u!114 &1619875879 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
@@ -454,6 +453,74 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 15226056972602904, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_Name
+      value: MoveLeftRightBallButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 650687890303819532, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_Name
+      value: MoveUpDownBallButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 799980962224834380, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944829677839065104, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_Name
+      value: HookBallButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2359040337446798384, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2359040337446798384, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2359040337446798384, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3033540575572898727, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_Name
+      value: OneStepBallButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3522703078090745194, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_Pivot.x
+      value: -0.00000003306195
+      objectReference: {fileID: 0}
+    - target: {fileID: 3522703078090745194, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_Pivot.y
+      value: 1.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3522703078090745194, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -769.3259
+      objectReference: {fileID: 0}
+    - target: {fileID: 3522703078090745194, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -302.48026
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848920195326806250, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3848920195326806250, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337298349398115879, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337298349398115879, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337298349398115879, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5748870159558225431, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: m_Name
       value: MapEditor
@@ -461,6 +528,50 @@ PrefabInstance:
     - target: {fileID: 5748870159558225431, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: balls.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: floors.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: balls.Array.data[0]
+      value: 
+      objectReference: {fileID: 1282903968301792020, guid: 33097b2a30fdeef47a087d081de8437a, type: 3}
+    - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: balls.Array.data[1]
+      value: 
+      objectReference: {fileID: 1282903968301792020, guid: 41cc58dea81eecc459f8a4618f25f47f, type: 3}
+    - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: balls.Array.data[2]
+      value: 
+      objectReference: {fileID: 1282903968301792020, guid: ec3d7b450ad9ff54d960ec8908b9189f, type: 3}
+    - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: balls.Array.data[3]
+      value: 
+      objectReference: {fileID: 1282903968301792020, guid: 6a6d37573b05dc849aad3b95491602fa, type: 3}
+    - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: balls.Array.data[4]
+      value: 
+      objectReference: {fileID: 1282903968301792020, guid: 94eb4f60a231e94418740f7273e597d7, type: 3}
+    - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: balls.Array.data[5]
+      value: 
+      objectReference: {fileID: 1282903968301792020, guid: abda7ee356ca20d4daa41c0ce14d60d3, type: 3}
+    - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: balls.Array.data[6]
+      value: 
+      objectReference: {fileID: 1282903968301792020, guid: e7a915a00c965114680ba5d61f17cf38, type: 3}
+    - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: balls.Array.data[7]
+      value: 
+      objectReference: {fileID: 1282903968301792020, guid: 1541fef2524af95459c5de5d21579b73, type: 3}
+    - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: floors.Array.data[2]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5748870159558225433, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: m_RootOrder
@@ -537,6 +648,30 @@ PrefabInstance:
     - target: {fileID: 5748870159888370621, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767516925751389243, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_Name
+      value: SelectedBallsView
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321601235801764955, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_Name
+      value: IceBallButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7174091029783719506, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00023287129
+      objectReference: {fileID: 0}
+    - target: {fileID: 7734148154461522821, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_Name
+      value: SlowBallButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066015280565782019, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_Name
+      value: MoveCircleBallButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206858255585143578, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_Name
+      value: BlackBallButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
