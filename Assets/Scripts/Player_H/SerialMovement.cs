@@ -64,7 +64,7 @@ public class SerialMovement : MonoBehaviour
 
         if (topPlayer.stop == true)
         {
-            Destroy(Players[top + 1]);
+            //Destroy(Players[top + 1]);
             Players[top].GetComponent<CircleCollider2D>().isTrigger = false;
             rb2D = Players[top].GetComponent<Rigidbody2D>();
             rb2D.gravityScale = 1.0f;
@@ -73,6 +73,13 @@ public class SerialMovement : MonoBehaviour
                 Players[top].AddComponent<PlayerLaunch>();
                 topPlayer = Players[top].GetComponent<PlayerLaunch>();
                 topPlayer.SetStopFalse();
+            }
+            else
+            {
+                Players[top].AddComponent<PlayerLaunch>();
+                topPlayer = Players[top].GetComponent<PlayerLaunch>();
+                topPlayer.SetStopFalse();
+
             }
         }
         if (!isJumping())

@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
         Vector3 spawn = spawnPlatform.transform.position + new Vector3(0f, 1f, 0f);
         for(int i=0; i<playerCount; i++)
         {
-            Instantiate(playerPrefabs[0], spawn, Quaternion.identity, Players.transform);
+            Instantiate(playerPrefabs[(int)curPlayers[i]], spawn, Quaternion.identity, Players.transform);
             //Debug.Log((int)curPlayers[i]);
         }
         serialMove.SetActive(true);
