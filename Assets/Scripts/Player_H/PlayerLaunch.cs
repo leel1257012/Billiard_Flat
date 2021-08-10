@@ -135,7 +135,21 @@ public class PlayerLaunch : MonoBehaviour
             {
                 Debug.Log("Goal Reached!");
             }
+
+            //얼음 플랫폼
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlipFloor)
+            {
+                
+            }
+
+            //한 번 밟으면 2초 후 사라지는 플랫폼
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.DisposableFloor)
+            {
+                Destroy(collision.gameObject, 2.0f);
+                collision.gameObject.GetComponent<Pf_Disappearing>().disappear = 1;
+            }
         }
+        
 
         Vector2 normalVector = collision.contacts[0].normal;
         Vector2 reflectVector = Vector2.Reflect(Direction, normalVector);
