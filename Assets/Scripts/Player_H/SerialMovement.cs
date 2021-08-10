@@ -46,8 +46,8 @@ public class SerialMovement : MonoBehaviour
         rb2D = Players[top].GetComponent<Rigidbody2D>();
         Players[top].AddComponent<PlayerLaunch>();
         topPlayer = Players[top].GetComponent<PlayerLaunch>();
-        //camera = GameObject.Find("Main Camera").GetComponent<CameraController>(); ////수정
-        //camera.Player = Players[top]; ////수정
+        camera = GameObject.Find("Main Camera").GetComponent<CameraController>(); ////수정
+        camera.Player = Players[top]; ////수정
     }
 
     // Update is called once per frame
@@ -59,12 +59,12 @@ public class SerialMovement : MonoBehaviour
         {
             PreviousPlayer previousPlayer = Players[--top].GetComponent<PreviousPlayer>();
             Destroy(previousPlayer);
-            //camera.Player = Players[top]; ////수정
+            camera.Player = Players[top]; ////수정
         }
 
         if (topPlayer.stop == true)
         {
-            Destroy(Players[top + 1]);
+            //Destroy(Players[top + 1]);
             Players[top].GetComponent<CircleCollider2D>().isTrigger = false;
             rb2D = Players[top].GetComponent<Rigidbody2D>();
             rb2D.gravityScale = 1.0f;
@@ -73,6 +73,13 @@ public class SerialMovement : MonoBehaviour
                 Players[top].AddComponent<PlayerLaunch>();
                 topPlayer = Players[top].GetComponent<PlayerLaunch>();
                 topPlayer.SetStopFalse();
+            }
+            else
+            {
+                Players[top].AddComponent<PlayerLaunch>();
+                topPlayer = Players[top].GetComponent<PlayerLaunch>();
+                topPlayer.SetStopFalse();
+
             }
         }
         if (!isJumping())
