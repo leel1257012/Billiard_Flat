@@ -2426,6 +2426,7 @@ MonoBehaviour:
   stage: TEST STAGE
   level: 1
   stageName: {fileID: 386160199}
+  ballUI: {fileID: 55017869}
   pauseButton: {fileID: 1317693584}
   img_ball:
   - {fileID: 444503404}

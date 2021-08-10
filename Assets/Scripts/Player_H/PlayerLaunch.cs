@@ -147,10 +147,17 @@ public class PlayerLaunch : MonoBehaviour
         #region platforms
         if (collision.gameObject.GetComponent<MapEditorFloor>() != null && !moved)
         {
-            // 사라지는 플랫폼
+            //얼음 플랫폼
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlipFloor)
+            {
+
+            }
+
+            //한 번 밟으면 2초 후 사라지는 플랫폼
             if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.DisposableFloor)
             {
-                Destroy(collision.gameObject, 1f);
+                Destroy(collision.gameObject, 2.0f);
+                collision.gameObject.GetComponent<Pf_Disappearing>().disappear = 1;
             }
 
 
@@ -167,6 +174,7 @@ public class PlayerLaunch : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.name == "CheckGoal" && !moved) Debug.Log("Goal Reached!");
+
 
     }
 
