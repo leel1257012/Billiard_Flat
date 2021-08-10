@@ -13,6 +13,8 @@ public class draw_UI : MonoBehaviour
     public string stage = "TEST STAGE"; //the name of stage
     public int level = 1; //current level of stage
     public Text stageName; //Text instance
+    public GameObject ballUI; //UI for drawing the list of balls
+    bool ballUI_toggle = true;
     public GameObject pauseButton; //pauseButton instance
     public Image[] img_ball;
     public Sprite[] spr_ball;
@@ -63,6 +65,12 @@ public class draw_UI : MonoBehaviour
             {
                 AddBall();
             }
+
+            //press u to toggle ballUI
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                ToggleBallUI();
+            }
         }
         else if (GameState == 1) //game pause
         {
@@ -103,6 +111,19 @@ public class draw_UI : MonoBehaviour
         {
             img_ball[i].sprite = spr_ball[arr_ball[i]];
         }
+    }
+
+    void ToggleBallUI()
+    {
+        if (ballUI_toggle)
+        {
+            ballUI.SetActive(false);
+        }
+        else
+        {
+            ballUI.SetActive(true);
+        }
+        ballUI_toggle = !ballUI_toggle;
     }
 
     public void PauseGame()
