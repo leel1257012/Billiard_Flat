@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SerialMovement : MonoBehaviour
+public class SerialMovement_EJ : MonoBehaviour
 {
     public float JumpForce = 5.0f;
     public Rigidbody2D rb2D;
@@ -15,6 +15,7 @@ public class SerialMovement : MonoBehaviour
     PlayerLaunch topPlayer;
 
     public CameraController camera; /////����
+    public GameObject PlayersGameObject;
 
     // Start is called before the first frame update
     void Start()
@@ -85,5 +86,32 @@ public class SerialMovement : MonoBehaviour
     {
         if (rb2D.velocity.y == 0) return false;
         else return true;
+    }
+
+    public void OnTriggerstar(Collider2D other)
+    {
+        Players[top].GetComponent<CircleCollider2D>().isTrigger = true;
+        GameObject newTop = Instantiate(other.gameObject.GetComponent<StarSetting>().Player, Players[top].transform.position, Quaternion.identity, PlayersGameObject.transform);
+        other.gameObject.SetActive(false);
+        Players.Add(newTop);
+
+        Destroy(topPlayer);
+
+        Players[top].gameObject.AddComponent<PreviousPlayer>();
+        PreviousPlayer pre = Players[top].GetComponent<PreviousPlayer>();
+        pre.Previous = Players[top + 1];
+        pre.Next = Players[top - 1];
+
+        Vector3 currentVelocity = rb2D.velocity;
+        rb2D.velocity = new Vector3(0,0,0);
+        rb2D.gravityScale = 0.0f;
+        rb2D = Players[++top].GetComponent<Rigidbody2D>();
+        rb2D.gravityScale = 1.0f;
+        rb2D.AddForce(currentVelocity, ForceMode2D.Impulse);
+
+        Players[top].gameObject.AddComponent<PlayerLaunch>();
+        topPlayer = Players[top].GetComponent<PlayerLaunch>();
+        camera.Player = Players[top];
+        
     }
 }
