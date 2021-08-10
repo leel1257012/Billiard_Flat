@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLaunch_EJ : MonoBehaviour
 {
-    public SerialMovement SerialMovement;
+    public SerialMovement_EJ SerialMovement;
 
     Camera Camera;
     Vector2 Direction;
@@ -30,7 +30,7 @@ public class PlayerLaunch_EJ : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SerialMovement = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
+        SerialMovement = GameObject.Find("SerialMoving").GetComponent<SerialMovement_EJ>();
         moved = false;
         stop = false; //플레이가 움직이는 중인지
         UpDown = true; //up == true, Down == false

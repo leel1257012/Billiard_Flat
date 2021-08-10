@@ -15,6 +15,7 @@ public class SerialMovement : MonoBehaviour
     PlayerLaunch topPlayer;
 
     public CameraController camera; /////����
+    public GameObject PlayersGameObject;
 
     // Start is called before the first frame update
     void Start()
@@ -53,8 +54,12 @@ public class SerialMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.A)) Players[top].transform.Translate(-1 * speed * Time.deltaTime, 0, 0);
-        if (Input.GetKey(KeyCode.D)) Players[top].transform.Translate(1 * speed * Time.deltaTime, 0, 0);
+        if (!topPlayer.moved && !topPlayer.isLaunching)
+        {
+            if (Input.GetKey(KeyCode.A)) Players[top].transform.Translate(-1 * speed * Time.deltaTime, 0, 0);
+            if (Input.GetKey(KeyCode.D)) Players[top].transform.Translate(1 * speed * Time.deltaTime, 0, 0);
+        }
+        
         if (Input.GetMouseButtonDown(0) && (top != bottom) && !isJumping())
         {
             PreviousPlayer previousPlayer = Players[--top].GetComponent<PreviousPlayer>();
@@ -82,7 +87,7 @@ public class SerialMovement : MonoBehaviour
 
             }
         }
-        if (!isJumping())
+        if (!isJumping() && !topPlayer.isLaunching)
         {
             if (Input.GetKeyDown(KeyCode.Space))
                 rb2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
@@ -92,5 +97,32 @@ public class SerialMovement : MonoBehaviour
     {
         if (rb2D.velocity.y == 0) return false;
         else return true;
+    }
+
+    public void OnTriggerstar(Collider2D other)
+    {
+        Players[top].GetComponent<CircleCollider2D>().isTrigger = true;
+        GameObject newTop = Instantiate(other.gameObject.GetComponent<StarSetting>().Player, Players[top].transform.position, Quaternion.identity, PlayersGameObject.transform);
+        other.gameObject.SetActive(false);
+        Players.Add(newTop);
+
+        Destroy(topPlayer);
+
+        Players[top].gameObject.AddComponent<PreviousPlayer>();
+        PreviousPlayer pre = Players[top].GetComponent<PreviousPlayer>();
+        pre.Previous = Players[top + 1];
+        pre.Next = Players[top - 1];
+
+        Vector3 currentVelocity = rb2D.velocity;
+        rb2D.velocity = new Vector3(0, 0, 0);
+        rb2D.gravityScale = 0.0f;
+        rb2D = Players[++top].GetComponent<Rigidbody2D>();
+        rb2D.gravityScale = 1.0f;
+        rb2D.AddForce(currentVelocity, ForceMode2D.Impulse);
+
+        Players[top].gameObject.AddComponent<PlayerLaunch>();
+        topPlayer = Players[top].GetComponent<PlayerLaunch>();
+        camera.Player = Players[top];
+
     }
 }

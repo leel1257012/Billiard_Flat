@@ -13,9 +13,9 @@ public class PlayerLaunch : MonoBehaviour
     private Rigidbody2D rb;
     public float speed, deceleration;
     public float maxSpeed, minSpeed;
-    bool UpDown, moved;
+    public bool UpDown, moved;
     public bool stop;
-    public bool isLaunched;
+    public bool isLaunching;
     public bool singular = false;
 
     Vector3 colPos;
@@ -32,6 +32,7 @@ public class PlayerLaunch : MonoBehaviour
     void Start()
     {
         SerialMovement = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
+        isLaunching = false;
         moved = false;
         stop = false; //플레이가 움직이는 중인지
         UpDown = true; //up == true, Down == false
@@ -54,6 +55,7 @@ public class PlayerLaunch : MonoBehaviour
         {
             if(Input.GetMouseButtonDown(0))
             {
+                isLaunching = true;
                 speed = minSpeed;
                 MousePosition = Input.mousePosition;
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
@@ -91,6 +93,7 @@ public class PlayerLaunch : MonoBehaviour
             }
             if(Input.GetMouseButtonUp(0))
             {
+                isLaunching = false;
                 rb.gravityScale = 0;
                 moved = true;
                 time = currentTime - minTime; ////수정
@@ -170,6 +173,11 @@ public class PlayerLaunch : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == "GameOverZone" && !moved) Debug.Log("GameOver!");
+        if (collision.gameObject.CompareTag("Star"))
+        {
+            Debug.Log("star");
+            SerialMovement.OnTriggerstar(collision);
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
