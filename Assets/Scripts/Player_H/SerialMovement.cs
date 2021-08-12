@@ -64,7 +64,7 @@ public class SerialMovement : MonoBehaviour
         {
             PreviousPlayer previousPlayer = Players[--top].GetComponent<PreviousPlayer>();
             Destroy(previousPlayer);
-            camera.Player = Players[top]; ////����
+            //camera.Player = Players[top]; ////����
         }
 
         if (topPlayer.stop == true)

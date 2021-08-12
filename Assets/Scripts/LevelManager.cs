@@ -13,9 +13,13 @@ public class LevelManager : MonoBehaviour
     public GameObject serialMove;
     public int playerCount;
     public List<FloorType> curPlayers;
+    public GameObject gameUI;
+    public int totalPlayers;
     // Start is called before the first frame update
     void Start()
     {
+        playerCount = curPlayers.Count;
+        totalPlayers = playerCount;
         spawnPlatform = GameObject.Find("SpawnPlatform");
         Vector3 spawn = spawnPlatform.transform.position + new Vector3(0f, 1f, 0f);
         for(int i=0; i<playerCount; i++)
@@ -23,6 +27,7 @@ public class LevelManager : MonoBehaviour
             Instantiate(playerPrefabs[(int)curPlayers[i]], spawn, Quaternion.identity, Players.transform);
             //Debug.Log((int)curPlayers[i]);
         }
+        gameUI.SetActive(true);
         serialMove.SetActive(true);
         
     }

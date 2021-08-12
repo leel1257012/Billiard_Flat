@@ -18,24 +18,25 @@ public class draw_UI : MonoBehaviour
     public GameObject pauseButton; //pauseButton instance
     public Image[] img_ball;
     public Sprite[] spr_ball;
-    public List<int> arr_ball = new List<int>();
+    public List<FloorType> arr_ball;
     public GameObject pauseUI;
     public GameObject backToStageUI;
     public GameObject restartUI;
+    private LevelManager levelManager;
+    public Canvas mainUI;
 
     // Start is called before the first frame update
     void Start()
     {
+        levelManager = LevelManager.instance;
+        arr_ball = levelManager.curPlayers;
+        mainUI.gameObject.SetActive(true);
+
         //unable UI
         pauseUI.SetActive(false);
         backToStageUI.SetActive(false);
         restartUI.SetActive(false);
 
-        //list of codes corresponding ball sprites
-        for (int i = 0; i < 5; i++)
-        {
-            arr_ball.Add(Random.Range(1, 10));
-        }
         BallImageUpdate();
     }
 
@@ -60,11 +61,11 @@ public class draw_UI : MonoBehaviour
                 UseCurrentBall();
             }
 
-            //press w to add a ball
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                AddBall();
-            }
+            ////press w to add a ball
+            //if (Input.GetKeyDown(KeyCode.W))
+            //{
+            //    AddBall();
+            //}
 
             //press u to toggle ballUI
             if (Input.GetKeyDown(KeyCode.U))
@@ -91,25 +92,29 @@ public class draw_UI : MonoBehaviour
     }
 
     // When player uses a current ball of list, updating the list
-    void UseCurrentBall()
+    public void UseCurrentBall()
     {
-        arr_ball.RemoveAt(0);
-        if (arr_ball.Count < 5) arr_ball.Add(0); //When the number of balls are less than 5 after shooting ball, none_sprite ball must be added.
+        //arr_ball.RemoveAt(0);
+        //if (arr_ball.Count < 5) arr_ball.Add(0); //When the number of balls are less than 5 after shooting ball, none_sprite ball must be added.
         BallImageUpdate();
     }
 
     void AddBall() //When player get a new ball in game
     {
-        arr_ball.Insert(0, Random.Range(1, 10)); // 0 is none_sprite (blank)
+        //arr_ball.Insert(0, Random.Range(1, 10)); // 0 is none_sprite (blank)
         if (arr_ball.LastIndexOf(0) != -1) arr_ball.RemoveAt(arr_ball.LastIndexOf(0));
         BallImageUpdate();
     }
 
-    void BallImageUpdate()
+    public void BallImageUpdate()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < levelManager.playerCount; i++)
         {
-            img_ball[i].sprite = spr_ball[arr_ball[i]];
+            img_ball[i].sprite = spr_ball[(int)arr_ball[levelManager.playerCount - 1 - i]];
+        }
+        for(int i = levelManager.playerCount; i<levelManager.totalPlayers; i++)
+        {
+            img_ball[i].sprite = spr_ball[0];
         }
     }
 

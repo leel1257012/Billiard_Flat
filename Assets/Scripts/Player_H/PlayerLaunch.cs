@@ -17,6 +17,8 @@ public class PlayerLaunch : MonoBehaviour
     public bool stop;
     public bool isLaunching;
     public bool singular = false;
+    public draw_UI draw;
+    private LevelManager levelManager;
 
     Vector3 colPos;
     Vector3 colLocalScale;
@@ -31,6 +33,8 @@ public class PlayerLaunch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelManager = LevelManager.instance;
+        draw = GameObject.Find("GameManager").GetComponent<draw_UI>();
         SerialMovement = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
         isLaunching = false;
         moved = false;
@@ -93,6 +97,8 @@ public class PlayerLaunch : MonoBehaviour
             }
             if(Input.GetMouseButtonUp(0))
             {
+                levelManager.playerCount--;
+                //draw.UseCurrentBall();
                 isLaunching = false;
                 rb.gravityScale = 0;
                 moved = true;
