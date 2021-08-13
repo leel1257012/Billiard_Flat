@@ -485,6 +485,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: OneStepBallButton
       objectReference: {fileID: 0}
+    - target: {fileID: 3211333015340691847, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230099137160994544, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230099137160994544, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230099137160994544, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230099137160994544, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3230099137160994544, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309833906256778163, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450141675909943715, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3522703078090745194, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: m_Pivot.x
       value: -0.00000003306195
@@ -521,6 +553,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5301026415050089532, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AspectRatio
+      value: NaN
+      objectReference: {fileID: 0}
     - target: {fileID: 5748870159558225431, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: m_Name
       value: MapEditor
@@ -540,35 +576,35 @@ PrefabInstance:
     - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: balls.Array.data[0]
       value: 
-      objectReference: {fileID: 1282903968301792020, guid: 33097b2a30fdeef47a087d081de8437a, type: 3}
+      objectReference: {fileID: 21300000, guid: b7aa9b1652382d3479d46e36c74a09e7, type: 3}
     - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: balls.Array.data[1]
       value: 
-      objectReference: {fileID: 1282903968301792020, guid: 41cc58dea81eecc459f8a4618f25f47f, type: 3}
+      objectReference: {fileID: 21300000, guid: 7bc78620ed1674b4c96fbd24005add54, type: 3}
     - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: balls.Array.data[2]
       value: 
-      objectReference: {fileID: 1282903968301792020, guid: ec3d7b450ad9ff54d960ec8908b9189f, type: 3}
+      objectReference: {fileID: 21300000, guid: 558862ca4d0ae964a8ea26397971f4bf, type: 3}
     - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: balls.Array.data[3]
       value: 
-      objectReference: {fileID: 1282903968301792020, guid: 6a6d37573b05dc849aad3b95491602fa, type: 3}
+      objectReference: {fileID: 21300000, guid: 619d64a065b1ef24c854a97c56fc0e77, type: 3}
     - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: balls.Array.data[4]
       value: 
-      objectReference: {fileID: 1282903968301792020, guid: 94eb4f60a231e94418740f7273e597d7, type: 3}
+      objectReference: {fileID: 21300000, guid: 855cc39b00cb0424a8d3fd66a6960abb, type: 3}
     - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: balls.Array.data[5]
       value: 
-      objectReference: {fileID: 1282903968301792020, guid: abda7ee356ca20d4daa41c0ce14d60d3, type: 3}
+      objectReference: {fileID: 21300000, guid: dd634dfc91e738549bdc54c58de2d60f, type: 3}
     - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: balls.Array.data[6]
       value: 
-      objectReference: {fileID: 1282903968301792020, guid: e7a915a00c965114680ba5d61f17cf38, type: 3}
+      objectReference: {fileID: 21300000, guid: 767b4c89bd833584ba3e7b297d8fa594, type: 3}
     - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: balls.Array.data[7]
       value: 
-      objectReference: {fileID: 1282903968301792020, guid: 1541fef2524af95459c5de5d21579b73, type: 3}
+      objectReference: {fileID: 21300000, guid: 3b33bb484154c9947b61a0fc1b8621b5, type: 3}
     - target: {fileID: 5748870159558225432, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: floors.Array.data[2]
       value: 
@@ -657,17 +693,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: IceBallButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6906285637649731963, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7174091029783719506, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -0.00023287129
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657223713748069233, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7734148154461522821, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: m_Name
       value: SlowBallButton
       objectReference: {fileID: 0}
+    - target: {fileID: 8041066488574832701, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8066015280565782019, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: m_Name
       value: MoveCircleBallButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 9132053820362373592, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
+      propertyPath: m_AspectRatio
+      value: 1.0666667
       objectReference: {fileID: 0}
     - target: {fileID: 9206858255585143578, guid: 735a485c2cbbc1347a3e4ca4a6f629d6, type: 3}
       propertyPath: m_Name
