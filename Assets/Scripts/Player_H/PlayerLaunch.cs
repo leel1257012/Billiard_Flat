@@ -17,6 +17,7 @@ public class PlayerLaunch : MonoBehaviour
     public bool stop;
     public bool isLaunching;
     public bool singular = false;
+    public bool mouseDown = false; //점프 중이 아닐 때 마우스가 눌렸는지
     public draw_UI draw;
     private LevelManager levelManager;
 
@@ -68,8 +69,9 @@ public class PlayerLaunch : MonoBehaviour
                 minTime = currentTime; //// 수정
                 arrow.Instant(transform.position, Direction);
                 arrow.chargebarSpawn(transform.position); ////
+                mouseDown = true;
             }
-            if(Input.GetMouseButton(0))
+            if(Input.GetMouseButton(0) && mouseDown)
             {
                 MousePosition = Input.mousePosition; //중간에 발사위치 조정 가능하도록
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
@@ -95,7 +97,7 @@ public class PlayerLaunch : MonoBehaviour
                 }////
 
             }
-            if(Input.GetMouseButtonUp(0))
+            if(Input.GetMouseButtonUp(0) && mouseDown)
             {
                 levelManager.playerCount--;
                 //draw.UseCurrentBall();
@@ -131,6 +133,7 @@ public class PlayerLaunch : MonoBehaviour
             {
                 moved = false;
                 stop = true;
+                mouseDown = false;
                 //this.platform = GameObject.Find("TestPlatform");
                 //Instantiate(platform, transform.position, Quaternion.identity);
                 Destroy(gameObject);

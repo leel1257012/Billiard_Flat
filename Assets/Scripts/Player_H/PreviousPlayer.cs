@@ -36,7 +36,7 @@ public class PreviousPlayer : MonoBehaviour
         if(ten > 10)
         {
             SavePos %= 10;
-            this.transform.position = Pos[SavePos];
+            this.transform.position = Pos[SavePos] - new Vector3(0,0,-1);
             Pos[SavePos++] = Previous.transform.position;
         }
     }
