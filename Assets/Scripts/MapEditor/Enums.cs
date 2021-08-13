@@ -1,6 +1,6 @@
 public enum FloorType
 {
-    None, Wall, DisposableFloor, HookFloor, MovingFloorCircle, MovingFloorUpDown, MovingFloorLeftRight, SlipFloor, JumpFloor, Device,
+    None, Wall, DisposableFloor, HookFloor, MovingFloorUpDown, MovingFloorLeftRight, MovingFloorCircle, SlipFloor, JumpFloor, Device,
     SlowFloor, ElectricFloor, TimedFloor, Spawn, Goal, Item, MovingFloor
 }
 public enum BallType

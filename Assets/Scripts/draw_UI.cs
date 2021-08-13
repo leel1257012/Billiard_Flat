@@ -108,14 +108,26 @@ public class draw_UI : MonoBehaviour
 
     public void BallImageUpdate()
     {
-        for (int i = 0; i < levelManager.playerCount; i++)
+
+        if(levelManager.playerCount < img_ball.Length)
         {
-            img_ball[i].sprite = spr_ball[(int)arr_ball[levelManager.playerCount - 1 - i]];
+            for (int i = 0; i < levelManager.playerCount; i++)
+            {
+                img_ball[i].sprite = spr_ball[(int)arr_ball[levelManager.playerCount - 1 - i]];
+            }
+            for (int i = levelManager.playerCount; i < levelManager.totalPlayers; i++)
+            {
+                img_ball[i].sprite = spr_ball[0];
+            }
         }
-        for(int i = levelManager.playerCount; i<levelManager.totalPlayers; i++)
+        else
         {
-            img_ball[i].sprite = spr_ball[0];
+            for (int i = 0; i < img_ball.Length; i++)
+            {
+                img_ball[i].sprite = spr_ball[(int)arr_ball[levelManager.playerCount - 1 - i]];
+            }
         }
+
     }
 
     void ToggleBallUI()
