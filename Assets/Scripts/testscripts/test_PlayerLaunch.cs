@@ -176,9 +176,9 @@ public class test_PlayerLaunch : MonoBehaviour
             }
 
             //¿òÁ÷ÀÌ´Â ÇÃ·§Æû
-            if (((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingUDFloor) ||
-                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingLRFloor) ||
-                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingCircleFloor)) && !test_SerialMovement.isJumping())
+            if (((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorUpDown) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorLeftRight) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorCircle)) && !test_SerialMovement.isJumping())
             {
                 transform.SetParent(collision.transform);
             }
@@ -229,9 +229,9 @@ public class test_PlayerLaunch : MonoBehaviour
             }
 
             //¿òÁ÷ÀÌ´Â ÇÃ·§Æû
-            if ((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingUDFloor) ||
-                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingLRFloor) ||
-                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingCircleFloor))
+            if ((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorUpDown) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorLeftRight) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorCircle))
             {
                 transform.SetParent(null);
             }

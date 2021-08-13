@@ -31,6 +31,12 @@ public class PlayerLaunch : MonoBehaviour
     public float chargeTime = 1.5f;
     ArrowController arrow; ////
 
+    //움직이는 플랫폼 용
+    bool onPlatform = false;
+    GameObject contactedPlatform;
+    Vector3 platformPos;
+    Vector3 distance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -117,6 +123,13 @@ public class PlayerLaunch : MonoBehaviour
                 arrow.chargebarDestroy(); ////
             }
         }
+
+        //움직이는 플랫폼
+        float h = Input.GetAxisRaw("Horizontal"); // 키 입력 (A, D)
+        if ((onPlatform) && (h == 0)) //좌우 이동이 없을 때 플랫폼 탑승 위치 고정
+        {
+            transform.position = contactedPlatform.transform.position - distance;
+        }
     }
 
     void FixedUpdate()
@@ -188,7 +201,9 @@ public class PlayerLaunch : MonoBehaviour
             }
 
             //움직이는 플랫폼
-            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloor && !SerialMovement.isJumping())
+            if (((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorUpDown) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorLeftRight) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorCircle)) && !SerialMovement.isJumping())
             {
                 transform.SetParent(collision.transform);
             }
@@ -216,7 +231,9 @@ public class PlayerLaunch : MonoBehaviour
             }
 
             //움직이는 플랫폼
-            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloor)
+            if (((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorUpDown) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorLeftRight) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorCircle)))
             {
                 transform.SetParent(null);
             }

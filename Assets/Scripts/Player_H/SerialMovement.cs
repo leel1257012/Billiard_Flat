@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SerialMovement : MonoBehaviour
 {
-    public float JumpForce = 5.0f;
+    public float MaxSpeed = 3.0f; // 최대 속력 변수 
+    public float JumpForce = 5.0f; // 점프 가속 변수
     public Rigidbody2D rb2D;
     //public GameObject[] Players = new GameObject[8];
     public List<GameObject> Players;
@@ -53,13 +54,7 @@ public class SerialMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (!topPlayer.moved && !topPlayer.isLaunching)
-        {
-            if (Input.GetKey(KeyCode.A)) Players[top].transform.Translate(-1 * speed * Time.deltaTime, 0, 0);
-            if (Input.GetKey(KeyCode.D)) Players[top].transform.Translate(1 * speed * Time.deltaTime, 0, 0);
-        }
-        
+    {       
         if (Input.GetMouseButtonDown(0) && (top != bottom) && !isJumping())
         {
             PreviousPlayer previousPlayer = Players[--top].GetComponent<PreviousPlayer>();
@@ -88,11 +83,31 @@ public class SerialMovement : MonoBehaviour
 
             }
         }
+        // 좌우 이동
+        float h = Input.GetAxisRaw("Horizontal"); // 키 입력 (A, D)
+
+        if (h > 0 && rb2D.velocity.x < 0) rb2D.velocity = new Vector2(-rb2D.velocity.x, rb2D.velocity.y); // 방향 바꿀 때 속도 유지
+        else if (h < 0 && rb2D.velocity.x > 0) rb2D.velocity = new Vector2(-rb2D.velocity.x, rb2D.velocity.y);
+
+        rb2D.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+
+        if (rb2D.velocity.x > MaxSpeed) // 속도 제한
+            rb2D.velocity = new Vector2(MaxSpeed, rb2D.velocity.y);
+        else if (rb2D.velocity.x < -MaxSpeed)
+            rb2D.velocity = new Vector2(-MaxSpeed, rb2D.velocity.y);
+
+        if (Input.GetButtonUp("Horizontal")) // 방향키 떼면 정지
+        {
+            rb2D.AddForce(new Vector2(-0.7f * rb2D.velocity.x, 0), ForceMode2D.Impulse);
+        }
+
+        // 점프
         if (!isJumping() && !topPlayer.isLaunching)
         {
             if (Input.GetKeyDown(KeyCode.Space))
                 rb2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
         }
+
     }
     public bool isJumping()
     {
