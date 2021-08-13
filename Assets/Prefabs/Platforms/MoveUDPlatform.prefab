@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7611568993638488619}
   - component: {fileID: 5917829682816107975}
   - component: {fileID: 8146151918162889802}
+  - component: {fileID: 298384681}
   m_Layer: 0
   m_Name: MoveUDPlatform
   m_TagString: Untagged
@@ -123,4 +124,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapPos: {x: 0, y: 0}
-  thisFloor: 2
+  thisFloor: 15
+--- !u!114 &298384681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8176950569141369975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ebfca25c1b5bb4ab8bc4b772b0bc76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpDown: 1
+  speed: 2
+  distance: 5

@@ -29,9 +29,9 @@ public class Pf_Disappearing : MonoBehaviour
             progress = Mathf.Clamp(progress, 0, 1);
 
             alpha = 1 - progress;
-            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, alpha);
+            transform.parent.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, alpha);
 
-            if (alpha == 0) Destroy(gameObject);
+            if (alpha == 0) Destroy(transform.parent.gameObject);
         }
     }
 }

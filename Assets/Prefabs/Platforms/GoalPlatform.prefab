@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapPos: {x: 0, y: 0}
-  thisFloor: 11
+  thisFloor: 13
 --- !u!1 &7371006741770807670
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLaunch : MonoBehaviour
+public class test_PlayerLaunch : MonoBehaviour
 {
-    public SerialMovement SerialMovement;
+    public test_SerialMovement test_SerialMovement;
 
     Camera Camera;
     Vector2 Direction;
@@ -17,9 +17,6 @@ public class PlayerLaunch : MonoBehaviour
     public bool stop;
     public bool isLaunching;
     public bool singular = false;
-    public bool mouseDown = false; //ì í”„ ì¤‘ì´ ì•„ë‹ ë•Œ ë§ˆìš°ìŠ¤ê°€ ëˆŒë ¸ëŠ”ì§€
-    public draw_UI draw;
-    private LevelManager levelManager;
 
     Vector3 colPos;
     Vector3 colLocalScale;
@@ -27,19 +24,23 @@ public class PlayerLaunch : MonoBehaviour
     PlatformSpawn spawn;
     //public GameObject platform;
 
-    float minTime = 0, currentTime = 0, time = 0; ////ìˆ˜ì •
+    float minTime = 0, currentTime = 0, time = 0; ////¼öÁ¤
     public float chargeTime = 1.5f;
     ArrowController arrow; ////
+
+    //¿òÁ÷ÀÌ´Â ÇÃ·§Æû ¿ë
+    bool onPlatform = false;
+    GameObject contactedPlatform;
+    Vector3 platformPos;
+    Vector3 distance;
 
     // Start is called before the first frame update
     void Start()
     {
-        levelManager = LevelManager.instance;
-        draw = GameObject.Find("GameManager").GetComponent<draw_UI>();
-        SerialMovement = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
+        test_SerialMovement = GameObject.Find("SerialMoving").GetComponent<test_SerialMovement>();
         isLaunching = false;
         moved = false;
-        stop = false; //í”Œë ˆì´ê°€ ì›€ì§ì´ëŠ” ì¤‘ì¸ì§€
+        stop = false; //ÇÃ·¹ÀÌ°¡ ¿òÁ÷ÀÌ´Â ÁßÀÎÁö
         UpDown = true; //up == true, Down == false
         maxSpeed = 10;
         speed = minSpeed = 1;
@@ -48,17 +49,17 @@ public class PlayerLaunch : MonoBehaviour
         Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         //platform = GameObject.Find("TestPlatform");
         spawn = GameObject.Find("PlatformSpawner").GetComponent<PlatformSpawn>();
-        arrow = GameObject.Find("ArrowSpawner").GetComponent<ArrowController>(); ////ìˆ˜ì •
+        arrow = GameObject.Find("ArrowSpawner").GetComponent<ArrowController>(); ////¼öÁ¤
     }
 
     // Update is called once per frame
     void Update()
     {
         checkPlayerCount();
-        currentTime += Time.deltaTime; ////ìˆ˜ì •
-        if (moved == false && !SerialMovement.isJumping() && !singular)
+        currentTime += Time.deltaTime; ////¼öÁ¤
+        if (moved == false && !test_SerialMovement.isJumping() && !singular)
         {
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 isLaunching = true;
                 speed = minSpeed;
@@ -66,20 +67,19 @@ public class PlayerLaunch : MonoBehaviour
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
                 Direction = MousePosition - rb.position;
                 Direction = Direction.normalized;
-                minTime = currentTime; //// ìˆ˜ì •
+                minTime = currentTime; //// ¼öÁ¤
                 arrow.Instant(transform.position, Direction);
                 arrow.chargebarSpawn(transform.position); ////
-                mouseDown = true;
             }
-            if(Input.GetMouseButton(0) && mouseDown)
+            if (Input.GetMouseButton(0))
             {
-                MousePosition = Input.mousePosition; //ì¤‘ê°„ì— ë°œì‚¬ìœ„ì¹˜ ì¡°ì • ê°€ëŠ¥í•˜ë„ë¡
+                MousePosition = Input.mousePosition; //Áß°£¿¡ ¹ß»çÀ§Ä¡ Á¶Á¤ °¡´ÉÇÏµµ·Ï
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
                 Direction = MousePosition - rb.position;
                 Direction = Direction.normalized;
                 arrow.Setting(transform.position, Direction);
 
-                if (UpDown == true) //speed ê¸°ì¤€ì—ì„œ ì‹œê°„ ê¸°ì¤€ìœ¼ë¡œ ë°”ê¿ˆ
+                if (UpDown == true) //speed ±âÁØ¿¡¼­ ½Ã°£ ±âÁØÀ¸·Î ¹Ù²Ş
                 {
                     if (currentTime - minTime >= chargeTime)
                     {
@@ -97,14 +97,12 @@ public class PlayerLaunch : MonoBehaviour
                 }////
 
             }
-            if(Input.GetMouseButtonUp(0) && mouseDown)
+            if (Input.GetMouseButtonUp(0))
             {
-                levelManager.playerCount--;
-                //draw.UseCurrentBall();
                 isLaunching = false;
                 rb.gravityScale = 0;
                 moved = true;
-                time = currentTime - minTime; ////ìˆ˜ì •
+                time = currentTime - minTime; ////¼öÁ¤
                 if (UpDown == true)
                 {
                     speed = minSpeed + (maxSpeed - minSpeed) * (time / chargeTime);
@@ -117,29 +115,36 @@ public class PlayerLaunch : MonoBehaviour
                 arrow.chargebarDestroy(); ////
             }
         }
+
+        //¿òÁ÷ÀÌ´Â ÇÃ·§Æû
+        float h = Input.GetAxisRaw("Horizontal"); // Å° ÀÔ·Â (A, D)
+        if ((onPlatform) && (h == 0)) //ÁÂ¿ì ÀÌµ¿ÀÌ ¾øÀ» ¶§ ÇÃ·§Æû Å¾½Â À§Ä¡ °íÁ¤
+        {
+            transform.position = contactedPlatform.transform.position - distance;
+        }
     }
 
     void FixedUpdate()
     {
-        if(moved == true) 
+        if (moved == true)
         {
-            if(speed > 0.3)
+            if (speed > 0.3)
             {
                 //rb.MovePosition(rb.position + Direction * speed * Time.fixedDeltaTime);
                 rb.velocity = Direction * speed;
                 speed *= deceleration;
             }
-            else 
+            else
             {
                 moved = false;
                 stop = true;
-                mouseDown = false;
                 //this.platform = GameObject.Find("TestPlatform");
                 //Instantiate(platform, transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 spawn.Platform1(transform.position);
             }
         }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -157,15 +162,10 @@ public class PlayerLaunch : MonoBehaviour
         Direction = reflectVector.normalized;
 
         #region platforms
-        if (collision.gameObject.GetComponent<MapEditorFloor>() != null && !moved)
+        if (collision.gameObject.GetComponent<MapEditorFloor>() != null)
         {
-            //ì–¼ìŒ í”Œë«í¼
-            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlipFloor)
-            {
 
-            }
-
-            //í•œ ë²ˆ ë°Ÿìœ¼ë©´ 2ì´ˆ í›„ ì‚¬ë¼ì§€ëŠ” í”Œë«í¼
+            //ÇÑ ¹ø ¹âÀ¸¸é 2ÃÊ ÈÄ »ç¶óÁö´Â ÇÃ·§Æû
             if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.DisposableFloor)
             {
                 if (collision.gameObject.GetComponent<Pf_Disappearing>().disappear == 0)
@@ -175,22 +175,35 @@ public class PlayerLaunch : MonoBehaviour
                 }
             }
 
-            //ì í”„ë ¥ í–¥ìƒ í”Œë«í¼
-            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.JumpFloor && !SerialMovement.isJumping())
-            {
-                SerialMovement.JumpForce = 7.5f;
-            }
-
-            //ìŠ¬ë¡œìš° í”Œë«í¼
-            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlowFloor && !SerialMovement.isJumping())
-            {
-                SerialMovement.speed = 2f;
-            }
-
-            //ì›€ì§ì´ëŠ” í”Œë«í¼
-            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloor && !SerialMovement.isJumping())
+            //¿òÁ÷ÀÌ´Â ÇÃ·§Æû
+            if (((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingUDFloor) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingLRFloor) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingCircleFloor)) && !test_SerialMovement.isJumping())
             {
                 transform.SetParent(collision.transform);
+            }
+
+        }
+        #endregion
+
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        #region platforms
+
+        if (collision.gameObject.GetComponent<MapEditorFloor>() != null)
+        {
+            //Á¡ÇÁ·Â Çâ»ó ÇÃ·§Æû
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.JumpFloor && !test_SerialMovement.isJumping())
+            {
+                test_SerialMovement.JumpForce = 7.5f;
+            }
+
+            //½½·Î¿ì ÇÃ·§Æû
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlowFloor && !test_SerialMovement.isJumping())
+            {
+                test_SerialMovement.MaxSpeed = 2f;
             }
 
         }
@@ -201,22 +214,24 @@ public class PlayerLaunch : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         #region platforms
-        if (collision.gameObject.GetComponent<MapEditorFloor>() != null && !moved)
+        if (collision.gameObject.GetComponent<MapEditorFloor>() != null)
         {
-            //ì í”„ë ¥ í–¥ìƒ í”Œë«í¼
+            //Á¡ÇÁ·Â Çâ»ó ÇÃ·§Æû
             if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.JumpFloor)
             {
-                SerialMovement.JumpForce = 5.0f;
+                test_SerialMovement.JumpForce = 5.0f;
             }
 
-            //ìŠ¬ë¡œìš° í”Œë«í¼
+            //½½·Î¿ì ÇÃ·§Æû
             if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlowFloor)
             {
-                SerialMovement.speed = 3f;
+                test_SerialMovement.MaxSpeed = 3f;
             }
 
-            //ì›€ì§ì´ëŠ” í”Œë«í¼
-            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloor)
+            //¿òÁ÷ÀÌ´Â ÇÃ·§Æû
+            if ((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingUDFloor) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingLRFloor) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingCircleFloor))
             {
                 transform.SetParent(null);
             }
@@ -231,12 +246,12 @@ public class PlayerLaunch : MonoBehaviour
         if (collision.gameObject.CompareTag("Star"))
         {
             Debug.Log("star");
-            SerialMovement.OnTriggerstar(collision);
+            test_SerialMovement.OnTriggerstar(collision);
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.name == "CheckGoal" && !moved) Debug.Log("Goal Reached!");
+        if (collision.name == "CheckGoal" && !moved) Debug.Log("Goal Reached!");
 
 
     }
@@ -252,7 +267,7 @@ public class PlayerLaunch : MonoBehaviour
         List<GameObject> Players;
         Players = new List<GameObject>();
         Transform[] tempPlayers = temp.GetComponentsInChildren<Transform>();
-        if(tempPlayers.Length <= 2)
+        if (tempPlayers.Length <= 2)
         {
             singular = true;
         }

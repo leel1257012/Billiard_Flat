@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeTime: 2
   currentTime: 0
-  enabled: 1
+  _enabled: 1
 --- !u!1 &4933003796786164033
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +59,6 @@ GameObject:
   - component: {fileID: 4933003796786164044}
   - component: {fileID: 4933003796786164045}
   - component: {fileID: 4933003796786164046}
-  - component: {fileID: 4933003796786164047}
   m_Layer: 0
   m_Name: realTimedPlatform
   m_TagString: Untagged
@@ -171,19 +170,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapPos: {x: 0, y: 0}
-  thisFloor: 9
---- !u!114 &4933003796786164047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4933003796786164033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e68314dffaa93648bb0dd58c098bdee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  disappear: 0
-  startTime: 0
-  duration: 2
+  thisFloor: 11

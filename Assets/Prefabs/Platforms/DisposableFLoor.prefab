@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2750766288395636635}
   - component: {fileID: 8976619953314840561}
   - component: {fileID: 208332169272034598}
+  - component: {fileID: 7361100283743780110}
   m_Layer: 0
   m_Name: DisposableFLoor
   m_TagString: Untagged
@@ -124,3 +125,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapPos: {x: 0, y: 0}
   thisFloor: 2
+--- !u!114 &7361100283743780110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620043614595881181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e68314dffaa93648bb0dd58c098bdee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disappear: 0
+  startTime: 0
+  duration: 2
