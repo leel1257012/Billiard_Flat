@@ -6,12 +6,12 @@ public class Pf_Blink : MonoBehaviour
 {
     public float changeTime = 2.0f;
     public float currentTime = 0;
-    public bool enabled = true;
+    public bool _enabled = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        enabled = true;
+        _enabled = true;
     }
 
     // Update is called once per frame
@@ -27,8 +27,8 @@ public class Pf_Blink : MonoBehaviour
 
     void togglePlatform()
     {
-        enabled = !enabled;
+        _enabled = !_enabled;
         GameObject child = transform.Find("realTimedPlatform").gameObject;
-        child.SetActive(enabled);
+        child.SetActive(_enabled);
     }
 }

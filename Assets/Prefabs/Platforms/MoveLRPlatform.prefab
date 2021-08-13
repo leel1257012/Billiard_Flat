@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8265480004338802057}
   - component: {fileID: 814319045590030498}
   - component: {fileID: 6037608473397473807}
+  - component: {fileID: 1042193075}
   m_Layer: 0
   m_Name: MoveLRPlatform
   m_TagString: Untagged
@@ -123,4 +124,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapPos: {x: 0, y: 0}
-  thisFloor: 2
+  thisFloor: 15
+--- !u!114 &1042193075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8157255765619750476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9506970d7c59854abdb56e8e79395bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftRight: 1
+  speed: 2
+  distance: 5

@@ -159,15 +159,61 @@ public class PlayerLaunch : MonoBehaviour
             //한 번 밟으면 2초 후 사라지는 플랫폼
             if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.DisposableFloor)
             {
-                Destroy(collision.gameObject, 2.0f);
-                collision.gameObject.GetComponent<Pf_Disappearing>().disappear = 1;
+                if (collision.gameObject.GetComponent<Pf_Disappearing>().disappear == 0)
+                {
+                    Destroy(collision.transform.parent.gameObject, 2.0f);
+                    collision.gameObject.GetComponent<Pf_Disappearing>().disappear = 1;
+                }
             }
 
+            //점프력 향상 플랫폼
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.JumpFloor && !SerialMovement.isJumping())
+            {
+                SerialMovement.JumpForce = 7.5f;
+            }
 
+            //슬로우 플랫폼
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlowFloor && !SerialMovement.isJumping())
+            {
+                SerialMovement.speed = 2f;
+            }
+
+            //움직이는 플랫폼
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloor && !SerialMovement.isJumping())
+            {
+                transform.SetParent(collision.transform);
+            }
 
         }
         #endregion
 
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        #region platforms
+        if (collision.gameObject.GetComponent<MapEditorFloor>() != null && !moved)
+        {
+            //점프력 향상 플랫폼
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.JumpFloor)
+            {
+                SerialMovement.JumpForce = 5.0f;
+            }
+
+            //슬로우 플랫폼
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlowFloor)
+            {
+                SerialMovement.speed = 3f;
+            }
+
+            //움직이는 플랫폼
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloor)
+            {
+                transform.SetParent(null);
+            }
+
+        }
+        #endregion
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
