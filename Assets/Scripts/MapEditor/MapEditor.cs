@@ -68,7 +68,8 @@ public class MapEditor : MonoBehaviour
 
                         GameObject newFloor = null;
                         if (floorMode == FloorType.Wall) newFloor = Instantiate(currentFloor, mousePoint, Quaternion.identity, walls);
-                        if (floorMode == FloorType.DisposableFloor || floorMode == FloorType.HookFloor || floorMode == FloorType.MovingFloor
+                        if (floorMode == FloorType.DisposableFloor || floorMode == FloorType.HookFloor || floorMode == FloorType.MovingFloorUpDown 
+                            || floorMode == FloorType.MovingFloorCircle || floorMode == FloorType.MovingFloorLeftRight || floorMode == FloorType.ElectricFloor
                             || floorMode == FloorType.SlipFloor || floorMode == FloorType.JumpFloor || floorMode == FloorType.SlowFloor
                             || floorMode == FloorType.TimedFloor || floorMode == FloorType.Spawn || floorMode == FloorType.Goal) newFloor = Instantiate(currentFloor, mousePoint, Quaternion.identity, platforms);
                         if (floorMode == FloorType.Device) newFloor = Instantiate(currentFloor, mousePoint, Quaternion.identity, devices);
@@ -262,7 +263,8 @@ public class MapEditor : MonoBehaviour
 
                 GameObject newFloor = null;
                 if (floorType == FloorType.Wall) newFloor = Instantiate(floorObject, pos, Quaternion.identity, walls);
-                if (floorType == FloorType.DisposableFloor || floorType == FloorType.HookFloor || floorType == FloorType.MovingFloor
+                if (floorType == FloorType.DisposableFloor || floorType == FloorType.HookFloor || floorType == FloorType.MovingFloorUpDown 
+                    || floorType == FloorType.MovingFloorCircle || floorType == FloorType.MovingFloorLeftRight || floorType == FloorType.ElectricFloor
                     || floorType == FloorType.SlipFloor || floorType == FloorType.JumpFloor || floorType == FloorType.SlowFloor
                     || floorType == FloorType.TimedFloor || floorType == FloorType.Spawn || floorType == FloorType.Goal) newFloor = Instantiate(floorObject, pos, Quaternion.identity, platforms);
                 if (floorType == FloorType.Device) newFloor = Instantiate(floorObject, pos, Quaternion.identity, devices);
