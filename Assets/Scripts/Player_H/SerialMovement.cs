@@ -15,12 +15,12 @@ public class SerialMovement : MonoBehaviour
     PlayerLaunch topPlayer;
 
     public CameraController camera; /////����
-    public GameObject PlayersGameObject;
+    public GameObject temp;
 
     // Start is called before the first frame update
     void Start()
     {
-        GameObject temp = GameObject.Find("Players");
+        temp = GameObject.Find("Players");
         Players = new List<GameObject>();
         Transform[] tempPlayers = temp.GetComponentsInChildren<Transform>();
         for (int i = 0; i < tempPlayers.Length; i++)
@@ -70,6 +70,7 @@ public class SerialMovement : MonoBehaviour
         if (topPlayer.stop == true)
         {
             //Destroy(Players[top + 1]);
+            Players.Remove(Players[top+1]);
             Players[top].GetComponent<CircleCollider2D>().isTrigger = false;
             rb2D = Players[top].GetComponent<Rigidbody2D>();
             rb2D.gravityScale = 1.0f;
@@ -102,7 +103,7 @@ public class SerialMovement : MonoBehaviour
     public void OnTriggerstar(Collider2D other)
     {
         Players[top].GetComponent<CircleCollider2D>().isTrigger = true;
-        GameObject newTop = Instantiate(other.gameObject.GetComponent<StarSetting>().Player, Players[top].transform.position, Quaternion.identity, PlayersGameObject.transform);
+        GameObject newTop = Instantiate(other.gameObject.GetComponent<StarSetting>().Player, Players[top].transform.position, Quaternion.identity, temp.transform);
         other.gameObject.SetActive(false);
         Players.Add(newTop);
 
@@ -111,7 +112,7 @@ public class SerialMovement : MonoBehaviour
         Players[top].gameObject.AddComponent<PreviousPlayer>();
         PreviousPlayer pre = Players[top].GetComponent<PreviousPlayer>();
         pre.Previous = Players[top + 1];
-        pre.Next = Players[top - 1];
+        if(top != 0) pre.Next = Players[top - 1];
 
         Vector3 currentVelocity = rb2D.velocity;
         rb2D.velocity = new Vector3(0, 0, 0);
