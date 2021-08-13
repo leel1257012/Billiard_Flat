@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class test_SerialMovement : MonoBehaviour
 {
-    static float MaxSpeed = 3.0f; // 최대 속력 변수 
+    public float MaxSpeed = 3.0f; // 최대 속력 변수 
     public float JumpForce = 5.0f; // 점프 가속 변수
     public Rigidbody2D rb2D;
     //public GameObject[] Players = new GameObject[8];
@@ -112,7 +112,7 @@ public class test_SerialMovement : MonoBehaviour
 
     public bool isJumping()
     {
-        if (rb2D.velocity.y == 0) return false;
+        if (rb2D.velocity.y == 0) return false; //상하, 원형으로 움직이는 플랫폼에서 y축 속력이 생겨서 점프가 안됨
         else return true;
     }
 

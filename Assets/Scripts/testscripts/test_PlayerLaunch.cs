@@ -28,6 +28,12 @@ public class test_PlayerLaunch : MonoBehaviour
     public float chargeTime = 1.5f;
     ArrowController arrow; ////
 
+    //¿òÁ÷ÀÌ´Â ÇÃ·§Æû ¿ë
+    bool onPlatform = false;
+    GameObject contactedPlatform;
+    Vector3 platformPos;
+    Vector3 distance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -109,6 +115,13 @@ public class test_PlayerLaunch : MonoBehaviour
                 arrow.chargebarDestroy(); ////
             }
         }
+
+        //¿òÁ÷ÀÌ´Â ÇÃ·§Æû
+        float h = Input.GetAxisRaw("Horizontal"); // Å° ÀÔ·Â (A, D)
+        if ((onPlatform) && (h == 0)) //ÁÂ¿ì ÀÌµ¿ÀÌ ¾øÀ» ¶§ ÇÃ·§Æû Å¾½Â À§Ä¡ °íÁ¤
+        {
+            transform.position = contactedPlatform.transform.position - distance;
+        }
     }
 
     void FixedUpdate()
@@ -131,6 +144,7 @@ public class test_PlayerLaunch : MonoBehaviour
                 spawn.Platform1(transform.position);
             }
         }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -148,26 +162,82 @@ public class test_PlayerLaunch : MonoBehaviour
         Direction = reflectVector.normalized;
 
         #region platforms
-        if (collision.gameObject.GetComponent<MapEditorFloor>() != null && !moved)
+        if (collision.gameObject.GetComponent<MapEditorFloor>() != null)
         {
-            //¾óÀ½ ÇÃ·§Æû
-            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlipFloor)
-            {
-
-            }
 
             //ÇÑ ¹ø ¹âÀ¸¸é 2ÃÊ ÈÄ »ç¶óÁö´Â ÇÃ·§Æû
             if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.DisposableFloor)
             {
-                Destroy(collision.gameObject, 2.0f);
-                collision.gameObject.GetComponent<Pf_Disappearing>().disappear = 1;
+                if (collision.gameObject.GetComponent<Pf_Disappearing>().disappear == 0)
+                {
+                    Destroy(collision.transform.parent.gameObject, 2.0f);
+                    collision.gameObject.GetComponent<Pf_Disappearing>().disappear = 1;
+                }
             }
 
-
+            //¿òÁ÷ÀÌ´Â ÇÃ·§Æû
+            if (((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingUDFloor) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingLRFloor) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingCircleFloor)) && !test_SerialMovement.isJumping())
+            {
+                transform.SetParent(collision.transform);
+            }
 
         }
         #endregion
 
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        #region platforms
+
+        if (collision.gameObject.GetComponent<MapEditorFloor>() != null)
+        {
+            //Á¡ÇÁ·Â Çâ»ó ÇÃ·§Æû
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.JumpFloor && !test_SerialMovement.isJumping())
+            {
+                test_SerialMovement.JumpForce = 7.5f;
+            }
+
+            //½½·Î¿ì ÇÃ·§Æû
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlowFloor && !test_SerialMovement.isJumping())
+            {
+                test_SerialMovement.MaxSpeed = 2f;
+            }
+
+        }
+        #endregion
+
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        #region platforms
+        if (collision.gameObject.GetComponent<MapEditorFloor>() != null)
+        {
+            //Á¡ÇÁ·Â Çâ»ó ÇÃ·§Æû
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.JumpFloor)
+            {
+                test_SerialMovement.JumpForce = 5.0f;
+            }
+
+            //½½·Î¿ì ÇÃ·§Æû
+            if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlowFloor)
+            {
+                test_SerialMovement.MaxSpeed = 3f;
+            }
+
+            //¿òÁ÷ÀÌ´Â ÇÃ·§Æû
+            if ((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingUDFloor) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingLRFloor) ||
+                (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingCircleFloor))
+            {
+                transform.SetParent(null);
+            }
+
+        }
+        #endregion
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
