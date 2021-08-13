@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3470773568309772513}
   - component: {fileID: 2483423787297553636}
   - component: {fileID: 4160955146641743159}
+  - component: {fileID: -1612863286765977905}
   m_Layer: 0
   m_Name: MoveCirclePlatform
   m_TagString: Untagged
@@ -124,3 +125,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapPos: {x: 0, y: 0}
   thisFloor: 6
+--- !u!114 &-1612863286765977905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560219593681043248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85b51bec90974f47b3806f9bced1c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  counterClock: 0
+  speed: 1
+  r: 1
