@@ -1,9 +1,9 @@
 public enum FloorType
 {
-    None, Wall, DisposableFloor, HookFloor, MovingUDFloor, MovingLRFloor, MovingCircleFloor, SlipFloor, JumpFloor, Device,
-    SlowFloor, TimedFloor, Spawn, Goal, Item, MovingFloor
+    None, Wall, DisposableFloor, HookFloor, MovingFloorCircle, MovingFloorUpDown, MovingFloorLeftRight, SlipFloor, JumpFloor, Device,
+    SlowFloor, ElectricFloor, TimedFloor, Spawn, Goal, Item, MovingFloor
 }
 public enum BallType
 {
-    Black,Ice,MoveCircle,MoveLeftRight,MoveUpDown,OneStep,Slow,Hook
+    Black,Ice,MovingCircle,MovingLeftRight,MovingUpDown,OneStep,Slow,Hook,Electric,Timed
 }
