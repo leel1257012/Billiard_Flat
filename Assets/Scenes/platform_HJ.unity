@@ -1422,11 +1422,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4024701944062294476, guid: 7ca99b2364bbd410480b6b46ab36253e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.97
+      value: -4.45
       objectReference: {fileID: 0}
     - target: {fileID: 4024701944062294476, guid: 7ca99b2364bbd410480b6b46ab36253e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.6
+      value: -2.32
       objectReference: {fileID: 0}
     - target: {fileID: 4024701944062294476, guid: 7ca99b2364bbd410480b6b46ab36253e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1665,6 +1665,7 @@ MonoBehaviour:
   gameUI: {fileID: 315380187}
   totalPlayers: 0
   isLaunching: 0
+  starCollision: 0
 --- !u!4 &517791988
 Transform:
   m_ObjectHideFlags: 0

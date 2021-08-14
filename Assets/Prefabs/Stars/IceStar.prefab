@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 3388313034334333477, guid: 1d54c91d9a79cff469e814b2a637d00c, type: 3}
+  floor: 7
 --- !u!61 &4024701944062294477
 BoxCollider2D:
   m_ObjectHideFlags: 0

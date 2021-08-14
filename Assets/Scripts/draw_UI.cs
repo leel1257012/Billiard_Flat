@@ -122,7 +122,7 @@ public class draw_UI : MonoBehaviour
             {
                 img_ball[i].sprite = spr_ball[(int)arr_ball[levelManager.playerCount - 1 - i]];
             }
-            for (int i = levelManager.playerCount; i < levelManager.totalPlayers; i++)
+            for (int i = levelManager.playerCount; i < img_ball.Length; i++)
             {
                 img_ball[i].sprite = spr_ball[0];
             }

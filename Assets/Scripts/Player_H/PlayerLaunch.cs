@@ -20,6 +20,7 @@ public class PlayerLaunch : MonoBehaviour
     public draw_UI draw;
     private LevelManager levelManager;
 
+
     Vector3 colPos;
     Vector3 colLocalScale;
     int check;
@@ -29,6 +30,7 @@ public class PlayerLaunch : MonoBehaviour
     float minTime = 0, currentTime = 0, time = 0; ////수정
     public float chargeTime = 1.5f;
     ArrowController arrow; ////
+
 
     //움직이는 플랫폼 용
     bool onPlatform = false;
@@ -104,6 +106,8 @@ public class PlayerLaunch : MonoBehaviour
             if(Input.GetMouseButtonUp(0) && mouseDown)
             {
                 levelManager.playerCount--;
+                levelManager.curPlayers.RemoveAt(levelManager.curPlayers.Count - 1);
+                levelManager.gameUI.GetComponent<draw_UI>().BallImageUpdate();
                 //draw.UseCurrentBall();
                 rb.gravityScale = 0;
                 moved = true;
@@ -246,8 +250,9 @@ public class PlayerLaunch : MonoBehaviour
         if (collision.name == "GameOverZone" && !moved) Debug.Log("GameOver!");
         if (collision.gameObject.CompareTag("Star"))
         {
-            Debug.Log("star");
+
             SerialMovement.OnTriggerstar(collision);
+
         }
     }
     private void OnTriggerStay2D(Collider2D collision)

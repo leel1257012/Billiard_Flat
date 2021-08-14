@@ -9,11 +9,14 @@ public class PreviousPlayer : MonoBehaviour
     //public bool last = false;
     public Vector3[] Pos = new Vector3[10];
     int ten = 0, SavePos = 0;
+
+    private LevelManager levelManager;
     // Start is called before the first frame update
+
 
     void Start()
     {
-        
+        levelManager = LevelManager.instance;
     }
 
     // Update is called once per frame
@@ -24,21 +27,25 @@ public class PreviousPlayer : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(ten < 10) 
+        if (!levelManager.isLaunching)
         {
-            Pos[ten] = Previous.transform.position;
-            ten++;
+            if (ten < 10)
+            {
+                Pos[ten] = Previous.transform.position;
+                ten++;
+            }
+            else if (ten == 10)
+            {
+                ten++;
+            }
+            if (ten > 10)
+            {
+                SavePos %= 10;
+                this.transform.position = Pos[SavePos] - new Vector3(0, 0, -1);
+                Pos[SavePos++] = Previous.transform.position;
+            }
         }
-        else if(ten == 10)
-        {
-            ten++;
-        }
-        if(ten > 10)
-        {
-            SavePos %= 10;
-            this.transform.position = Pos[SavePos] - new Vector3(0,0,-1);
-            Pos[SavePos++] = Previous.transform.position;
-        }
+
     }
 
     /*public void SetLastTrue()

@@ -16,8 +16,10 @@ public class SerialMovement : MonoBehaviour
     PlayerLaunch topPlayer;
     private LevelManager levelManager;
 
+
     public CameraController camera; /////����
     public GameObject temp;
+
 
     // Start is called before the first frame update
     void Start()
@@ -69,24 +71,41 @@ public class SerialMovement : MonoBehaviour
 
         if (topPlayer.stop == true)
         {
-            //Destroy(Players[top + 1]);
-            Players.Remove(Players[top+1]);
-            Players[top].GetComponent<CircleCollider2D>().isTrigger = false;
-            rb2D = Players[top].GetComponent<Rigidbody2D>();
-            rb2D.gravityScale = 1.0f;
-            if (top != bottom)
+            if (levelManager.starCollision)
             {
+                //Destroy(Players[top + 1]);
+                Players.Remove(Players[top + 1]);
+                Players[top].GetComponent<CircleCollider2D>().isTrigger = false;
+                rb2D = Players[top].GetComponent<Rigidbody2D>();
+                rb2D.gravityScale = 1.0f;
                 Players[top].AddComponent<PlayerLaunch>();
                 topPlayer = Players[top].GetComponent<PlayerLaunch>();
                 topPlayer.SetStopFalse();
+                levelManager.starCollision = false;
+
             }
             else
             {
-                Players[top].AddComponent<PlayerLaunch>();
-                topPlayer = Players[top].GetComponent<PlayerLaunch>();
-                topPlayer.SetStopFalse();
+                //Destroy(Players[top + 1]);
+                Players.Remove(Players[top + 1]);
+                Players[top].GetComponent<CircleCollider2D>().isTrigger = false;
+                rb2D = Players[top].GetComponent<Rigidbody2D>();
+                rb2D.gravityScale = 1.0f;
+                if (top != bottom)
+                {
+                    Players[top].AddComponent<PlayerLaunch>();
+                    topPlayer = Players[top].GetComponent<PlayerLaunch>();
+                    topPlayer.SetStopFalse();
+                }
+                else
+                {
+                    Players[top].AddComponent<PlayerLaunch>();
+                    topPlayer = Players[top].GetComponent<PlayerLaunch>();
+                    topPlayer.SetStopFalse();
 
+                }
             }
+
         }
         // 좌우 이동
         float h = Input.GetAxisRaw("Horizontal"); // 키 입력 (A, D)
@@ -122,28 +141,60 @@ public class SerialMovement : MonoBehaviour
 
     public void OnTriggerstar(Collider2D other)
     {
-        Players[top].GetComponent<CircleCollider2D>().isTrigger = true;
-        GameObject newTop = Instantiate(other.gameObject.GetComponent<StarSetting>().Player, Players[top].transform.position, Quaternion.identity, temp.transform);
-        other.gameObject.SetActive(false);
-        Players.Add(newTop);
+        if (!levelManager.isLaunching)
+        {
+            levelManager.curPlayers.Add(other.GetComponent<StarSetting>().floor);
+            levelManager.playerCount++;
+            levelManager.gameUI.GetComponent<draw_UI>().BallImageUpdate();
+            Players[top].GetComponent<CircleCollider2D>().isTrigger = true;
+            GameObject newTop = Instantiate(other.gameObject.GetComponent<StarSetting>().Player, Players[top].transform.position, Quaternion.identity, temp.transform);
+            other.gameObject.SetActive(false);
+            Players.Add(newTop);
 
-        Destroy(topPlayer);
+            Destroy(topPlayer);
 
-        Players[top].gameObject.AddComponent<PreviousPlayer>();
-        PreviousPlayer pre = Players[top].GetComponent<PreviousPlayer>();
-        pre.Previous = Players[top + 1];
-        if(top != 0) pre.Next = Players[top - 1];
+            Players[top].gameObject.AddComponent<PreviousPlayer>();
+            PreviousPlayer pre = Players[top].GetComponent<PreviousPlayer>();
+            pre.Previous = Players[top + 1];
+            if (top != 0) pre.Next = Players[top - 1];
 
-        Vector3 currentVelocity = rb2D.velocity;
-        rb2D.velocity = new Vector3(0, 0, 0);
-        rb2D.gravityScale = 0.0f;
-        rb2D = Players[++top].GetComponent<Rigidbody2D>();
-        rb2D.gravityScale = 1.0f;
-        rb2D.AddForce(currentVelocity, ForceMode2D.Impulse);
+            Vector3 currentVelocity = rb2D.velocity;
+            rb2D.velocity = new Vector3(0, 0, 0);
+            rb2D.gravityScale = 0.0f;
+            rb2D = Players[++top].GetComponent<Rigidbody2D>();
+            rb2D.gravityScale = 1.0f;
+            rb2D.AddForce(currentVelocity, ForceMode2D.Impulse);
 
-        Players[top].gameObject.AddComponent<PlayerLaunch>();
-        topPlayer = Players[top].GetComponent<PlayerLaunch>();
-        camera.Player = Players[top];
+            Players[top].gameObject.AddComponent<PlayerLaunch>();
+            topPlayer = Players[top].GetComponent<PlayerLaunch>();
+            camera.Player = Players[top];
+        }
+        else
+        {
+            top++;
+            levelManager.curPlayers.Insert(top, other.GetComponent<StarSetting>().floor);
+            levelManager.playerCount++;
+            levelManager.gameUI.GetComponent<draw_UI>().BallImageUpdate();
+            levelManager.starCollision = true;
+            GameObject newTop = Instantiate(other.gameObject.GetComponent<StarSetting>().Player, Players[top-1].transform.position, Quaternion.identity, temp.transform);
+            Players.Insert(top, newTop);
+
+            if(Players[top-1].GetComponent<PreviousPlayer>() == null)
+            {
+                Players[top-1].AddComponent<PreviousPlayer>();
+            }
+            PreviousPlayer pre = Players[top-1].GetComponent<PreviousPlayer>();
+            pre.Previous = Players[top];
+
+            
+
+            other.gameObject.SetActive(false);
+
+        }
+
+
+        
+
 
     }
 }

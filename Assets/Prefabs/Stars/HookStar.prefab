@@ -123,3 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 7541974382307533267, guid: b71d5d3f7b3143e4b8829d56387e5dc2, type: 3}
+  floor: 3
