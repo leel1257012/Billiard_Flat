@@ -24,6 +24,7 @@ public class draw_UI : MonoBehaviour
     public GameObject restartUI;
     private LevelManager levelManager;
     public Canvas mainUI;
+    public GameObject cursor;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,12 @@ public class draw_UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // inGame Cursor
+        if (cursor)
+        {
+            cursor.GetComponent<RectTransform>().position = Input.mousePosition;
+        }
+
         //draw stage and current level
         stageName.text = stage + " - Level " + level.ToString();
 

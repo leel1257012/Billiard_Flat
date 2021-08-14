@@ -14,6 +14,7 @@ public class SerialMovement : MonoBehaviour
     public int bottom = 0;
     public float speed = 3f;
     PlayerLaunch topPlayer;
+    private LevelManager levelManager;
 
     public CameraController camera; /////����
     public GameObject temp;
@@ -21,6 +22,7 @@ public class SerialMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelManager = LevelManager.instance;
         temp = GameObject.Find("Players");
         Players = new List<GameObject>();
         Transform[] tempPlayers = temp.GetComponentsInChildren<Transform>();
@@ -31,21 +33,24 @@ public class SerialMovement : MonoBehaviour
                 Players.Add(tempPlayers[i].gameObject);
         }
         top = Players.Count - 1;
-        for (int i = 0; i < top; i++)
+        if(levelManager.playerCount > 1)
         {
-            Players[i].gameObject.AddComponent<PreviousPlayer>();
-        }
-        Players[top].GetComponent<Rigidbody2D>().gravityScale = 1;
-        Players[0].GetComponent<PreviousPlayer>().Previous = Players[1];
-        Players[0].GetComponent<CircleCollider2D>().isTrigger = true;
-        for (int i = 1; i < top; i++)
-        {
-            Players[i].GetComponent<CircleCollider2D>().isTrigger = true;
-            PreviousPlayer pre = Players[i].GetComponent<PreviousPlayer>();
-            pre.Previous = Players[i + 1];
-            pre.Next = Players[i - 1];
+            for (int i = 0; i < top; i++)
+            {
+                Players[i].gameObject.AddComponent<PreviousPlayer>();
+            }
+            Players[0].GetComponent<PreviousPlayer>().Previous = Players[1];
+            Players[0].GetComponent<CircleCollider2D>().isTrigger = true;
+            for (int i = 1; i < top; i++)
+            {
+                Players[i].GetComponent<CircleCollider2D>().isTrigger = true;
+                PreviousPlayer pre = Players[i].GetComponent<PreviousPlayer>();
+                pre.Previous = Players[i + 1];
+                pre.Next = Players[i - 1];
+            }
         }
         rb2D = Players[top].GetComponent<Rigidbody2D>();
+        rb2D.gravityScale = 1f;
         Players[top].AddComponent<PlayerLaunch>();
         topPlayer = Players[top].GetComponent<PlayerLaunch>();
         camera = GameObject.Find("Main Camera").GetComponent<CameraController>(); ////����

@@ -60,9 +60,8 @@ public class PlayerLaunch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkPlayerCount();
         currentTime += Time.deltaTime; ////수정
-        if (moved == false && !SerialMovement.isJumping() && !singular)
+        if (moved == false && !SerialMovement.isJumping() && levelManager.playerCount > 1)
         {
             if(Input.GetMouseButtonDown(0))
             {
@@ -235,7 +234,8 @@ public class PlayerLaunch : MonoBehaviour
                 (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorLeftRight) ||
                 (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.MovingFloorCircle)))
             {
-                transform.SetParent(null);
+                GameObject players = GameObject.Find("Players");
+                transform.SetParent(players.transform);
             }
 
         }
@@ -263,15 +263,4 @@ public class PlayerLaunch : MonoBehaviour
         this.stop = false;
     }
 
-    private void checkPlayerCount()
-    {
-        GameObject temp = GameObject.Find("Players");
-        List<GameObject> Players;
-        Players = new List<GameObject>();
-        Transform[] tempPlayers = temp.GetComponentsInChildren<Transform>();
-        if(tempPlayers.Length <= 2)
-        {
-            singular = true;
-        }
-    }
 }
