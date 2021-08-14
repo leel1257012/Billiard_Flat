@@ -107,7 +107,7 @@ public class SerialMovement : MonoBehaviour
         }
 
         // 점프
-        if (!isJumping() && !topPlayer.isLaunching)
+        if (!isJumping() && !levelManager.isLaunching)
         {
             if (Input.GetKeyDown(KeyCode.Space))
                 rb2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);

@@ -15,7 +15,6 @@ public class PlayerLaunch : MonoBehaviour
     public float maxSpeed, minSpeed;
     public bool UpDown, moved;
     public bool stop;
-    public bool isLaunching;
     public bool singular = false;
     public bool mouseDown = false; //점프 중이 아닐 때 마우스가 눌렸는지
     public draw_UI draw;
@@ -43,7 +42,7 @@ public class PlayerLaunch : MonoBehaviour
         levelManager = LevelManager.instance;
         draw = GameObject.Find("GameManager").GetComponent<draw_UI>();
         SerialMovement = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
-        isLaunching = false;
+        levelManager.isLaunching = false;
         moved = false;
         stop = false; //플레이가 움직이는 중인지
         UpDown = true; //up == true, Down == false
@@ -65,14 +64,14 @@ public class PlayerLaunch : MonoBehaviour
         {
             if(Input.GetMouseButtonDown(0))
             {
-                isLaunching = true;
+                levelManager.isLaunching = true;
                 speed = minSpeed;
                 MousePosition = Input.mousePosition;
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
                 Direction = MousePosition - rb.position;
                 Direction = Direction.normalized;
                 minTime = currentTime; //// 수정
-                arrow.Instant(transform.position, Direction);
+                //arrow.Instant(transform.position, Direction);
                 arrow.chargebarSpawn(transform.position); ////
                 mouseDown = true;
             }
@@ -80,9 +79,9 @@ public class PlayerLaunch : MonoBehaviour
             {
                 MousePosition = Input.mousePosition; //중간에 발사위치 조정 가능하도록
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
-                Direction = MousePosition - rb.position;
-                Direction = Direction.normalized;
-                arrow.Setting(transform.position, Direction);
+                //Direction = MousePosition - rb.position;
+                //Direction = Direction.normalized;
+                //arrow.Setting(transform.position, Direction);
 
                 if (UpDown == true) //speed 기준에서 시간 기준으로 바꿈
                 {
@@ -106,7 +105,6 @@ public class PlayerLaunch : MonoBehaviour
             {
                 levelManager.playerCount--;
                 //draw.UseCurrentBall();
-                isLaunching = false;
                 rb.gravityScale = 0;
                 moved = true;
                 time = currentTime - minTime; ////수정
@@ -118,7 +116,7 @@ public class PlayerLaunch : MonoBehaviour
                 {
                     speed = maxSpeed - (maxSpeed - minSpeed) * (time / chargeTime);
                 }
-                arrow.DisInstant();
+                //arrow.DisInstant();
                 arrow.chargebarDestroy(); ////
             }
         }
@@ -143,6 +141,7 @@ public class PlayerLaunch : MonoBehaviour
             }
             else 
             {
+                levelManager.isLaunching = false;
                 moved = false;
                 stop = true;
                 mouseDown = false;

@@ -22,7 +22,7 @@ public class ArrowController : MonoBehaviour
     }
     public void Instant(Vector3 Player, Vector3 Direction)
     {
-        arrow = Instantiate(Arrow,Player+Direction,Quaternion.identity);
+        arrow = Instantiate(Arrow, Player + Direction, Quaternion.identity);
     }
 
     public void DisInstant()

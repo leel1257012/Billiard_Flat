@@ -15,6 +15,7 @@ public class LevelManager : MonoBehaviour
     public List<FloorType> curPlayers;
     public GameObject gameUI;
     public int totalPlayers;
+    public bool isLaunching;
     // Start is called before the first frame update
     void Start()
     {

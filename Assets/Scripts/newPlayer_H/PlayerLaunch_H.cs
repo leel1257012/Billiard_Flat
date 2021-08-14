@@ -54,7 +54,7 @@ public class PlayerLaunch_H : MonoBehaviour
                 Direction = MousePosition - rb.position;
                 Direction = Direction.normalized;
                 minTime = currentTime; //// 수정
-                arrow.Instant(transform.position,Direction); 
+                //arrow.Instant(transform.position,Direction); 
                 arrow.chargebarSpawn(transform.position); ////
             }
             if(Input.GetMouseButton(0)) ////수정
