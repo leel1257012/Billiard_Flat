@@ -106,7 +106,6 @@ public class PlayerLaunch : MonoBehaviour
             if(Input.GetMouseButtonUp(0) && mouseDown)
             {
                 levelManager.playerCount--;
-                levelManager.curPlayers.RemoveAt(levelManager.curPlayers.Count - 1);
                 levelManager.gameUI.GetComponent<draw_UI>().BallImageUpdate();
                 //draw.UseCurrentBall();
                 rb.gravityScale = 0;

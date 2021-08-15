@@ -76,6 +76,10 @@ public class SerialMovement : MonoBehaviour
                 //Destroy(Players[top + 1]);
                 Players.Remove(Players[top + 1]);
                 Players[top].GetComponent<CircleCollider2D>().isTrigger = false;
+                for(int i=0; i<top; i++)
+                {
+                    Players[i].GetComponent<CircleCollider2D>().isTrigger = true;
+                }
                 rb2D = Players[top].GetComponent<Rigidbody2D>();
                 rb2D.gravityScale = 1.0f;
                 Players[top].AddComponent<PlayerLaunch>();
