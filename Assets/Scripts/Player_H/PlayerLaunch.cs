@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerLaunch : MonoBehaviour
 {
     public SerialMovement SerialMovement;
@@ -246,7 +246,10 @@ public class PlayerLaunch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "GameOverZone" && !moved) Debug.Log("GameOver!");
+        if (collision.name == "GameOverZone" && !moved)
+        {
+            SceneManager.LoadScene("LevelSelect");
+        }
         if (collision.gameObject.CompareTag("Star"))
         {
 
@@ -256,7 +259,10 @@ public class PlayerLaunch : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.name == "CheckGoal" && !moved) Debug.Log("Goal Reached!");
+        if(collision.name == "CheckGoal" && !moved)
+        {
+            SceneManager.LoadScene("LevelSelect");
+        }
 
 
     }
