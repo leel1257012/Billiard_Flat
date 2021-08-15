@@ -24,6 +24,11 @@ public class LevelButton : MonoBehaviour
         SceneManager.LoadScene("Sample Level 2");
     }
 
+    public void loadlv7()
+    {
+        SceneManager.LoadScene("Sample Level 3");
+    }
+
 
 
 }
