@@ -26,12 +26,14 @@ public class PlatformSpawn : MonoBehaviour
         {
             FloorType cur = levelManager.curPlayers[levelManager.curPlayers.Count - 1];
             Instantiate(levelManager.platformPrefabs[(int)cur], pos, Quaternion.identity);
+            levelManager.curPlayers.RemoveAt(levelManager.curPlayers.Count - 1);
             move.camera.Player = move.Players[move.top];
         }
         else
         {
             FloorType cur = levelManager.curPlayers[levelManager.curPlayers.Count - 1];
             Instantiate(levelManager.platformPrefabs[(int)cur], pos, Quaternion.identity);
+            levelManager.curPlayers.RemoveAt(levelManager.curPlayers.Count - 1);
             move.camera.Player = move.Players[move.top];
         }
     }
