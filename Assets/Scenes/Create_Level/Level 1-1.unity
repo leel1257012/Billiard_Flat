@@ -961,7 +961,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 100
-    m_Alignment: 4
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1468,7 +1468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb50abe3274e834c8ec40b77b9de1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage: TEST STAGE
+  stage: STAGE
   level: 1
   stageName: {fileID: 491686890}
   ballUI: {fileID: 1817324964}
