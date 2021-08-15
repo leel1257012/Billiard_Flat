@@ -3912,7 +3912,7 @@ MonoBehaviour:
   Players: {fileID: 1542981438}
   serialMove: {fileID: 2008886504}
   playerCount: 0
-  curPlayers: 02000000080000000800000008000000
+  curPlayers: 01000000040000000500000006000000
   gameUI: {fileID: 219418543}
   totalPlayers: 0
   isLaunching: 0

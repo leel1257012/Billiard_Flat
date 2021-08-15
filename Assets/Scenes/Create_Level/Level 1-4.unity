@@ -1682,7 +1682,7 @@ MonoBehaviour:
   Players: {fileID: 1542981438}
   serialMove: {fileID: 2008886504}
   playerCount: 0
-  curPlayers: 0200000008000000080000000800000008000000
+  curPlayers: 0100000008000000080000000800000008000000
   gameUI: {fileID: 392779008}
   totalPlayers: 0
   isLaunching: 0
