@@ -27,7 +27,7 @@ public class PlayerLaunch : MonoBehaviour
     PlatformSpawn spawn;
     //public GameObject platform;
 
-    float minTime = 0, currentTime = 0, time = 0; ////수정
+    float minTime = 0, currentTime = 0, time = 0, lauchTime = 0; ////수정
     public float chargeTime = 1.5f;
     ArrowController arrow; ////
 
@@ -50,7 +50,7 @@ public class PlayerLaunch : MonoBehaviour
         UpDown = true; //up == true, Down == false
         maxSpeed = 10;
         speed = minSpeed = 1;
-        deceleration = 0.99f;
+        deceleration = 0.98f;
         rb = GetComponent<Rigidbody2D>();
         Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         //platform = GameObject.Find("TestPlatform");
@@ -142,12 +142,20 @@ public class PlayerLaunch : MonoBehaviour
                 rb.velocity = Direction * speed;
                 speed *= deceleration;
             }
+
+            //일정한 속도로 2초동안
+            /*if((lauchTime += Time.deltaTime) < 1.5)
+            {
+                rb.velocity = Direction * speed;
+            }*/
+
             else 
             {
                 levelManager.isLaunching = false;
                 moved = false;
                 stop = true;
                 mouseDown = false;
+                lauchTime = 0;
                 //this.platform = GameObject.Find("TestPlatform");
                 //Instantiate(platform, transform.position, Quaternion.identity);
                 Destroy(gameObject);
