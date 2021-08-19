@@ -62,7 +62,7 @@ public class SerialMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {       
-        if (Input.GetMouseButtonDown(0) && (top != bottom) && !isJumping())
+        if (Input.GetMouseButtonUp(0) && (top != bottom) && !isJumping() && levelManager.isLaunching)
         {
             PreviousPlayer previousPlayer = Players[--top].GetComponent<PreviousPlayer>();
             Destroy(previousPlayer);

@@ -79,6 +79,14 @@ public class PlayerLaunch : MonoBehaviour
             }
             if(Input.GetMouseButton(0) && mouseDown)
             {
+
+                if (Input.GetKeyDown("c"))
+                {
+                    mouseDown = false;
+                    levelManager.isLaunching = false;
+                    arrow.chargebarDestroy();
+                }
+
                 MousePosition = Input.mousePosition; //중간에 발사위치 조정 가능하도록
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
                 //Direction = MousePosition - rb.position;
