@@ -24,7 +24,7 @@ public class PlayerLaunch_HS : MonoBehaviour
     Vector3 colPos;
     Vector3 colLocalScale;
     int check;
-    PlatformSpawn spawn;
+    PlatformSpawn_HS spawn;
     //public GameObject platform;
 
     float minTime = 0, currentTime = 0, time = 0; ////수정
@@ -54,7 +54,7 @@ public class PlayerLaunch_HS : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         //platform = GameObject.Find("TestPlatform");
-        spawn = GameObject.Find("PlatformSpawner").GetComponent<PlatformSpawn>();
+        spawn = GameObject.Find("PlatformSpawner").GetComponent<PlatformSpawn_HS>();
         arrow = GameObject.Find("ArrowSpawner").GetComponent<ArrowController>(); ////수정
     }
 
@@ -256,7 +256,7 @@ public class PlayerLaunch_HS : MonoBehaviour
             SerialMovement.OnTriggerstar(collision);
 
         }
-        if (collision.gameObject.CompareTag("Hole") && levelManager.isLaunching)
+        if (collision.gameObject.CompareTag("Hole") && levelManager.isLaunching) // 구멍
         {
             levelManager.isLaunching = false;
             moved = false;
@@ -271,6 +271,10 @@ public class PlayerLaunch_HS : MonoBehaviour
             FloorType cur = levelManager.curPlayers[levelManager.curPlayers.Count - 1];
             levelManager.curPlayers.RemoveAt(levelManager.curPlayers.Count - 1);
             SerialMovement.camera.Player = SerialMovement.Players[SerialMovement.top];
+        }
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            // TODO: 바람에 닿으면 가속도 변화
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
