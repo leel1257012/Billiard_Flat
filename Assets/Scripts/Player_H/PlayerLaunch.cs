@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 public class PlayerLaunch : MonoBehaviour
 {
     public SerialMovement SerialMovement;
@@ -62,9 +63,9 @@ public class PlayerLaunch : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime; ////수정
-        if (moved == false && !SerialMovement.isJumping() && levelManager.playerCount > 1)
+        if (moved == false && !SerialMovement.isJumping() && levelManager.playerCount > 1 && (draw.GameState == 0)/*추가*/)
         {
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0) && !draw.mouseOnPause/*추가*/)
             {
                 levelManager.isLaunching = true;
                 speed = minSpeed;

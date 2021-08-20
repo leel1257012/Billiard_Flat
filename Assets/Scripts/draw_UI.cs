@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class draw_UI : MonoBehaviour
 {
     //GameState
-    int GameState = 0; //0 = playing, 1 = pause, 2 = question for backing to stage, 3 = question for restarting ...
+    public int GameState = 0; //0 = playing, 1 = pause, 2 = question for backing to stage, 3 = question for restarting ...
 
     //UI
     public string stage = "TEST STAGE"; //the name of stage
@@ -24,7 +24,8 @@ public class draw_UI : MonoBehaviour
     public GameObject restartUI;
     private LevelManager levelManager;
     public Canvas mainUI;
-    public GameObject cursor;
+    public Texture2D cursor;
+    public bool mouseOnPause = false; //마우스가 일시정지 버튼 위에 있는가
 
     // Start is called before the first frame update
     void Start()
@@ -39,16 +40,17 @@ public class draw_UI : MonoBehaviour
         restartUI.SetActive(false);
 
         BallImageUpdate();
+
+        // inGame Cursor
+        if (cursor)
+        {
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // inGame Cursor
-        if (cursor)
-        {
-            cursor.GetComponent<RectTransform>().position = Input.mousePosition;
-        }
 
         //draw stage and current level
         stageName.text = stage + " - Level " + level.ToString();
@@ -152,7 +154,7 @@ public class draw_UI : MonoBehaviour
 
     public void PauseGame()
     {
-        if (GameState == 0)
+        if (GameState == 0 && !levelManager.isLaunching)
         {
             GameState = 1;
             Time.timeScale = 0;
@@ -200,7 +202,7 @@ public class draw_UI : MonoBehaviour
     {
         if (GameState == 3)
         {
-            SceneManager.LoadScene("TestScene");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -208,7 +210,18 @@ public class draw_UI : MonoBehaviour
     {
         if (GameState == 2)
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene("LevelSelect");
         }
+    }
+
+    /*추가*/
+    public void MouseEnteredPause()
+    {
+        mouseOnPause = true;
+    }
+
+    public void MouseExitedPause()
+    {
+        mouseOnPause = false;
     }
 }
