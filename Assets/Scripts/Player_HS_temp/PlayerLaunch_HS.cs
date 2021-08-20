@@ -274,8 +274,19 @@ public class PlayerLaunch_HS : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Wind"))
         {
-            // TODO: 바람에 닿으면 가속도 변화
+            switch(collision.transform.parent.gameObject.GetComponent<DeviceWind>().direction){
+                case 1:
+                    //Debug.Log("0");
+                    var velocity = SerialMovement.rb2D.velocity;
+                    velocity.y = 0f;
+                    SerialMovement.rb2D.velocity = velocity;
+                    
+                    SerialMovement.rb2D.gravityScale=0f;
+                    break;
+            }
+            
         }
+        
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -283,8 +294,29 @@ public class PlayerLaunch_HS : MonoBehaviour
         {
             SceneManager.LoadScene("LevelSelect");
         }
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            switch(collision.transform.parent.gameObject.GetComponent<DeviceWind>().direction){
+                case 0:
+                    SerialMovement.modifyVelocity(new Vector2(-0.1f,0));
+                    break;
+            }
+            
+        }
 
-
+    }
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            switch(collision.transform.parent.gameObject.GetComponent<DeviceWind>().direction){
+                case 1:
+                    //Debug.Log("1");
+                    SerialMovement.rb2D.gravityScale=1f;
+                    break;
+            }
+            
+        }
     }
 
     public void SetStopFalse()

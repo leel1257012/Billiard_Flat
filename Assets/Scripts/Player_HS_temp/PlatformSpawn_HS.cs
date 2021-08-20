@@ -11,7 +11,7 @@ public class PlatformSpawn_HS : MonoBehaviour
     {
         levelManager = LevelManager.instance;
         move = GameObject.Find("SerialMoving").GetComponent<SerialMovement_HS>();
-        GameObject.Find("FanDevice").GetComponent<DeviceWind>().RefreshWindSize();
+        //GameObject.Find("FanDevice").GetComponent<DeviceWind>().RefreshWindSize();
     }
 
     // Update is called once per frame
