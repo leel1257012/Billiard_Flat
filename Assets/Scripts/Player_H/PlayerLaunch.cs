@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 public class PlayerLaunch : MonoBehaviour
 {
     public SerialMovement SerialMovement;
@@ -27,7 +28,7 @@ public class PlayerLaunch : MonoBehaviour
     PlatformSpawn spawn;
     //public GameObject platform;
 
-    float minTime = 0, currentTime = 0, time = 0; ////수정
+    float minTime = 0, currentTime = 0, time = 0, lauchTime = 0; ////수정
     public float chargeTime = 1.5f;
     ArrowController arrow; ////
 
@@ -50,7 +51,7 @@ public class PlayerLaunch : MonoBehaviour
         UpDown = true; //up == true, Down == false
         maxSpeed = 10;
         speed = minSpeed = 1;
-        deceleration = 0.99f;
+        deceleration = 0.98f;
         rb = GetComponent<Rigidbody2D>();
         Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         //platform = GameObject.Find("TestPlatform");
@@ -62,9 +63,9 @@ public class PlayerLaunch : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime; ////수정
-        if (moved == false && !SerialMovement.isJumping() && levelManager.playerCount > 1)
+        if (moved == false && !SerialMovement.isJumping() && levelManager.playerCount > 1 && (draw.GameState == 0)/*추가*/)
         {
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0) && !draw.mouseOnPause/*추가*/)
             {
                 levelManager.isLaunching = true;
                 speed = minSpeed;
@@ -150,12 +151,20 @@ public class PlayerLaunch : MonoBehaviour
                 rb.velocity = Direction * speed;
                 speed *= deceleration;
             }
+
+            //일정한 속도로 2초동안
+            /*if((lauchTime += Time.deltaTime) < 1.5)
+            {
+                rb.velocity = Direction * speed;
+            }*/
+
             else 
             {
                 levelManager.isLaunching = false;
                 moved = false;
                 stop = true;
                 mouseDown = false;
+                lauchTime = 0;
                 //this.platform = GameObject.Find("TestPlatform");
                 //Instantiate(platform, transform.position, Quaternion.identity);
                 Destroy(gameObject);

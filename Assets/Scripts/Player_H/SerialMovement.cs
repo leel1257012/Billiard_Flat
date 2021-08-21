@@ -15,6 +15,7 @@ public class SerialMovement : MonoBehaviour
     public float speed = 3f;
     PlayerLaunch topPlayer;
     private LevelManager levelManager;
+    public draw_UI draw; //추가
 
 
     public CameraController camera; /////����
@@ -24,6 +25,7 @@ public class SerialMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        draw = GameObject.Find("GameManager").GetComponent<draw_UI>(); //추가
         levelManager = LevelManager.instance;
         temp = GameObject.Find("Players");
         Players = new List<GameObject>();
@@ -62,7 +64,7 @@ public class SerialMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {       
-        if (Input.GetMouseButtonUp(0) && (top != bottom) && !isJumping() && levelManager.isLaunching)
+        if (Input.GetMouseButtonUp(0) && (top != bottom) && !isJumping() && !draw.mouseOnPause && (draw.GameState == 0) && levelManager.isLaunching/*추가*/)
         {
             PreviousPlayer previousPlayer = Players[--top].GetComponent<PreviousPlayer>();
             Destroy(previousPlayer);
