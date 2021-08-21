@@ -254,10 +254,14 @@ public class PlayerLaunch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "GameOverZone" && !moved)
+        if (!levelManager.testMode)
         {
-            SceneManager.LoadScene("LevelSelect");
+            if (collision.name == "GameOverZone" && !moved)
+            {
+                SceneManager.LoadScene("LevelSelect");
+            }
         }
+
         if (collision.gameObject.CompareTag("Star"))
         {
 
@@ -267,9 +271,12 @@ public class PlayerLaunch : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.name == "CheckGoal" && !moved)
+        if (!levelManager.testMode)
         {
-            SceneManager.LoadScene("LevelSelect");
+            if (collision.name == "CheckGoal" && !moved)
+            {
+                SceneManager.LoadScene("LevelSelect");
+            }
         }
 
 
