@@ -8,7 +8,7 @@ public class DeviceLaser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("shoot",2f,1f);
+        InvokeRepeating("shoot",1f,2f);
     }
 
     // Update is called once per frame
