@@ -51,7 +51,7 @@ public class PlayerLaunch : MonoBehaviour
         UpDown = true; //up == true, Down == false
         maxSpeed = 10;
         speed = minSpeed = 1;
-        deceleration = 0.98f;
+        deceleration = 0.95f;
         rb = GetComponent<Rigidbody2D>();
         Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
         //platform = GameObject.Find("TestPlatform");
@@ -145,19 +145,23 @@ public class PlayerLaunch : MonoBehaviour
     {
         if(moved == true) 
         {
-            if(speed > 0.3)
+            /*if(speed > 0.3)
             {
                 //rb.MovePosition(rb.position + Direction * speed * Time.fixedDeltaTime);
                 rb.velocity = Direction * speed;
                 speed *= deceleration;
-            }
-
-            //일정한 속도로 2초동안
-            /*if((lauchTime += Time.deltaTime) < 1.5)
-            {
-                rb.velocity = Direction * speed;
             }*/
 
+            //일정한 속도로 1.5초동안
+            if((lauchTime += Time.deltaTime) < 1.5)
+            {
+                rb.velocity = Direction * speed;
+            }
+            else if(speed > 0.5)
+            {
+                rb.velocity = Direction * speed;
+                speed *= deceleration;
+            }
             else 
             {
                 levelManager.isLaunching = false;
@@ -182,6 +186,11 @@ public class PlayerLaunch : MonoBehaviour
         //        Debug.Log("Goal Reached!");
         //    }
         //}
+        if(collision.gameObject.CompareTag("MovePlatform")) 
+        {
+            int top = SerialMovement.top;
+            for(int i = 0; i < top; i++) SerialMovement.Players[i].GetComponent<PreviousPlayer>().movingPlatform = true;
+        }
 
         Vector2 normalVector = collision.contacts[0].normal;
         Vector2 reflectVector = Vector2.Reflect(Direction, normalVector);
@@ -233,6 +242,12 @@ public class PlayerLaunch : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        if(collision.gameObject.CompareTag("MovePlatform") && rb.gravityScale != 0) 
+        {
+            int top = SerialMovement.top;
+            for(int i = 0; i < top; i++) SerialMovement.Players[i].GetComponent<PreviousPlayer>().movingPlatform = false;
+        }
+
         #region platforms
         if (collision.gameObject.GetComponent<MapEditorFloor>() != null && !moved)
         {

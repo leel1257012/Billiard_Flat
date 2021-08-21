@@ -11,6 +11,7 @@ public class PreviousPlayer : MonoBehaviour
     int ten = 0, SavePos = 0;
 
     private LevelManager levelManager;
+    public bool movingPlatform = false;
     // Start is called before the first frame update
 
 
@@ -41,7 +42,8 @@ public class PreviousPlayer : MonoBehaviour
             if (ten > 10)
             {
                 SavePos %= 10;
-                this.transform.position = Pos[SavePos] - new Vector3(0, 0, -1);
+                if(movingPlatform == false) this.transform.position = Pos[SavePos] - new Vector3(0, 0, -1);
+                else this.transform.position = (Previous.transform.position + this.transform.position)/2 - new Vector3(0, 0, -1);
                 Pos[SavePos++] = Previous.transform.position;
             }
         }
