@@ -286,7 +286,10 @@ public class PlayerLaunch_HS : MonoBehaviour
             }
             
         }
-        
+        if (collision.gameObject.CompareTag("LaserBullet"))
+        {
+            SceneManager.LoadScene("LevelSelect");
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
