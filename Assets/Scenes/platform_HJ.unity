@@ -1089,6 +1089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb50abe3274e834c8ec40b77b9de1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameState: 0
   stage: TEST STAGE
   level: 1
   stageName: {fileID: 1979946833}
@@ -1120,6 +1121,7 @@ MonoBehaviour:
   restartUI: {fileID: 2098002533}
   mainUI: {fileID: 62644960}
   cursor: {fileID: 77614271}
+  mouseOnPause: 0
 --- !u!4 &315380190
 Transform:
   m_ObjectHideFlags: 0
@@ -4885,6 +4887,7 @@ GameObject:
   - component: {fileID: 1173340756}
   - component: {fileID: 1173340755}
   - component: {fileID: 1173340757}
+  - component: {fileID: 1173340758}
   m_Layer: 0
   m_Name: Tilemap_Billiard
   m_TagString: Untagged
@@ -5713,13 +5716,32 @@ TilemapCollider2D:
   m_GameObject: {fileID: 1173340753}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 089bb31b779bb2246bbfaf45b6546f0c, type: 2}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!251 &1173340758
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173340753}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &1259831034
 GameObject:
   m_ObjectHideFlags: 0
@@ -6487,6 +6509,7 @@ MonoBehaviour:
   top: 0
   bottom: 0
   speed: 3
+  draw: {fileID: 0}
   camera: {fileID: 0}
   temp: {fileID: 0}
 --- !u!4 &2008886506
