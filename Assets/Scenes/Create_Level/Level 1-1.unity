@@ -739,12 +739,13 @@ MonoBehaviour:
   - {fileID: 788156684932613914, guid: 704f9f956366e7e4285c3ee9e6bc0c86, type: 3}
   Players: {fileID: 1542981438}
   serialMove: {fileID: 2008886504}
-  playerCount: 0
+  playerCount: 3
   curPlayers: 010000000100000001000000
   gameUI: {fileID: 2084599679}
   totalPlayers: 0
   isLaunching: 0
   starCollision: 0
+  testMode: 0
 --- !u!4 &1145143835
 Transform:
   m_ObjectHideFlags: 0
@@ -934,7 +935,7 @@ PrefabInstance:
     - target: {fileID: 3824741817793992285, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 656314952}
+      objectReference: {fileID: 0}
     - target: {fileID: 3824741817793992286, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0

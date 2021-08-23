@@ -976,7 +976,7 @@ PrefabInstance:
     - target: {fileID: 3824741817793992285, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 656314952}
+      objectReference: {fileID: 0}
     - target: {fileID: 3824741817793992286, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
@@ -1137,6 +1137,7 @@ MonoBehaviour:
   totalPlayers: 0
   isLaunching: 0
   starCollision: 0
+  testMode: 0
 --- !u!4 &1802952853
 Transform:
   m_ObjectHideFlags: 0

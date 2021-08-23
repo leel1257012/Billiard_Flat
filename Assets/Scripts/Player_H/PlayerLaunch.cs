@@ -90,8 +90,8 @@ public class PlayerLaunch : MonoBehaviour
 
                 MousePosition = Input.mousePosition; //중간에 발사위치 조정 가능하도록
                 MousePosition = Camera.ScreenToWorldPoint(MousePosition);
-                //Direction = MousePosition - rb.position;
-                //Direction = Direction.normalized;
+                Direction = MousePosition - rb.position;
+                Direction = Direction.normalized;
                 //arrow.Setting(transform.position, Direction);
 
                 if (UpDown == true) //speed 기준에서 시간 기준으로 바꿈

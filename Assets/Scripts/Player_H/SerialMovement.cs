@@ -115,21 +115,24 @@ public class SerialMovement : MonoBehaviour
 
         }
         // 좌우 이동
-        float h = Input.GetAxisRaw("Horizontal"); // 키 입력 (A, D)
-
-        if (h > 0 && rb2D.velocity.x < 0) rb2D.velocity = new Vector2(-rb2D.velocity.x, rb2D.velocity.y); // 방향 바꿀 때 속도 유지
-        else if (h < 0 && rb2D.velocity.x > 0) rb2D.velocity = new Vector2(-rb2D.velocity.x, rb2D.velocity.y);
-
-        rb2D.AddForce(Vector2.right * h, ForceMode2D.Impulse);
-
-        if (rb2D.velocity.x > MaxSpeed) // 속도 제한
-            rb2D.velocity = new Vector2(MaxSpeed, rb2D.velocity.y);
-        else if (rb2D.velocity.x < -MaxSpeed)
-            rb2D.velocity = new Vector2(-MaxSpeed, rb2D.velocity.y);
-
-        if (Input.GetButtonUp("Horizontal")) // 방향키 떼면 정지
+        if (!levelManager.isLaunching)
         {
-            rb2D.AddForce(new Vector2(-0.7f * rb2D.velocity.x, 0), ForceMode2D.Impulse);
+            float h = Input.GetAxisRaw("Horizontal"); // 키 입력 (A, D)
+
+            if (h > 0 && rb2D.velocity.x < 0) rb2D.velocity = new Vector2(-rb2D.velocity.x, rb2D.velocity.y); // 방향 바꿀 때 속도 유지
+            else if (h < 0 && rb2D.velocity.x > 0) rb2D.velocity = new Vector2(-rb2D.velocity.x, rb2D.velocity.y);
+
+            rb2D.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+
+            if (rb2D.velocity.x > MaxSpeed) // 속도 제한
+                rb2D.velocity = new Vector2(MaxSpeed, rb2D.velocity.y);
+            else if (rb2D.velocity.x < -MaxSpeed)
+                rb2D.velocity = new Vector2(-MaxSpeed, rb2D.velocity.y);
+
+            if (Input.GetButtonUp("Horizontal")) // 방향키 떼면 정지
+            {
+                rb2D.AddForce(new Vector2(-0.7f * rb2D.velocity.x, 0), ForceMode2D.Impulse);
+            }
         }
 
         // 점프

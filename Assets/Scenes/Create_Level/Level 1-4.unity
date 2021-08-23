@@ -359,7 +359,7 @@ PrefabInstance:
     - target: {fileID: 3824741817793992285, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 656314952}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
 --- !u!1 &629327288
@@ -815,6 +815,7 @@ MonoBehaviour:
   totalPlayers: 0
   isLaunching: 0
   starCollision: 0
+  testMode: 0
 --- !u!4 &1078764410
 Transform:
   m_ObjectHideFlags: 0
