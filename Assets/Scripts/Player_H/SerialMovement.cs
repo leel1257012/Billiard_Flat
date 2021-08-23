@@ -203,8 +203,12 @@ public class SerialMovement : MonoBehaviour
         }
 
 
-        
 
-
+    }
+    public void modifyVelocity(Vector2 modifier)
+    {
+        rb2D.velocity += modifier;
+        if (rb2D.velocity.x > MaxSpeed || rb2D.velocity.x < -MaxSpeed) // 속도 제한
+            rb2D.velocity = new Vector2(MaxSpeed, rb2D.velocity.y);
     }
 }

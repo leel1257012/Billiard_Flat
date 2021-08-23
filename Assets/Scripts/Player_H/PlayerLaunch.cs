@@ -292,6 +292,41 @@ public class PlayerLaunch : MonoBehaviour
             SerialMovement.OnTriggerstar(collision);
 
         }
+        if (collision.gameObject.CompareTag("Hole") && levelManager.isLaunching) // 구멍
+        {
+            levelManager.isLaunching = false;
+            moved = false;
+            stop = true;
+            mouseDown = false;
+            Destroy(gameObject);
+
+            //levelManager.playerCount--;
+            //levelManager.gameUI.GetComponent<draw_UI>().BallImageUpdate();
+
+            // PlatformSpawn.cs에서 복사됨
+            FloorType cur = levelManager.curPlayers[levelManager.curPlayers.Count - 1];
+            levelManager.curPlayers.RemoveAt(levelManager.curPlayers.Count - 1);
+            SerialMovement.camera.Player = SerialMovement.Players[SerialMovement.top];
+        }
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            switch (collision.transform.parent.gameObject.GetComponent<DeviceWind>().direction)
+            {
+                case 1:
+                    //Debug.Log("0");
+                    var velocity = SerialMovement.rb2D.velocity;
+                    velocity.y = 0f;
+                    SerialMovement.rb2D.velocity = velocity;
+
+                    SerialMovement.rb2D.gravityScale = 0f;
+                    break;
+            }
+
+        }
+        if (collision.gameObject.CompareTag("LaserBullet"))
+        {
+            SceneManager.LoadScene("LevelSelect");
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -301,9 +336,36 @@ public class PlayerLaunch : MonoBehaviour
             {
                 SceneManager.LoadScene("LevelSelect");
             }
+
+        }
+
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            switch (collision.transform.parent.gameObject.GetComponent<DeviceWind>().direction)
+            {
+                case 0:
+                    SerialMovement.modifyVelocity(new Vector2(-0.1f, 0));
+                    break;
+            }
+
         }
 
 
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            switch (collision.transform.parent.gameObject.GetComponent<DeviceWind>().direction)
+            {
+                case 1:
+                    //Debug.Log("1");
+                    SerialMovement.rb2D.gravityScale = 1f;
+                    break;
+            }
+
+        }
     }
 
     public void SetStopFalse()
