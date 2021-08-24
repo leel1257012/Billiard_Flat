@@ -202,6 +202,7 @@ public class draw_UI : MonoBehaviour
     {
         if (GameState == 3)
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
@@ -210,6 +211,7 @@ public class draw_UI : MonoBehaviour
     {
         if (GameState == 2)
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene("LevelSelect");
         }
     }
