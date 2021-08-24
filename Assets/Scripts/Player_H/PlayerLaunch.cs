@@ -18,6 +18,7 @@ public class PlayerLaunch : MonoBehaviour
     public bool stop;
     public bool singular = false;
     public bool mouseDown = false; //점프 중이 아닐 때 마우스가 눌렸는지
+    public bool gameOver = false, goal = false;
     public draw_UI draw;
     private LevelManager levelManager;
 
@@ -31,6 +32,7 @@ public class PlayerLaunch : MonoBehaviour
     float minTime = 0, currentTime = 0, time = 0, lauchTime = 0; ////수정
     public float chargeTime = 1.5f;
     ArrowController arrow; ////
+    float delayTime = 0;
 
 
     //움직이는 플랫폼 용
@@ -138,6 +140,20 @@ public class PlayerLaunch : MonoBehaviour
         if ((onPlatform) && (h == 0)) //좌우 이동이 없을 때 플랫폼 탑승 위치 고정
         {
             transform.position = contactedPlatform.transform.position - distance;
+        }
+
+        //게암오버
+        if(gameOver)
+        {
+            SerialMovement.pausePlayer = true;
+            delayTime += Time.deltaTime;
+            if(delayTime >= 3) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        
+        //골
+        if(goal)
+        {
+            if(Input.GetMouseButtonDown(0)) SceneManager.LoadScene("LevelSelect");
         }
     }
 
@@ -282,7 +298,9 @@ public class PlayerLaunch : MonoBehaviour
         {
             if (collision.name == "GameOverZone" && !moved)
             {
-                SceneManager.LoadScene("LevelSelect");
+                //SceneManager.LoadScene("LevelSelect");
+                gameOver = true;
+                GetComponent<AudioSource>().Play();
             }
         }
 
@@ -334,7 +352,9 @@ public class PlayerLaunch : MonoBehaviour
         {
             if (collision.name == "CheckGoal" && !moved)
             {
-                SceneManager.LoadScene("LevelSelect");
+                goal = true;
+                if((delayTime += Time.deltaTime) > 0.3f) SerialMovement.pausePlayer = true;
+                //if(Input.GetMouseButtonDown(0)) SceneManager.LoadScene("LevelSelect");
             }
 
         }

@@ -20,6 +20,7 @@ public class SerialMovement : MonoBehaviour
 
     public CameraController camera; /////����
     public GameObject temp;
+    public bool pausePlayer = false;
 
 
     // Start is called before the first frame update
@@ -115,7 +116,7 @@ public class SerialMovement : MonoBehaviour
 
         }
         // 좌우 이동
-        if (!levelManager.isLaunching)
+        if (!levelManager.isLaunching && !pausePlayer)
         {
             float h = Input.GetAxisRaw("Horizontal"); // 키 입력 (A, D)
 
