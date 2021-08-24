@@ -12,7 +12,7 @@ public class DeviceWind : MonoBehaviour
     void Start()
     {
         scale = this.gameObject.transform.localScale.x;
-        RefreshWindSize();
+        //RefreshWindSize();
     }
 
     // Update is called once per frame
