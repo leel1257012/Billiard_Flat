@@ -22,16 +22,16 @@ public class CameraController : MonoBehaviour
     {
         playerCam.transform.position = Player.transform.position + offset;
 
-        if (Input.GetKeyDown("m"))
-        {
-            map.gameObject.SetActive(true);
-            playerCam.gameObject.SetActive(false);
-        }
-        if (Input.GetKeyUp("m"))
-        {
-            map.gameObject.SetActive(false);
-            playerCam.gameObject.SetActive(true);
-        }
+        //if (Input.GetKeyDown("m"))
+        //{
+        //    map.gameObject.SetActive(true);
+        //    playerCam.gameObject.SetActive(false);
+        //}
+        //if (Input.GetKeyUp("m"))
+        //{
+        //    map.gameObject.SetActive(false);
+        //    playerCam.gameObject.SetActive(true);
+        //}
     }
 
     public void SetPlayer(GameObject newPlayer)

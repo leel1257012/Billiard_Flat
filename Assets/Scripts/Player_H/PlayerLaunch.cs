@@ -42,6 +42,7 @@ public class PlayerLaunch : MonoBehaviour
     Vector3 platformPos;
     Vector3 distance;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +58,7 @@ public class PlayerLaunch : MonoBehaviour
         speed = minSpeed = 1;
         deceleration = 0.95f;
         rb = GetComponent<Rigidbody2D>();
-        Camera = GameObject.Find("SelectCamera").GetComponent<CameraController>().playerCam;
+        Camera = GameObject.Find("SelectCamera").GetComponent<CameraController>().map;
         //platform = GameObject.Find("TestPlatform");
         spawn = GameObject.Find("PlatformSpawner").GetComponent<PlatformSpawn>();
         arrow = GameObject.Find("ArrowSpawner").GetComponent<ArrowController>(); ////수정
@@ -71,6 +72,8 @@ public class PlayerLaunch : MonoBehaviour
         {
             if(Input.GetMouseButtonDown(0) && !draw.mouseOnPause/*추가*/)
             {
+                Camera = camControl.map;
+                camControl.switchToMap();
                 levelManager.isLaunching = true;
                 speed = minSpeed;
                 MousePosition = Input.mousePosition;
@@ -87,6 +90,7 @@ public class PlayerLaunch : MonoBehaviour
 
                 if (Input.GetKeyDown("c"))
                 {
+                    camControl.switchToPlayer();
                     mouseDown = false;
                     levelManager.isLaunching = false;
                     arrow.chargebarDestroy();
@@ -118,8 +122,7 @@ public class PlayerLaunch : MonoBehaviour
             }
             if(Input.GetMouseButtonUp(0) && mouseDown)
             {
-                camControl.switchToMap();
-
+                camControl.switchToPlayer();
                 levelManager.playerCount--;
                 levelManager.gameUI.GetComponent<draw_UI>().BallImageUpdate();
                 //draw.UseCurrentBall();
@@ -194,7 +197,7 @@ public class PlayerLaunch : MonoBehaviour
                 Destroy(gameObject);
                 spawn.Platform1(transform.position);
                 SerialMovement.camera.Player = SerialMovement.Players[SerialMovement.top];
-                camControl.switchToPlayer();
+                //camControl.switchToPlayer();
             }
         }
     }
