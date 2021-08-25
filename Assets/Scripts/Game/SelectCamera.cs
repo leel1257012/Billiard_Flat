@@ -11,7 +11,8 @@ public class SelectCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        map.gameObject.SetActive(false);
+        player.gameObject.SetActive(true);
     }
 
     // Update is called once per frame

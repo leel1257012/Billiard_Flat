@@ -57,7 +57,7 @@ public class SerialMovement : MonoBehaviour
         rb2D.gravityScale = 1f;
         Players[top].AddComponent<PlayerLaunch>();
         topPlayer = Players[top].GetComponent<PlayerLaunch>();
-        camera = GameObject.Find("Main Camera").GetComponent<CameraController>(); ////����
+        camera = GameObject.Find("SelectCamera").GetComponent<CameraController>();
         camera.Player = Players[top]; ////����
     }
 

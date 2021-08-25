@@ -7,6 +7,7 @@ public class PlayerLaunch : MonoBehaviour
 {
     public SerialMovement SerialMovement;
 
+    CameraController camControl;
     Camera Camera;
     Vector2 Direction;
     Vector2 MousePosition;
@@ -43,6 +44,7 @@ public class PlayerLaunch : MonoBehaviour
     void Start()
     {
         levelManager = LevelManager.instance;
+        camControl = GameObject.Find("SelectCamera").GetComponent<CameraController>();
         draw = GameObject.Find("GameManager").GetComponent<draw_UI>();
         SerialMovement = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
         levelManager.isLaunching = false;
@@ -53,7 +55,7 @@ public class PlayerLaunch : MonoBehaviour
         speed = minSpeed = 1;
         deceleration = 0.95f;
         rb = GetComponent<Rigidbody2D>();
-        Camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        Camera = GameObject.Find("SelectCamera").GetComponent<CameraController>().playerCam;
         //platform = GameObject.Find("TestPlatform");
         spawn = GameObject.Find("PlatformSpawner").GetComponent<PlatformSpawn>();
         arrow = GameObject.Find("ArrowSpawner").GetComponent<ArrowController>(); ////수정
@@ -114,6 +116,8 @@ public class PlayerLaunch : MonoBehaviour
             }
             if(Input.GetMouseButtonUp(0) && mouseDown)
             {
+                camControl.switchToMap();
+
                 levelManager.playerCount--;
                 levelManager.gameUI.GetComponent<draw_UI>().BallImageUpdate();
                 //draw.UseCurrentBall();
@@ -173,6 +177,8 @@ public class PlayerLaunch : MonoBehaviour
                 //Instantiate(platform, transform.position, Quaternion.identity);
                 Destroy(gameObject);
                 spawn.Platform1(transform.position);
+                SerialMovement.camera.Player = SerialMovement.Players[SerialMovement.top];
+                camControl.switchToPlayer();
             }
         }
     }

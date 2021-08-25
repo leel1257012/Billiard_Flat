@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlatformSpawn : MonoBehaviour
 {
     private LevelManager levelManager;
-    SerialMovement move;
+    //SerialMovement move;
     // Start is called before the first frame update
     void Start()
     {
         levelManager = LevelManager.instance;
-        move = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
+        //move = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
     }
 
     // Update is called once per frame
@@ -27,14 +27,14 @@ public class PlatformSpawn : MonoBehaviour
             FloorType cur = levelManager.curPlayers[levelManager.curPlayers.Count - 1];
             Instantiate(levelManager.platformPrefabs[(int)cur], pos, Quaternion.identity);
             levelManager.curPlayers.RemoveAt(levelManager.curPlayers.Count - 1);
-            move.camera.Player = move.Players[move.top];
+            //move.camera.Player = move.Players[move.top];
         }
         else
         {
             FloorType cur = levelManager.curPlayers[levelManager.curPlayers.Count - 1];
             Instantiate(levelManager.platformPrefabs[(int)cur], pos, Quaternion.identity);
             levelManager.curPlayers.RemoveAt(levelManager.curPlayers.Count - 1);
-            move.camera.Player = move.Players[move.top];
+            //move.camera.Player = move.Players[move.top];
         }
     }
 }
