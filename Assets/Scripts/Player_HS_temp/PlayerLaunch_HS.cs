@@ -313,6 +313,9 @@ public class PlayerLaunch_HS : MonoBehaviour
                 case 0:
                     SerialMovement.modifyVelocity(new Vector2(-0.1f,0));
                     break;
+                case 2:
+                    SerialMovement.modifyVelocity(new Vector2(0.1f,0));
+                    break;
             }
             
         }
