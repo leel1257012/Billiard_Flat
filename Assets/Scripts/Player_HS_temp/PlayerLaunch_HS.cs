@@ -290,6 +290,16 @@ public class PlayerLaunch_HS : MonoBehaviour
         {
             SceneManager.LoadScene("LevelSelect");
         }
+        if (collision.gameObject.CompareTag("Portal"))
+        {
+            var component = collision.gameObject.GetComponent<DevicePortal>();
+            if(component.inOut)
+            {
+                var pairLocation = component.pair.transform.position;
+                gameObject.transform.position = pairLocation;
+            }
+            
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

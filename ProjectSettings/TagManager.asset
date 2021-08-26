@@ -9,6 +9,8 @@ TagManager:
   - Wind
   - LaserBullet
   - Hole
+  - LaserGun
+  - Portal
   layers:
   - Default
   - TransparentFX
