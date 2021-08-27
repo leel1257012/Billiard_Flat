@@ -5,26 +5,28 @@ using UnityEngine;
 public class Pf_Disappearing : MonoBehaviour
 {
     public int disappear = 0;
-    public float startTime;
+    public float sec = 0;
     public float duration = 2.0f;
+    private LevelManager levelManager;
     float alpha = 1.0f;
 
     void Start()
     {
-
+        levelManager = LevelManager.instance;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (disappear == 1)
         {
-            startTime = Time.time;
+            sec = 0;
             disappear++;
         }
         else if (disappear == 2)
         {
-            float progress = (Time.time - startTime) / duration;
+            if (!levelManager.isLaunching) { sec += 0.02f; }
+            float progress = sec / duration;
 
             progress = Mathf.Clamp(progress, 0, 1);
 

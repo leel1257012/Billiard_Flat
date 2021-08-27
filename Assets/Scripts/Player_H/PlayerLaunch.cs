@@ -235,7 +235,6 @@ public class PlayerLaunch : MonoBehaviour
             {
                 if (collision.gameObject.GetComponent<Pf_Disappearing>().disappear == 0)
                 {
-                    Destroy(collision.transform.parent.gameObject, 2.0f);
                     collision.gameObject.GetComponent<Pf_Disappearing>().disappear = 1;
                 }
             }
