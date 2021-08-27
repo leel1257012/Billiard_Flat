@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MapSelection : MonoBehaviour
@@ -35,6 +36,11 @@ public class MapSelection : MonoBehaviour
         {
             if (stage < maxStage) stage++;
             DisablePlat();
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            SceneManager.LoadScene("LevelSelect");
         }
 
         switch(stage % 4)

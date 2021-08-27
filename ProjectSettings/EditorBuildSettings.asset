@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -32,4 +32,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Create_Level/Sample Level 3.unity
     guid: 48d18041c5bdd114593e864a223236bc
+  - enabled: 1
+    path: Assets/Scenes/Game/StartMenu.unity
+    guid: 112aeef8cc4960148bddb30c1179e876
+  - enabled: 1
+    path: Assets/Scenes/Game/MapSelect.unity
+    guid: 479196c4560ea3947a2232cb942a49cc
   m_configObjects: {}
