@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class PlayerLaunch : MonoBehaviour
 {
     public SerialMovement SerialMovement;
+    public draw_UI draw_UI;
 
     CameraController camControl;
     Camera Camera;
@@ -21,6 +22,7 @@ public class PlayerLaunch : MonoBehaviour
     public bool mouseDown = false; //점프 중이 아닐 때 마우스가 눌렸는지
     public bool gameOver = false, goal = false;
     public draw_UI draw;
+    public AudioPlayer audioPlayer;
     private LevelManager levelManager;
 
 
@@ -50,6 +52,8 @@ public class PlayerLaunch : MonoBehaviour
         camControl = GameObject.Find("SelectCamera").GetComponent<CameraController>();
         draw = GameObject.Find("GameManager").GetComponent<draw_UI>();
         SerialMovement = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
+        draw_UI = GameObject.Find("GameManager").GetComponent<draw_UI>();
+        audioPlayer = GameObject.Find("GameManager").GetComponent<AudioPlayer>();
         levelManager.isLaunching = false;
         moved = false;
         stop = false; //플레이가 움직이는 중인지
@@ -84,6 +88,7 @@ public class PlayerLaunch : MonoBehaviour
                 //arrow.Instant(transform.position, Direction);
                 arrow.chargebarSpawn(transform.position); ////
                 mouseDown = true;
+                if(!SerialMovement.pausePlayer) audioPlayer.PlayGaugebarMusic(true);
             }
             if(Input.GetMouseButton(0) && mouseDown)
             {
@@ -139,6 +144,8 @@ public class PlayerLaunch : MonoBehaviour
                 }
                 //arrow.DisInstant();
                 arrow.chargebarDestroy(); ////
+                if(!SerialMovement.pausePlayer) audioPlayer.PlayGaugebarMusic(false);
+                audioPlayer.PlayLaunchMusic();
             }
         }
 
@@ -154,13 +161,22 @@ public class PlayerLaunch : MonoBehaviour
         {
             SerialMovement.pausePlayer = true;
             delayTime += Time.deltaTime;
-            if(delayTime >= 3) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            if(delayTime >= 3) 
+            {
+                draw_UI.GameOver(false);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
         
         //골
         if(goal)
         {
-            if(Input.GetMouseButtonDown(0)) SceneManager.LoadScene("LevelSelect");
+            draw_UI.GameClear(true);
+            if(Input.GetMouseButtonDown(0)) 
+            {
+                draw_UI.GameClear(false);
+                SceneManager.LoadScene("LevelSelect");
+            }
         }
     }
 
@@ -220,6 +236,7 @@ public class PlayerLaunch : MonoBehaviour
         Vector2 normalVector = collision.contacts[0].normal;
         Vector2 reflectVector = Vector2.Reflect(Direction, normalVector);
         Direction = reflectVector.normalized;
+        if(levelManager.isLaunching) audioPlayer.PlayCollisionMusic();
 
         #region platforms
         if (collision.gameObject.GetComponent<MapEditorFloor>() != null && !moved)
@@ -280,6 +297,7 @@ public class PlayerLaunch : MonoBehaviour
             if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.JumpFloor)
             {
                 SerialMovement.JumpForce = 5.0f;
+                audioPlayer.PlayJumpPlatformMusic();
             }
 
             //슬로우 플랫폼
@@ -297,6 +315,12 @@ public class PlayerLaunch : MonoBehaviour
                 transform.SetParent(players.transform);
             }
 
+            //플레이어 점프 오디오
+            if ((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor != FloorType.JumpFloor))
+            {
+                audioPlayer.PlayPlayerJumpMusic();
+            }
+
         }
         #endregion
     }
@@ -310,6 +334,12 @@ public class PlayerLaunch : MonoBehaviour
                 //SceneManager.LoadScene("LevelSelect");
                 gameOver = true;
                 GetComponent<AudioSource>().Play();
+                draw_UI.GameOver(true);
+            }
+            if (collision.name == "CheckGoal" && !moved)
+            {
+                GetComponent<ParticleSystem>().Play();
+                audioPlayer.PlayGoalMusic();
             }
         }
 

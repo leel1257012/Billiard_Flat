@@ -25,7 +25,9 @@ public class draw_UI : MonoBehaviour
     private LevelManager levelManager;
     public Canvas mainUI;
     public Texture2D cursor;
-    public bool mouseOnPause = false; //¸¶¿ì½º°¡ ÀÏ½ÃÁ¤Áö ¹öÆ° À§¿¡ ÀÖ´Â°¡
+    public bool mouseOnPause = false; //ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Â°ï¿½
+    public GameObject gameoverUI;
+    public GameObject gameclearUI;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,8 @@ public class draw_UI : MonoBehaviour
         pauseUI.SetActive(false);
         backToStageUI.SetActive(false);
         restartUI.SetActive(false);
+        gameoverUI.SetActive(false);
+        gameclearUI.SetActive(false);
 
         BallImageUpdate();
 
@@ -216,7 +220,7 @@ public class draw_UI : MonoBehaviour
         }
     }
 
-    /*Ãß°¡*/
+    /*ï¿½ß°ï¿½*/
     public void MouseEnteredPause()
     {
         mouseOnPause = true;
@@ -225,5 +229,15 @@ public class draw_UI : MonoBehaviour
     public void MouseExitedPause()
     {
         mouseOnPause = false;
+    }
+
+    public void GameOver(bool i)
+    {
+        gameoverUI.SetActive(i);
+    }
+
+    public void GameClear(bool i)
+    {
+        gameclearUI.SetActive(i);
     }
 }
