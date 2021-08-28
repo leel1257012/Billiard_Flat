@@ -68,10 +68,11 @@ public class PlayerLaunch : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime; ////수정
-        if (moved == false && !SerialMovement.isJumping() && levelManager.playerCount > 1 && (draw.GameState == 0)/*추가*/)
+        if (moved == false && !SerialMovement.isJumping() && levelManager.playerCount > 1 && (draw.GameState == 0) && !gameOver) 
         {
             if(Input.GetMouseButtonDown(0) && !draw.mouseOnPause/*추가*/)
             {
+                rb.velocity = new Vector2(0, 0);
                 Camera = camControl.map;
                 camControl.switchToMap();
                 levelManager.isLaunching = true;

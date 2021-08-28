@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerCam.transform.position = Player.transform.position + offset;
+        if(playerCam != null) playerCam.transform.position = Player.transform.position + offset;
 
         //if (Input.GetKeyDown("m"))
         //{
