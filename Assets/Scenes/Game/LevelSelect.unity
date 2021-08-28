@@ -949,7 +949,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 715597111}
         m_TargetAssemblyTypeName: LevelButton, Assembly-CSharp
-        m_MethodName: loadlv7
+        m_MethodName: loadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1083,7 +1083,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 717771007}
         m_TargetAssemblyTypeName: LevelButton, Assembly-CSharp
-        m_MethodName: loadlv5
+        m_MethodName: loadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1436,7 +1436,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1236278435}
         m_TargetAssemblyTypeName: LevelButton, Assembly-CSharp
-        m_MethodName: loadlv6
+        m_MethodName: loadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

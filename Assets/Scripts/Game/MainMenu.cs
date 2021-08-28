@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void Play()
     {
-        SceneManager.LoadScene("MapSelect");
+        SceneManager.LoadScene("MapSelect 1");
     }
 
     public void Quit()
