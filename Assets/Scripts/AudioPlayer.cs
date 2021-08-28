@@ -56,7 +56,10 @@ public class AudioPlayer : MonoBehaviour
             Audio.loop = true;
             Audio.Play();
         }
-        else Audio.loop = false;
+        else 
+        {
+            Audio.loop = false;
+        }
     }
 
     public void PlayPlayerJumpMusic()

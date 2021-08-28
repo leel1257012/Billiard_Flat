@@ -159,7 +159,6 @@ public class PlayerLaunch : MonoBehaviour
         //게암오버
         if(gameOver)
         {
-            SerialMovement.pausePlayer = true;
             delayTime += Time.deltaTime;
             if(delayTime >= 3) 
             {
@@ -277,6 +276,8 @@ public class PlayerLaunch : MonoBehaviour
                 transform.SetParent(collision.transform);
             }
 
+            if(collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.JumpFloor) SerialMovement.jumpPlatform = true;
+            else SerialMovement.jumpPlatform = false;
         }
         #endregion
 
@@ -297,7 +298,6 @@ public class PlayerLaunch : MonoBehaviour
             if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.JumpFloor)
             {
                 SerialMovement.JumpForce = 5.0f;
-                audioPlayer.PlayJumpPlatformMusic();
             }
 
             //슬로우 플랫폼
@@ -315,12 +315,6 @@ public class PlayerLaunch : MonoBehaviour
                 transform.SetParent(players.transform);
             }
 
-            //플레이어 점프 오디오
-            if ((collision.gameObject.GetComponent<MapEditorFloor>().thisFloor != FloorType.JumpFloor))
-            {
-                audioPlayer.PlayPlayerJumpMusic();
-            }
-
         }
         #endregion
     }
@@ -333,6 +327,8 @@ public class PlayerLaunch : MonoBehaviour
             {
                 //SceneManager.LoadScene("LevelSelect");
                 gameOver = true;
+                SerialMovement.pausePlayer = true;
+                rb.velocity = new Vector3(0,0,0);
                 GetComponent<AudioSource>().Play();
                 draw_UI.GameOver(true);
             }

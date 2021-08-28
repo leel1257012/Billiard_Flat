@@ -16,11 +16,13 @@ public class SerialMovement : MonoBehaviour
     PlayerLaunch topPlayer;
     private LevelManager levelManager;
     public draw_UI draw; //추가
+    public AudioPlayer audioPlayer;
 
 
     public CameraController camera; /////����
     public GameObject temp;
     public bool pausePlayer = false;
+    public bool jumpPlatform = false;
 
 
     // Start is called before the first frame update
@@ -60,6 +62,7 @@ public class SerialMovement : MonoBehaviour
         topPlayer = Players[top].GetComponent<PlayerLaunch>();
         camera = GameObject.Find("SelectCamera").GetComponent<CameraController>();
         camera.Player = Players[top]; ////����
+        audioPlayer = GameObject.Find("GameManager").GetComponent<AudioPlayer>();
     }
 
     // Update is called once per frame
@@ -140,7 +143,11 @@ public class SerialMovement : MonoBehaviour
         if (!isJumping() && !levelManager.isLaunching && !pausePlayer)
         {
             if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if(jumpPlatform) audioPlayer.PlayJumpPlatformMusic();
+                else audioPlayer.PlayPlayerJumpMusic();
                 rb2D.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+            }
         }
 
     }
