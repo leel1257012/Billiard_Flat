@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 502080377660428129}
   - component: {fileID: 502080377660428128}
+  - component: {fileID: -5591655577477613870}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -77,6 +78,27 @@ MonoBehaviour:
   mainUI: {fileID: 5634706476294241752}
   cursor: {fileID: 2800000, guid: 2c019e7b1bf0104479ce428f4ed21012, type: 3}
   mouseOnPause: 0
+  gameoverUI: {fileID: 1543907560787348401}
+  gameclearUI: {fileID: 89087471971236074}
+--- !u!114 &-5591655577477613870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502080377660428143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573344b732bd14c29b0a3f60adc741bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Audio: {fileID: 0}
+  GoalMusic: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+  CollisionMusic: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
+  LaunchMusic: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  JumpPlatformMusic: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  GaugebarMusic: {fileID: 8300000, guid: c5e2a73ad4706440f93bf05df0b465fe, type: 3}
+  PlayerJumpMusic: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
 --- !u!1001 &9066298786017785057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -353,5 +375,15 @@ GameObject:
 --- !u!1 &5634706476200499001 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3738982861745890264, guid: 0a1c709c7fe33af40b4b0bbf76059ccf, type: 3}
+  m_PrefabInstance: {fileID: 9066298786017785057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1543907560787348401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7547180901052989264, guid: 0a1c709c7fe33af40b4b0bbf76059ccf, type: 3}
+  m_PrefabInstance: {fileID: 9066298786017785057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &89087471971236074 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9001981112560208907, guid: 0a1c709c7fe33af40b4b0bbf76059ccf, type: 3}
   m_PrefabInstance: {fileID: 9066298786017785057}
   m_PrefabAsset: {fileID: 0}

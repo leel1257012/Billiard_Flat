@@ -9,6 +9,7 @@ TagManager:
   - Wind
   - LaserBullet
   - Hole
+  - JumpPlatform
   layers:
   - Default
   - TransparentFX
