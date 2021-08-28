@@ -290,6 +290,16 @@ public class PlayerLaunch_HS : MonoBehaviour
         {
             SceneManager.LoadScene("LevelSelect");
         }
+        if (collision.gameObject.CompareTag("Portal"))
+        {
+            var component = collision.gameObject.GetComponent<DevicePortal>();
+            if(component.inOut)
+            {
+                var pairLocation = component.pair.transform.position;
+                gameObject.transform.position = pairLocation;
+            }
+            
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -302,6 +312,9 @@ public class PlayerLaunch_HS : MonoBehaviour
             switch(collision.transform.parent.gameObject.GetComponent<DeviceWind>().direction){
                 case 0:
                     SerialMovement.modifyVelocity(new Vector2(-0.1f,0));
+                    break;
+                case 2:
+                    SerialMovement.modifyVelocity(new Vector2(0.1f,0));
                     break;
             }
             

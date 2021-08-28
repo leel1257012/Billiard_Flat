@@ -90,6 +90,7 @@ public class PlayerLaunch : MonoBehaviour
                 arrow.chargebarSpawn(transform.position); ////
                 mouseDown = true;
                 if(!SerialMovement.pausePlayer) audioPlayer.PlayGaugebarMusic(true);
+                SerialMovement.rb2D.velocity = new Vector3(0,0,0); //추가
             }
             if(Input.GetMouseButton(0) && mouseDown)
             {
@@ -365,20 +366,23 @@ public class PlayerLaunch : MonoBehaviour
         {
             switch (collision.transform.parent.gameObject.GetComponent<DeviceWind>().direction)
             {
-                case 1:
-                    //Debug.Log("0");
-                    var velocity = SerialMovement.rb2D.velocity;
-                    velocity.y = 0f;
-                    SerialMovement.rb2D.velocity = velocity;
-
-                    SerialMovement.rb2D.gravityScale = 0f;
-                    break;
+                
             }
 
         }
         if (collision.gameObject.CompareTag("LaserBullet"))
         {
             SceneManager.LoadScene("LevelSelect");
+        }
+        if (collision.gameObject.CompareTag("Portal"))
+        {
+            var component = collision.gameObject.GetComponent<DevicePortal>();
+            if(component.inOut)
+            {
+                var pairLocation = component.pair.transform.position;
+                gameObject.transform.position = pairLocation;
+            }
+            
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -396,11 +400,23 @@ public class PlayerLaunch : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Wind"))
         {
-            switch (collision.transform.parent.gameObject.GetComponent<DeviceWind>().direction)
-            {
-                case 0:
-                    SerialMovement.modifyVelocity(new Vector2(-0.1f, 0));
-                    break;
+            if(!levelManager.isLaunching){
+                switch (collision.transform.parent.gameObject.GetComponent<DeviceWind>().direction)
+                {
+                    case 0:
+                        SerialMovement.modifyVelocity(new Vector2(-0.1f, 0));
+                        break;
+                    case 1:
+                        var velocity = SerialMovement.rb2D.velocity;
+                        velocity.y = 0f;
+                        SerialMovement.rb2D.velocity = velocity;
+
+                        SerialMovement.rb2D.gravityScale = 0f;
+                        break;
+                    case 2:
+                        SerialMovement.modifyVelocity(new Vector2(0.1f,0));
+                        break;
+                }
             }
 
         }
