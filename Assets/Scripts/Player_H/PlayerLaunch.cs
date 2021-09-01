@@ -353,6 +353,7 @@ public class PlayerLaunch : MonoBehaviour
             stop = true;
             mouseDown = false;
             Destroy(gameObject);
+            audioPlayer.PlayHoleMusic();
 
             //levelManager.playerCount--;
             //levelManager.gameUI.GetComponent<draw_UI>().BallImageUpdate();
@@ -372,6 +373,7 @@ public class PlayerLaunch : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("LaserBullet"))
         {
+            audioPlayer.PlayLaserMusic();
             SceneManager.LoadScene("LevelSelect");
         }
         if (collision.gameObject.CompareTag("Portal"))
@@ -379,6 +381,7 @@ public class PlayerLaunch : MonoBehaviour
             var component = collision.gameObject.GetComponent<DevicePortal>();
             if(component.inOut)
             {
+                audioPlayer.PlayWhiteHoleMusic();
                 var pairLocation = component.pair.transform.position;
                 gameObject.transform.position = pairLocation;
             }
