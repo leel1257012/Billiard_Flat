@@ -6288,8 +6288,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1943740506}
   - component: {fileID: 1943740505}
-  - component: {fileID: 1943740504}
   - component: {fileID: 1943740507}
+  - component: {fileID: 1943740504}
   m_Layer: 0
   m_Name: GameOverZone
   m_TagString: Untagged
@@ -6359,10 +6359,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 22.463345, y: 13}
+  m_Offset: {x: 22.463345, y: 12.8}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
