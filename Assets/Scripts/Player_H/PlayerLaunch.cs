@@ -72,7 +72,7 @@ public class PlayerLaunch : MonoBehaviour
     void Update()
     {
         currentTime += Time.deltaTime; ////수정
-        if (moved == false && !SerialMovement.isJumping() && levelManager.playerCount > 1 && (draw.GameState == 0) && !gameOver) 
+        if (moved == false && !SerialMovement.isJumping() && levelManager.playerCount > 1 && (draw.GameState == 0) && !levelManager.gameOver) 
         {
             if(Input.GetMouseButtonDown(0) && !draw.mouseOnPause/*추가*/)
             {
@@ -159,16 +159,7 @@ public class PlayerLaunch : MonoBehaviour
             transform.position = contactedPlatform.transform.position - distance;
         }
 
-        //게암오버
-        if(gameOver)
-        {
-            delayTime += Time.deltaTime;
-            if(delayTime >= 3) 
-            {
-                draw_UI.GameOver(false);
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
-        }
+
         
         //골
         if(goal)
@@ -444,7 +435,7 @@ public class PlayerLaunch : MonoBehaviour
     void GameOver()
     {
         levelManager.timerActive = false;
-        gameOver = true;
+        levelManager.gameOver = true;
         SerialMovement.pausePlayer = true;
         rb.velocity = new Vector3(0, 0, 0);
         GetComponent<AudioSource>().Play();

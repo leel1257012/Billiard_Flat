@@ -31,6 +31,7 @@ public class draw_UI : MonoBehaviour
     public GameObject gameclearUI;
     public Text curTimeText;
     float curTime;
+    public GameObject settings;
 
     // Start is called before the first frame update
     void Start()
@@ -108,7 +109,7 @@ public class draw_UI : MonoBehaviour
         else if (GameState == 2) //backToStage
         {
 
-        } 
+        }
         else if (GameState == 3) //restart
         {
 
@@ -133,7 +134,7 @@ public class draw_UI : MonoBehaviour
     public void BallImageUpdate()
     {
 
-        if(levelManager.playerCount < img_ball.Length)
+        if (levelManager.playerCount < img_ball.Length)
         {
             for (int i = 0; i < levelManager.playerCount; i++)
             {
@@ -174,6 +175,7 @@ public class draw_UI : MonoBehaviour
             GameState = 1;
             Time.timeScale = 0;
             //able pause UI
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
             pauseUI.SetActive(true);
         }
         else if (GameState == 1)
@@ -181,6 +183,7 @@ public class draw_UI : MonoBehaviour
             GameState = 0;
             Time.timeScale = 1;
             //unable pause UI
+            Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
             pauseUI.SetActive(false);
         }
     }
@@ -250,4 +253,19 @@ public class draw_UI : MonoBehaviour
     {
         gameclearUI.SetActive(i);
     }
+
+    public void Settings()
+    {
+        pauseUI.SetActive(false);
+        settings.gameObject.SetActive(true);
+    }
+
+    public void ExitSettings()
+    {
+        pauseUI.SetActive(true);
+        settings.gameObject.SetActive(false);
+
+    }
+
+
 }

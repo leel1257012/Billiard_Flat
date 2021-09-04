@@ -11,17 +11,29 @@ public class AudioPlayer : MonoBehaviour
     public AudioClip JumpPlatformMusic;
     public AudioClip GaugebarMusic;
     public AudioClip PlayerJumpMusic;
+    public float vol = 1f;
+
+
+    private void Awake()
+    {
+        Audio = gameObject.AddComponent<AudioSource>();
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
-        Audio = gameObject.AddComponent<AudioSource>();
         Audio.playOnAwake = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Audio.volume = vol;
+    }
+
+    public void updateVolume(float volume)
+    {
+        vol = volume;
     }
 
     public void cancelAudio()
