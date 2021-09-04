@@ -26,6 +26,7 @@ public class PlayerLaunch : MonoBehaviour
     private LevelManager levelManager;
 
 
+
     Vector3 colPos;
     Vector3 colLocalScale;
     int check;
@@ -410,7 +411,7 @@ public class PlayerLaunch : MonoBehaviour
                         var velocity = SerialMovement.rb2D.velocity;
                         velocity.y = 0f;
                         SerialMovement.rb2D.velocity = velocity;
-
+                        SerialMovement.isInWind = true;
                         SerialMovement.rb2D.gravityScale = 0f;
                         break;
                     case 2:
@@ -433,6 +434,7 @@ public class PlayerLaunch : MonoBehaviour
                 case 1:
                     //Debug.Log("1");
                     SerialMovement.rb2D.gravityScale = 1f;
+                    SerialMovement.isInWind = false;
                     break;
             }
 
