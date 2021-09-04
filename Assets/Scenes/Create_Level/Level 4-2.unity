@@ -1559,6 +1559,8 @@ MonoBehaviour:
   totalPlayers: 0
   isLaunching: 0
   starCollision: 0
+  timerActive: 1
+  gameOver: 0
   testMode: 0
 --- !u!4 &1145143835
 Transform:
