@@ -17,6 +17,7 @@ public class SerialMovement : MonoBehaviour
     private LevelManager levelManager;
     public draw_UI draw; //추가
     public AudioPlayer audioPlayer;
+    public bool isInWind = false;
 
 
     public CameraController camera; /////����
@@ -140,7 +141,7 @@ public class SerialMovement : MonoBehaviour
         }
 
         // 점프
-        if (!isJumping() && !levelManager.isLaunching && !pausePlayer)
+        if (!isJumping() && !levelManager.isLaunching && !pausePlayer && !isInWind)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
