@@ -49,7 +49,10 @@ public class MapSelection : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
-            SceneManager.LoadScene("LevelSelect");
+            if (stage == 1) SceneManager.LoadScene("Stage1");
+            if (stage == 2) SceneManager.LoadScene("Stage2");
+            if (stage == 3) SceneManager.LoadScene("Stage3");
+            if (stage == 4) SceneManager.LoadScene("Stage4");
         }
 
         switch(stage % 4)

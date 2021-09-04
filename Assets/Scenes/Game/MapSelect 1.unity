@@ -313,8 +313,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 135, y: 0}
-  m_SizeDelta: {x: 180, y: 40}
+  m_AnchoredPosition: {x: 135, y: 20}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &119816540
 MonoBehaviour:
@@ -1050,8 +1050,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -135, y: -89}
-  m_SizeDelta: {x: 180, y: 40}
+  m_AnchoredPosition: {x: -135, y: -69}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &675870024
 MonoBehaviour:
@@ -1414,8 +1414,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -405, y: -178}
-  m_SizeDelta: {x: 180, y: 40}
+  m_AnchoredPosition: {x: -405, y: -158}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &878037816
 MonoBehaviour:
@@ -2617,8 +2617,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 405, y: 89}
-  m_SizeDelta: {x: 180, y: 40}
+  m_AnchoredPosition: {x: 405, y: 109}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1998145486
 MonoBehaviour:
@@ -2930,8 +2930,8 @@ MonoBehaviour:
   - {fileID: 2037287040}
   stage: 1
   stageGroup: 0
-  maxStage: 2
-  clearedStage: 030000000700000008000000
+  maxStage: 4
+  clearedStage: 
   slider: {fileID: 1968755518}
   settings: {fileID: 1011472740}
   audio: {fileID: 0}
