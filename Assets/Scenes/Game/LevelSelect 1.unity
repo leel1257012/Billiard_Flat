@@ -573,7 +573,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 620534629}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
         m_MethodName: PlayButtonClickMusic
         m_Mode: 1
@@ -732,7 +732,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 620534629}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
         m_MethodName: PlayButtonClickMusic
         m_Mode: 1
@@ -874,17 +874,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567377635}
   m_CullTransparentMesh: 1
---- !u!114 &620534629 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9081183624110450947, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-  m_PrefabInstance: {fileID: 9081183624590406246}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 573344b732bd14c29b0a3f60adc741bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &715597109
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +983,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 620534629}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
         m_MethodName: PlayButtonClickMusic
         m_Mode: 1
@@ -1140,7 +1129,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 620534629}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
         m_MethodName: PlayButtonClickMusic
         m_Mode: 1
@@ -1505,7 +1494,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 620534629}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
         m_MethodName: PlayButtonClickMusic
         m_Mode: 1
@@ -1743,7 +1732,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 620534629}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
         m_MethodName: PlayButtonClickMusic
         m_Mode: 1
@@ -1985,7 +1974,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 620534629}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
         m_MethodName: PlayButtonClickMusic
         m_Mode: 1
@@ -2285,60 +2274,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061220484}
   m_CullTransparentMesh: 1
---- !u!1001 &9081183624590406246
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 9081183624110450944, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081183624110450944, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.3933852
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081183624110450944, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.5715632
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081183624110450944, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.7624489
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081183624110450944, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081183624110450944, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081183624110450944, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081183624110450944, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081183624110450944, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081183624110450944, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081183624110450944, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9081183624110450946, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}
-      propertyPath: m_Name
-      value: Audio
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4834308aca196499fa07a8e6bf4c60ea, type: 3}

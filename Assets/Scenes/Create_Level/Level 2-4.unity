@@ -180,7 +180,7 @@ SpriteRenderer:
   m_SortingLayerID: 307715261
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 558abfcab15b35d43b2294213e7056c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a28eed3d4f62c5f43aff549e0da2ed82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1762,6 +1762,8 @@ MonoBehaviour:
   totalPlayers: 0
   isLaunching: 0
   starCollision: 0
+  timerActive: 1
+  gameOver: 0
   testMode: 0
 --- !u!4 &1145143835
 Transform:

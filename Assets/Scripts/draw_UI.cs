@@ -70,8 +70,6 @@ public class draw_UI : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R)) Restart();
 
-        //draw stage and current level
-        stageName.text = stage + " - Level " + level.ToString();
 
         //game playing
         if (GameState == 0)
@@ -187,6 +185,7 @@ public class draw_UI : MonoBehaviour
             //unable pause UI
             Cursor.SetCursor(cursor, Vector2.zero, CursorMode.ForceSoftware);
             pauseUI.SetActive(false);
+            settings.SetActive(false); 
         }
     }
 

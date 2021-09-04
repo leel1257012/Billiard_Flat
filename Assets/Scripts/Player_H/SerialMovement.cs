@@ -62,7 +62,7 @@ public class SerialMovement : MonoBehaviour
         topPlayer = Players[top].GetComponent<PlayerLaunch>();
         camera = GameObject.Find("SelectCamera").GetComponent<CameraController>();
         camera.Player = Players[top]; ////����
-        audioPlayer = GameObject.Find("GameManager").GetComponent<AudioPlayer>();
+        audioPlayer = GameObject.Find("Audio").GetComponent<AudioPlayer>();
     }
 
     // Update is called once per frame

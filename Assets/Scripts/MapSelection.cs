@@ -14,11 +14,20 @@ public class MapSelection : MonoBehaviour
     public int stageGroup = 0;
     public int maxStage = 8;
     public List<int> clearedStage;
+    public Slider slider;
+    public GameObject settings;
+    public AudioPlayer audio;
 
     // Start is called before the first frame update
     void Start()
     {
+        audio = GameObject.Find("Audio").GetComponent<AudioPlayer>();
+        settings.gameObject.SetActive(true);
+        slider.value = audio.vol;
+        settings.gameObject.SetActive(false);
+
         DisablePlat();
+
     }
 
     // Update is called once per frame
@@ -83,5 +92,19 @@ public class MapSelection : MonoBehaviour
             }
             Players[i].gameObject.SetActive(false);
         }
+    }
+
+    public void changeVolume(float vol)
+    {
+        audio.updateVolume(vol);
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("StartMenu 1");
+    }
+    public void Exit()
+    {
+        Application.Quit();
     }
 }

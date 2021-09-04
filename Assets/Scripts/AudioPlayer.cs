@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
 {
-    public AudioSource Audio;
+    public static AudioPlayer instance;
+
+    private AudioSource Audio;
+    public AudioSource BGM;
+
     public AudioClip GoalMusic;
     public AudioClip CollisionMusic;
     public AudioClip LaunchMusic;
@@ -16,8 +20,10 @@ public class AudioPlayer : MonoBehaviour
 
     private void Awake()
     {
-        Audio = gameObject.AddComponent<AudioSource>();
-        
+        instance = this;
+        Audio = gameObject.GetComponent<AudioSource>();
+        DontDestroyOnLoad(this.gameObject);
+
     }
     public AudioClip UIMusic;
     public AudioClip ButtonClickMusic;
@@ -28,12 +34,16 @@ public class AudioPlayer : MonoBehaviour
     void Start()
     {
         Audio.playOnAwake = false;
+        //BGM = transform.FindChild("BGM").GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Audio.volume = vol;
+        //BGM.volume = vol/4;
+        //BGM.volume = 0;
     }
 
     public void updateVolume(float volume)

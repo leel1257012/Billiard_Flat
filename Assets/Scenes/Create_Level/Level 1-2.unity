@@ -1149,7 +1149,7 @@ SpriteRenderer:
   m_SortingLayerID: 307715261
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: aede5c27d760ab24fb281466febd71a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c4713080b892e44f9e8811da875695a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1241,6 +1241,8 @@ MonoBehaviour:
   totalPlayers: 0
   isLaunching: 0
   starCollision: 0
+  timerActive: 1
+  gameOver: 0
   testMode: 0
 --- !u!4 &1145143835
 Transform:
@@ -1372,6 +1374,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1543907560787348401, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2723323876904735326, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2723323876904735326, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3824741817793992258, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1396,7 +1410,19 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 117.3
       objectReference: {fileID: 0}
+    - target: {fileID: 5634706476200499001, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5634706476294241735, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634706476868516479, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634706477352046697, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

@@ -53,7 +53,7 @@ public class PlayerLaunch : MonoBehaviour
         draw = GameObject.Find("GameManager").GetComponent<draw_UI>();
         SerialMovement = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
         draw_UI = GameObject.Find("GameManager").GetComponent<draw_UI>();
-        audioPlayer = GameObject.Find("GameManager").GetComponent<AudioPlayer>();
+        audioPlayer = GameObject.Find("Audio").GetComponent<AudioPlayer>();
         levelManager.isLaunching = false;
         moved = false;
         stop = false; //플레이가 움직이는 중인지
