@@ -8,7 +8,9 @@ using System;
 public class draw_UI : MonoBehaviour
 {
     //GameState
-    public int GameState = 0; //0 = playing, 1 = pause, 2 = question for backing to stage, 3 = question for restarting ...
+    public int GameState = 0; 
+    /* 0 = playing, 1 = pause, 2 = question for backing to stage, 3 = question for restarting,
+       4 = gameover, 5 = gamecleared */
 
     //UI
     public string stage = "TEST STAGE"; //the name of stage
@@ -247,11 +249,15 @@ public class draw_UI : MonoBehaviour
     public void GameOver(bool i)
     {
         gameoverUI.SetActive(i);
+        pauseUI.SetActive(false);
+        GameState = 4;
     }
 
     public void GameClear(bool i)
     {
         gameclearUI.SetActive(i);
+        pauseUI.SetActive(false);
+        GameState = 5;
     }
 
     public void Settings()
