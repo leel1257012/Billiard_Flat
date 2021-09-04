@@ -5,6 +5,8 @@ using UnityEngine;
 public class DeviceLaser : MonoBehaviour
 {
     public GameObject bullet;
+    public GameObject laser;
+    int state = 0;
     // Start is called before the first frame update
     void Start()
     {
