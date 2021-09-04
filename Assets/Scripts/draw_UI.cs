@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class draw_UI : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class draw_UI : MonoBehaviour
     public bool mouseOnPause = false; //���콺�� �Ͻ����� ��ư ���� �ִ°�
     public GameObject gameoverUI;
     public GameObject gameclearUI;
+    public Text curTimeText;
+    float curTime;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +58,14 @@ public class draw_UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (levelManager.timerActive)
+        {
+            curTime = curTime + Time.deltaTime;
+        }
+        TimeSpan time = TimeSpan.FromSeconds(curTime);
+        curTimeText.text = time.Minutes.ToString() + ":" + time.Seconds.ToString();
+
+        if (Input.GetKeyDown(KeyCode.R)) Restart();
 
         //draw stage and current level
         stageName.text = stage + " - Level " + level.ToString();
@@ -204,11 +215,10 @@ public class draw_UI : MonoBehaviour
 
     public void Restart()
     {
-        if (GameState == 3)
-        {
-            Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 
     public void BackToStage()

@@ -24,6 +24,12 @@ public class AudioPlayer : MonoBehaviour
         
     }
 
+    public void cancelAudio()
+    {
+        Audio.Stop();
+        Audio.loop = false;
+    }
+
     public void PlayGoalMusic()
     {
         Audio.clip = GoalMusic;

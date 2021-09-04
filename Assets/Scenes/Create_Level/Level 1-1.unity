@@ -1376,11 +1376,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5634706476294241735, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5634706476294241753, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
       propertyPath: m_ReferenceResolution.x
       value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634706476594618540, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
+      propertyPath: m_Color.a
+      value: 0.3137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634706477441280806, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}
+      propertyPath: m_Color.a
+      value: 0.3137255
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 372110ad2ae6c8647909077caa220dfe, type: 3}

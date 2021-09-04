@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     public int totalPlayers;
     public bool isLaunching;
     public bool starCollision;
+    public bool timerActive = true;
 
     public bool testMode;
     // Start is called before the first frame update

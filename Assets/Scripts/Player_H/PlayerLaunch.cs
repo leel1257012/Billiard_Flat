@@ -97,6 +97,7 @@ public class PlayerLaunch : MonoBehaviour
 
                 if (Input.GetKeyDown("c"))
                 {
+                    audioPlayer.cancelAudio();
                     camControl.switchToPlayer();
                     mouseDown = false;
                     levelManager.isLaunching = false;
@@ -326,15 +327,11 @@ public class PlayerLaunch : MonoBehaviour
         {
             if (collision.name == "GameOverZone" && !moved)
             {
-                //SceneManager.LoadScene("LevelSelect");
-                gameOver = true;
-                SerialMovement.pausePlayer = true;
-                rb.velocity = new Vector3(0,0,0);
-                GetComponent<AudioSource>().Play();
-                draw_UI.GameOver(true);
+                GameOver();
             }
             if (collision.name == "CheckGoal" && !moved)
             {
+                levelManager.timerActive = false;
                 GetComponent<ParticleSystem>().Play();
                 audioPlayer.PlayGoalMusic();
             }
@@ -372,7 +369,7 @@ public class PlayerLaunch : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("LaserBullet"))
         {
-            SceneManager.LoadScene("LevelSelect");
+            GameOver();
         }
         if (collision.gameObject.CompareTag("Portal"))
         {
@@ -442,6 +439,16 @@ public class PlayerLaunch : MonoBehaviour
     public void SetStopFalse()
     {
         this.stop = false;
+    }
+
+    void GameOver()
+    {
+        levelManager.timerActive = false;
+        gameOver = true;
+        SerialMovement.pausePlayer = true;
+        rb.velocity = new Vector3(0, 0, 0);
+        GetComponent<AudioSource>().Play();
+        draw_UI.GameOver(true);
     }
 
 }
