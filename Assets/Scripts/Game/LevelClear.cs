@@ -26,7 +26,7 @@ public class LevelClear : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
 
-        admin = true; // fixme
+        admin = false; // fixme
 
         DataPath = Path.Combine(Application.persistentDataPath + "/LevelClearData.json");
         FileInfo savefile = new FileInfo(DataPath);

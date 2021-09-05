@@ -21,7 +21,13 @@ public class AudioPlayer : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        //if we don't have an [_instance] set yet
+        if (!instance)
+            instance = this;
+        //otherwise, if we do, kill this thing
+        else
+            Destroy(this.gameObject);
+
         Audio = gameObject.GetComponent<AudioSource>();
         DontDestroyOnLoad(this.gameObject);
 
@@ -47,7 +53,8 @@ public class AudioPlayer : MonoBehaviour
         //BGM.volume = 0;
         if(SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 1)
         {
-            if (!BGM.isPlaying) BGM.Play();
+            if (!BGM.isPlaying) 
+                BGM.Play();
         }
         else
         {

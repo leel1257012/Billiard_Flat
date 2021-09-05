@@ -1647,6 +1647,8 @@ MonoBehaviour:
   totalPlayers: 0
   isLaunching: 0
   starCollision: 0
+  timerActive: 1
+  gameOver: 0
   testMode: 0
 --- !u!4 &1145143835
 Transform:
@@ -1679,7 +1681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!20 &1194558693
 Camera:
   m_ObjectHideFlags: 0
@@ -3503,6 +3505,7 @@ MonoBehaviour:
   speed: 3
   draw: {fileID: 0}
   audioPlayer: {fileID: 0}
+  isInWind: 0
   camera: {fileID: 0}
   temp: {fileID: 0}
   pausePlayer: 0
