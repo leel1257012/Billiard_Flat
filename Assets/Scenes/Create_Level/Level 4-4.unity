@@ -2210,7 +2210,7 @@ MonoBehaviour:
   - {fileID: 788156684932613914, guid: 704f9f956366e7e4285c3ee9e6bc0c86, type: 3}
   Players: {fileID: 1542981438}
   serialMove: {fileID: 2008886504}
-  playerCount: 4
+  playerCount: 3
   curPlayers: 010000000700000007000000
   gameUI: {fileID: 2084599679}
   totalPlayers: 0

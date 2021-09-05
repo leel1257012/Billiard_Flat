@@ -1341,12 +1341,14 @@ MonoBehaviour:
   - {fileID: 788156684932613914, guid: 704f9f956366e7e4285c3ee9e6bc0c86, type: 3}
   Players: {fileID: 1542981438}
   serialMove: {fileID: 2008886504}
-  playerCount: 3
+  playerCount: 2
   curPlayers: 0100000007000000
   gameUI: {fileID: 2084599679}
   totalPlayers: 0
   isLaunching: 0
   starCollision: 0
+  timerActive: 1
+  gameOver: 0
   testMode: 0
 --- !u!4 &1145143835
 Transform:
@@ -3145,6 +3147,7 @@ MonoBehaviour:
   speed: 3
   draw: {fileID: 0}
   audioPlayer: {fileID: 0}
+  isInWind: 0
   camera: {fileID: 0}
   temp: {fileID: 0}
   pausePlayer: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioPlayer : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class AudioPlayer : MonoBehaviour
     void Start()
     {
         Audio.playOnAwake = false;
-        //BGM = transform.FindChild("BGM").GetComponent<AudioSource>();
+        BGM = transform.FindChild("BGM").GetComponent<AudioSource>();
 
     }
 
@@ -42,8 +43,16 @@ public class AudioPlayer : MonoBehaviour
     void Update()
     {
         Audio.volume = vol;
-        //BGM.volume = vol/4;
+        BGM.volume = vol/4;
         //BGM.volume = 0;
+        if(SceneManager.GetActiveScene().buildIndex == 0 || SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            if (!BGM.isPlaying) BGM.Play();
+        }
+        else
+        {
+            BGM.Stop();
+        }
     }
 
     public void updateVolume(float volume)

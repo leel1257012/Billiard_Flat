@@ -59,4 +59,40 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Create_Level/Level 2-6.unity
     guid: 5d623201445991f4aab8f150d0f67ab5
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 3-1.unity
+    guid: 8395ad9bf71f8c548b5ffa22d123099a
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 3-2.unity
+    guid: 230b8e02bb5f03046a4c63b9b9f36141
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 3-3.unity
+    guid: 1f4496e1ef5d04c8b8b7a60666d96791
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 3-4.unity
+    guid: 35fa6295c3f024c708854fc414fc7793
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 3-5.unity
+    guid: e5921128f4ec5c445a9d1037451fcd63
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 3-6.unity
+    guid: c70b2f128fe4be44794731b1659057a8
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 4-1.unity
+    guid: bc61ffa34468c08488d14b06812574ca
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 4-2.unity
+    guid: 4c60141131de51e4c87ea137982e3a4e
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 4-3.unity
+    guid: bb6231dc72996d845a4b9ce37a252841
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 4-4.unity
+    guid: e4e64d1bbaa04024ca58015b7844570e
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 4-5.unity
+    guid: 6ee0501295d46fa46b286bc149f3c8fe
+  - enabled: 1
+    path: Assets/Scenes/Create_Level/Level 4-6.unity
+    guid: ddb40291473173c44959667e49d885dd
   m_configObjects: {}
