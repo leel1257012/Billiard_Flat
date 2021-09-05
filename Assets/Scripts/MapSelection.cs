@@ -18,22 +18,62 @@ public class MapSelection : MonoBehaviour
     public GameObject settings;
     public AudioPlayer audio;
 
+
+    int stageCount = 4;
+    int levelCount = 6;
+
+    private LevelClear levelClear;
+
+    bool hasStarted = false;
+
     // Start is called before the first frame update
     void Start()
     {
         audio = GameObject.Find("Audio").GetComponent<AudioPlayer>();
+        levelClear = LevelClear.instance;
         settings.gameObject.SetActive(true);
         slider.value = audio.vol;
         settings.gameObject.SetActive(false);
 
-        DisablePlat();
 
     }
+
 
     // Update is called once per frame
     void Update()
     {
         curr_stage.text = "STAGE " + stage.ToString();
+
+        bool checkStageClear = true;
+        int curStage = 1;
+
+        for (int i = 1; i <= stageCount; i++)
+        {
+            for (int j = 1; j <= levelCount; j++)
+            {
+                if (!levelClear.isCleared(i, j))
+                {
+                    checkStageClear = false;
+                }
+                if (!checkStageClear) break;
+            }
+            if (checkStageClear)
+            {
+                clearedStage[i] = i;
+                curStage++;
+                maxStage = curStage;
+            }
+            else
+            {
+                break;
+            }
+        }
+        maxStage = curStage;
+
+        if (!hasStarted)
+        {
+            DisablePlat();
+        }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -78,6 +118,7 @@ public class MapSelection : MonoBehaviour
                 Players[3].gameObject.SetActive(true);
                 break;
         }
+
     }
 
     void DisablePlat()
