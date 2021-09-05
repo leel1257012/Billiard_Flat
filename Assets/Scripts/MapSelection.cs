@@ -70,6 +70,8 @@ public class MapSelection : MonoBehaviour
         }
         maxStage = curStage;
 
+        if (levelClear.admin) maxStage = 4;
+
         if (!hasStarted)
         {
             DisablePlat();

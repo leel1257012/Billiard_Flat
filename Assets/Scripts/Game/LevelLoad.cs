@@ -19,27 +19,31 @@ public class LevelLoad : MonoBehaviour
     {
         levelClear = LevelClear.instance;
         levelClear.currentStage = stage;
-        for(int i=1; i<=6; i++)
+        if (!levelClear.admin)
         {
-            if(!levelClear.isCleared(stage, i))
+            for (int i = 1; i <= 6; i++)
             {
-                lvls[i - 1].interactable = false;
+                if (!levelClear.isCleared(stage, i))
+                {
+                    lvls[i - 1].interactable = false;
+                }
+                else
+                {
+                    lvls[i - 1].interactable = true;
+                    lvls[i - 1].image.color = clear;
+                }
             }
-            else
+            for (int i = 1; i <= 6; i++)
             {
-                lvls[i - 1].interactable = true;
-                lvls[i - 1].image.color = clear;
+                if (!levelClear.isCleared(stage, i))
+                {
+                    lvls[i - 1].interactable = true;
+                    lvls[i - 1].image.color = new Color32(0, 0, 0, 0);
+                    break;
+                }
             }
         }
-        for(int i=1; i<=6; i++)
-        {
-            if (!levelClear.isCleared(stage, i))
-            {
-                lvls[i - 1].interactable = true;
-                lvls[i - 1].image.color = new Color32(0, 0, 0, 0);
-                break;
-            }
-        }
+
 
     }
 

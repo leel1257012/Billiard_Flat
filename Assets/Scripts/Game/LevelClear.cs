@@ -14,6 +14,8 @@ public class LevelClear : MonoBehaviour
 
     public LevelLoad levelLoad;
 
+    public bool admin;
+
 
     public LevelClearDataStruct LevelClearData;
     string DataPath;
@@ -22,6 +24,9 @@ public class LevelClear : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+
+        admin = true; // fixme
 
         DataPath = Path.Combine(Application.persistentDataPath + "/LevelClearData.json");
         FileInfo savefile = new FileInfo(DataPath);
