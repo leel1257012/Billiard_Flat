@@ -10,10 +10,12 @@ public class LaserMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        var speed = 4f;
+        var rad = transform.rotation.z * Mathf.PI / 180;
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         bc2d = gameObject.GetComponent<BoxCollider2D>();
         rb2D = gameObject.GetComponent<Rigidbody2D>();
-        rb2D.velocity = new Vector2(-4f,0f);
+        rb2D.velocity = transform.right * (-1) * speed;
     }
 
     // Update is called once per frame
