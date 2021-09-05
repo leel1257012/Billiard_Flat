@@ -262,7 +262,7 @@ public class PlayerLaunch : MonoBehaviour
             //슬로우 플랫폼
             if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlowFloor && !SerialMovement.isJumping())
             {
-                SerialMovement.speed = 2f;
+                SerialMovement.MaxSpeed = 2f;
             }
 
             //움직이는 플랫폼
@@ -300,7 +300,7 @@ public class PlayerLaunch : MonoBehaviour
             //슬로우 플랫폼
             if (collision.gameObject.GetComponent<MapEditorFloor>().thisFloor == FloorType.SlowFloor)
             {
-                SerialMovement.speed = 3f;
+                SerialMovement.MaxSpeed = 3f;
             }
 
             //움직이는 플랫폼
