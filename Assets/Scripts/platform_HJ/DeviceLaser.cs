@@ -21,6 +21,6 @@ public class DeviceLaser : MonoBehaviour
 
     void shoot()
     {
-        Instantiate(bullet,gameObject.transform.position,Quaternion.identity,gameObject.transform);
+        Instantiate(bullet,gameObject.transform.position,gameObject.transform.rotation,gameObject.transform);
     }
 }
