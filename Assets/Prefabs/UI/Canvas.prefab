@@ -170,8 +170,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioPlayer, Assembly-CSharp
-        m_MethodName: updateVolume
+        m_TargetAssemblyTypeName: draw_UI, Assembly-CSharp
+        m_MethodName: changeVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

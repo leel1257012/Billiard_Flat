@@ -34,11 +34,21 @@ public class draw_UI : MonoBehaviour
     public Text curTimeText;
     float curTime;
     public GameObject settings;
+    public Slider slider;
+
+    AudioPlayer audioPlayer;
+
+    private LevelClear levelClear;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioPlayer = AudioPlayer.instance;
+
+        slider.value = audioPlayer.vol;
+
         levelManager = LevelManager.instance;
+        levelClear = LevelClear.instance;
         arr_ball = levelManager.curPlayers;
         mainUI.gameObject.SetActive(true);
 
@@ -230,7 +240,7 @@ public class draw_UI : MonoBehaviour
         if (GameState == 2)
         {
             Time.timeScale = 1;
-            SceneManager.LoadScene("LevelSelect");
+            SceneManager.LoadScene("Stage"+levelClear.currentStage);
         }
     }
 
@@ -270,6 +280,11 @@ public class draw_UI : MonoBehaviour
         pauseUI.SetActive(true);
         settings.gameObject.SetActive(false);
 
+    }
+
+    public void changeVolume(float volume)
+    {
+        audioPlayer.updateVolume(volume);
     }
 
 

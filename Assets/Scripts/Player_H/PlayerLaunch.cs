@@ -25,6 +25,8 @@ public class PlayerLaunch : MonoBehaviour
     public AudioPlayer audioPlayer;
     private LevelManager levelManager;
 
+    private LevelClear levelClear;
+
 
 
     Vector3 colPos;
@@ -50,6 +52,7 @@ public class PlayerLaunch : MonoBehaviour
     void Start()
     {
         levelManager = LevelManager.instance;
+        levelClear = LevelClear.instance;
         camControl = GameObject.Find("SelectCamera").GetComponent<CameraController>();
         draw = GameObject.Find("GameManager").GetComponent<draw_UI>();
         SerialMovement = GameObject.Find("SerialMoving").GetComponent<SerialMovement>();
@@ -169,7 +172,7 @@ public class PlayerLaunch : MonoBehaviour
             if(Input.GetMouseButtonDown(0)) 
             {
                 draw_UI.GameClear(false);
-                SceneManager.LoadScene("LevelSelect");
+                SceneManager.LoadScene("Stage" + levelClear.currentStage);
             }
         }
     }
@@ -384,6 +387,7 @@ public class PlayerLaunch : MonoBehaviour
             if (collision.name == "CheckGoal" && !moved)
             {
                 goal = true;
+                levelClear.ClearLevel(levelClear.currentStage, levelClear.currentLevel);
                 if((delayTime += Time.deltaTime) > 0.3f) SerialMovement.pausePlayer = true;
                 //if(Input.GetMouseButtonDown(0)) SceneManager.LoadScene("LevelSelect");
             }

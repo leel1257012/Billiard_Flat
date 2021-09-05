@@ -9,6 +9,12 @@ public class LevelClear : MonoBehaviour
     int stageCount = 4;
     int levelCount = 6;
 
+    public int currentStage;
+    public int currentLevel;
+
+    public LevelLoad levelLoad;
+
+
     public LevelClearDataStruct LevelClearData;
     string DataPath;
 
@@ -34,9 +40,15 @@ public class LevelClear : MonoBehaviour
                     LevelClearData.IsClear[i, j] = false;
                 }
             }
-            LevelClearData.IsClear[0, 0] = true;
+            //LevelClearData.IsClear[0, 0] = true;
             SaveLevel();
         }
+    }
+
+    private void Start()
+    {
+        
+
     }
 
     void SaveLevel()
@@ -54,6 +66,12 @@ public class LevelClear : MonoBehaviour
     public bool isCleared(int stage, int level)
     {
         return LevelClearData.IsClear[stage - 1, level - 1];
+    }
+
+    public void ClearLevel(int stage, int level)
+    {
+        LevelClearData.IsClear[stage - 1, level - 1] = true;
+        SaveLevel();
     }
     
 }
